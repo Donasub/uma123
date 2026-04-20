@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Contact — Universe Merch Africa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,900;1,9..144,300;1,9..144,400;1,9..144,600&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="universe-merch.css"/>
+<style>
+/* Contact */
+.contact-main{padding:6rem 0;background:var(--cream)}
+.contact-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:5rem;align-items:start}
+
+/* Info column */
+.contact-info h2{font-family:var(--font-display);font-size:clamp(1.8rem,3vw,2.3rem);font-weight:500;line-height:1.2;color:var(--ink);margin-bottom:1.2rem;letter-spacing:-.005em}
+.contact-info h2 em{font-style:italic;color:var(--oxblood);font-weight:300}
+.contact-info>p{font-size:1rem;color:var(--text-mid);line-height:1.75;margin-bottom:2.5rem}
+.contact-channels{display:grid;gap:1.2rem;margin-bottom:2.5rem}
+.channel{padding:1.3rem 1.5rem;background:var(--cream-2);border-left:3px solid var(--mustard);border-radius:2px;transition:transform .25s}
+.channel:hover{transform:translateX(4px)}
+.channel-label{font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--text-light);font-weight:600;margin-bottom:.4rem}
+.channel-email{font-family:var(--font-display);font-size:1.05rem;color:var(--oxblood);font-weight:500;letter-spacing:-.005em;display:block;margin-bottom:.2rem}
+.channel-email:hover{color:var(--ink)}
+.channel-desc{font-size:.85rem;color:var(--text-mid);line-height:1.5}
+.office-card{background:var(--ink-deep);color:var(--cream);padding:2.2rem 2rem;border-radius:3px;position:relative;overflow:hidden}
+.office-card::before{content:'';position:absolute;top:-40px;right:-40px;width:140px;height:140px;border-radius:50%;border:1px solid rgba(230,169,52,.2);pointer-events:none}
+.office-card::after{content:'';position:absolute;top:-20px;right:-20px;width:100px;height:100px;border-radius:50%;border:1px solid rgba(230,169,52,.12);pointer-events:none}
+.office-label{font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--mustard);font-weight:600;margin-bottom:.8rem}
+.office-card h3{font-family:var(--font-display);font-size:1.5rem;font-weight:500;color:var(--cream);margin-bottom:.6rem;letter-spacing:-.01em}
+.office-card h3 em{font-style:italic;color:var(--mustard-light);font-weight:300}
+.office-address{font-size:.95rem;color:rgba(244,237,224,.78);line-height:1.75;margin-bottom:1.3rem;position:relative;z-index:2}
+.office-hours{display:grid;gap:.4rem;padding-top:1.2rem;border-top:1px dashed rgba(230,169,52,.25);font-size:.85rem;color:rgba(244,237,224,.68);position:relative;z-index:2}
+.office-hours-row{display:flex;justify-content:space-between}
+.office-hours-row strong{color:var(--cream);font-weight:500}
+.socials{display:flex;gap:.7rem;margin-top:1.5rem;position:relative;z-index:2}
+.social-dot{width:38px;height:38px;border-radius:50%;background:rgba(230,169,52,.1);border:1px solid rgba(230,169,52,.3);display:grid;place-items:center;color:var(--mustard);font-family:var(--font-display);font-weight:600;font-size:.9rem;transition:all var(--transition);cursor:pointer;text-decoration:none}
+.social-dot:hover{background:var(--mustard);color:var(--ink);transform:translateY(-2px)}
+
+/* Form column */
+.contact-form-wrap{background:var(--cream-2);padding:2.6rem 2.4rem;border-radius:3px;border:1px solid var(--border)}
+.contact-form-wrap h3{font-family:var(--font-display);font-size:1.6rem;font-weight:500;color:var(--ink);margin-bottom:.5rem;letter-spacing:-.005em}
+.contact-form-wrap h3 em{font-style:italic;color:var(--oxblood);font-weight:300}
+.contact-form-wrap>p{font-size:.92rem;color:var(--text-mid);line-height:1.65;margin-bottom:2rem}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.1rem}
+.form-field{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1.1rem}
+.form-label{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text-mid);font-weight:600}
+.form-input,.form-select,.form-textarea{font-family:var(--font-body);font-size:.95rem;color:var(--ink);background:var(--cream);border:1px solid var(--border);border-radius:2px;padding:.85rem 1rem;transition:border-color var(--transition),box-shadow var(--transition);width:100%}
+.form-input:focus,.form-select:focus,.form-textarea:focus{outline:none;border-color:var(--mustard);box-shadow:0 0 0 3px rgba(230,169,52,.12)}
+.form-textarea{resize:vertical;min-height:140px;font-family:var(--font-body);line-height:1.55}
+.form-select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235b1a1a' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1rem center;padding-right:2.5rem}
+.form-check{display:flex;gap:.7rem;align-items:flex-start;font-size:.85rem;color:var(--text-mid);line-height:1.5;margin:1.3rem 0 1.5rem}
+.form-check input{margin-top:3px;accent-color:var(--oxblood);flex-shrink:0}
+.form-check a{color:var(--oxblood);text-decoration:underline}
+.form-submit{width:100%;font-size:.78rem;padding:1.1rem 2rem;justify-content:center}
+.form-note{font-size:.8rem;color:var(--text-light);margin-top:1rem;text-align:center;font-style:italic;font-family:var(--font-display)}
+
+/* Quick links */
+.quick-help{padding:5rem 0;background:var(--cream-2)}
+.quick-help-head{text-align:center;margin-bottom:2.5rem}
+.quick-help-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
+.quick-link{padding:2rem 1.8rem;background:var(--cream);border:1px solid var(--border);border-radius:3px;text-decoration:none;color:inherit;transition:all var(--transition)}
+.quick-link:hover{border-color:var(--mustard);transform:translateY(-3px);box-shadow:0 10px 24px rgba(23,20,15,.08)}
+.quick-link-label{font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--mustard);font-weight:600;margin-bottom:.6rem}
+.quick-link h3{font-family:var(--font-display);font-size:1.15rem;font-weight:500;color:var(--ink);margin-bottom:.5rem;letter-spacing:-.005em}
+.quick-link p{font-size:.88rem;color:var(--text-mid);line-height:1.55}
+
+/* Map placeholder */
+.map-band{padding:0;background:var(--oxblood-deep);color:var(--cream);position:relative;overflow:hidden;height:340px;display:flex;align-items:center;justify-content:center}
+.map-band::before{content:'';position:absolute;inset:0;background:
+  radial-gradient(circle at 30% 40%,rgba(230,169,52,.15) 0%,transparent 40%),
+  radial-gradient(circle at 70% 60%,rgba(244,237,224,.08) 0%,transparent 50%),
+  linear-gradient(135deg,var(--oxblood-deep) 0%,var(--ink-deep) 100%)}
+.map-band::after{content:'';position:absolute;inset:0;background-image:
+  repeating-linear-gradient(0deg,transparent,transparent 39px,rgba(230,169,52,.07) 39px,rgba(230,169,52,.07) 40px),
+  repeating-linear-gradient(90deg,transparent,transparent 39px,rgba(230,169,52,.07) 39px,rgba(230,169,52,.07) 40px)}
+.map-pin{position:relative;z-index:2;text-align:center}
+.map-pin-dot{width:22px;height:22px;border-radius:50%;background:var(--mustard);margin:0 auto 1rem;position:relative;animation:pulse 2s ease-in-out infinite}
+.map-pin-dot::before{content:'';position:absolute;inset:-6px;border-radius:50%;border:2px solid var(--mustard);opacity:.5;animation:pulse2 2s ease-in-out infinite}
+.map-pin-dot::after{content:'';position:absolute;inset:-14px;border-radius:50%;border:1px solid var(--mustard);opacity:.3;animation:pulse2 2s ease-in-out .3s infinite}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.15)}}
+@keyframes pulse2{0%,100%{transform:scale(1);opacity:.5}50%{transform:scale(1.3);opacity:0}}
+.map-label{font-family:var(--font-display);font-style:italic;font-size:1.3rem;color:var(--cream);margin-bottom:.3rem}
+.map-coords{font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--mustard);font-weight:500}
+
+@media(max-width:960px){
+  .contact-grid{grid-template-columns:1fr;gap:3rem}
+  .quick-help-grid{grid-template-columns:1fr}
+  .form-row{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<nav class="site-nav solid" id="siteNav">
+  <div class="container nav-inner">
+    <a href="index.html" class="nav-logo">
+      <div class="logo-mark">U</div>
+      <div class="logo-text">Universe<em>Merch</em><span>Africa</span></div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="how-it-works_1.html">How It Works</a></li>
+      <li><a href="students_redesigned.html">For Students</a></li>
+      <li><a href="partner.html">Partner</a></li>
+      <li><a href="students_redesigned.html" class="nav-cta">Shop Now</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" id="mobileClose" aria-label="Close menu">✕</button>
+  <a href="how-it-works_1.html" class="mobile-nav-link">How It <em>Works</em></a>
+  <a href="students_redesigned.html" class="mobile-nav-link">For <em>Students</em></a>
+  <a href="partner.html" class="mobile-nav-link"><em>Partner</em></a>
+  <a href="students_redesigned.html" class="mobile-nav-link">Shop <em>Now</em></a>
+</div>
+
+<section class="page-hero">
+  <div class="container">
+    <div class="page-hero-inner">
+      <div class="page-hero-crumbs"><a href="index.html">Home</a><span class="sep">/</span><span>Company</span><span class="sep">/</span><span>Contact</span></div>
+      <h1>Send us a <em>proper message.</em></h1>
+      <p class="page-hero-lede">"No bots, no ticket systems, no 'your call is important to us.' Just real humans in Ikeja who'll read what you wrote and write back."</p>
+      <p class="page-hero-desc">We answer every email within 24 hours on weekdays, 48 hours on weekends. If it's something urgent about an order, the fastest route is usually WhatsApp.</p>
+    </div>
+  </div>
+</section>
+
+<section class="contact-main">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-info reveal">
+        <span class="section-label">Direct lines</span>
+        <h2>The best way <em>to reach us.</em></h2>
+        <p>Pick the channel that fits what you need. Everything routes to a real person on our team — we don't run a support queue.</p>
+
+        <div class="contact-channels">
+          <div class="channel">
+            <div class="channel-label">General enquiries</div>
+            <a href="mailto:hello@universemerch.africa" class="channel-email">hello@universemerch.africa</a>
+            <p class="channel-desc">First stop for anything you're not sure where to send.</p>
+          </div>
+          <div class="channel">
+            <div class="channel-label">Order support</div>
+            <a href="mailto:support@universemerch.africa" class="channel-email">support@universemerch.africa</a>
+            <p class="channel-desc">For anything about an existing order — sizing swaps, delivery, returns.</p>
+          </div>
+          <div class="channel">
+            <div class="channel-label">Partnership enquiries</div>
+            <a href="mailto:partners@universemerch.africa" class="channel-email">partners@universemerch.africa</a>
+            <p class="channel-desc">Universities, high schools, and alumni associations. Or use the <a href="partner.html" style="color:var(--oxblood);font-weight:500">partner form</a>.</p>
+          </div>
+          <div class="channel">
+            <div class="channel-label">Press &amp; media</div>
+            <a href="mailto:press@universemerch.africa" class="channel-email">press@universemerch.africa</a>
+            <p class="channel-desc">Interview requests, high-res images, founder availability.</p>
+          </div>
+          <div class="channel">
+            <div class="channel-label">WhatsApp (fastest)</div>
+            <a href="https://wa.me/2348012345678" class="channel-email">+234 801 234 5678</a>
+            <p class="channel-desc">9am–7pm WAT, Mon–Sat. Text only — we'll call back if needed.</p>
+          </div>
+        </div>
+
+        <div class="office-card">
+          <div class="office-label">Come say hi</div>
+          <h3>Our <em>Ikeja</em> HQ</h3>
+          <p class="office-address">
+            Plot 14, Industrial Avenue<br/>
+            Ilupeju Bypass, Ikeja<br/>
+            Lagos 100252, Nigeria
+          </p>
+          <div class="office-hours">
+            <div class="office-hours-row"><span>Monday – Friday</span><strong>9:00 — 18:00 WAT</strong></div>
+            <div class="office-hours-row"><span>Saturday</span><strong>10:00 — 15:00 WAT</strong></div>
+            <div class="office-hours-row"><span>Sunday</span><strong>Closed</strong></div>
+          </div>
+          <div class="socials">
+            <a href="#" class="social-dot" aria-label="Instagram">IG</a>
+            <a href="#" class="social-dot" aria-label="Twitter">X</a>
+            <a href="#" class="social-dot" aria-label="TikTok">TK</a>
+            <a href="#" class="social-dot" aria-label="LinkedIn">IN</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-form-wrap reveal delay-2">
+        <span class="section-label">Or write to us</span>
+        <h3>Drop us a <em>line.</em></h3>
+        <p>Fill this out and it lands in the right inbox automatically. Expect a reply within one business day.</p>
+
+        <div class="form-row">
+          <div class="form-field">
+            <label class="form-label" for="fn">First name</label>
+            <input class="form-input" type="text" id="fn" placeholder="Chioma"/>
+          </div>
+          <div class="form-field">
+            <label class="form-label" for="ln">Last name</label>
+            <input class="form-input" type="text" id="ln" placeholder="Adeyemi"/>
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label class="form-label" for="em">Email address</label>
+          <input class="form-input" type="email" id="em" placeholder="you@email.com"/>
+        </div>
+
+        <div class="form-field">
+          <label class="form-label" for="tp">What's this about?</label>
+          <select class="form-select" id="tp">
+            <option>General question</option>
+            <option>Order support</option>
+            <option>Partnership enquiry</option>
+            <option>Press &amp; media</option>
+            <option>Careers</option>
+            <option>Something else</option>
+          </select>
+        </div>
+
+        <div class="form-field">
+          <label class="form-label" for="ms">Your message</label>
+          <textarea class="form-textarea" id="ms" placeholder="Tell us what's on your mind. Order numbers help if it's about a purchase."></textarea>
+        </div>
+
+        <div class="form-check">
+          <input type="checkbox" id="ck"/>
+          <label for="ck">I've read and agree to the <a href="privacy-policy.html">Privacy Policy</a>. You can email me about this message and related follow-ups.</label>
+        </div>
+
+        <button class="btn-primary form-submit" type="button">Send message →</button>
+        <p class="form-note">We reply to every message. Promise.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="map-band">
+  <div class="map-pin">
+    <div class="map-pin-dot"></div>
+    <div class="map-label">Ikeja, Lagos</div>
+    <div class="map-coords">6.6018° N · 3.3515° E</div>
+  </div>
+</section>
+
+<section class="quick-help">
+  <div class="container">
+    <div class="quick-help-head">
+      <span class="section-label center">Before you write</span>
+      <h2 style="font-family:var(--font-display);font-size:clamp(1.8rem,3vw,2.3rem);font-weight:500;color:var(--ink);line-height:1.15;margin:.5rem 0">Quick <em style="font-style:italic;color:var(--oxblood);font-weight:300">answers.</em></h2>
+      <p style="font-size:.95rem;color:var(--text-mid);max-width:520px;margin:0 auto;line-height:1.7">Most questions we get are already answered below.</p>
+    </div>
+    <div class="quick-help-grid">
+      <a href="shipping-returns.html" class="quick-link">
+        <div class="quick-link-label">Most asked</div>
+        <h3>Shipping &amp; Returns</h3>
+        <p>Delivery times, costs by zone, and how to return something that didn't fit.</p>
+      </a>
+      <a href="size-guide.html" class="quick-link">
+        <div class="quick-link-label">Before buying</div>
+        <h3>Size Guide</h3>
+        <p>Measurements for tees, hoodies, varsity jackets, and caps — with a how-to-measure walkthrough.</p>
+      </a>
+      <a href="partner.html" class="quick-link">
+        <div class="quick-link-label">For institutions</div>
+        <h3>Partner With Us</h3>
+        <p>Universities, high schools, and alumni associations: start the conversation here.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer><div class="container">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-logo"><div class="footer-logo-mark">U</div><div class="footer-logo-text">Universe<em>Merch</em></div></div>
+      <p class="footer-tagline">"Proper campus merch, officially licensed —<br/>designed, printed, and shipped from Lagos."</p>
+    </div>
+    <div class="footer-col"><h4>Shop</h4><ul class="footer-links"><li><a href="universities.html">Universities</a></li><li><a href="high-schools.html">High Schools</a></li><li><a href="new-drops.html">New Drops</a></li><li><a href="gift-cards.html">Gift Cards</a></li></ul></div>
+    <div class="footer-col"><h4>Company</h4><ul class="footer-links"><li><a href="our-story.html">Our Story</a></li><li><a href="partners.html">Partners</a></li><li><a href="careers.html">Careers</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+    <div class="footer-col"><h4>Help</h4><ul class="footer-links"><li><a href="size-guide.html">Size Guide</a></li><li><a href="shipping-returns.html">Shipping &amp; Returns</a></li><li><a href="privacy-policy.html">Privacy Policy</a></li><li><a href="terms-of-service.html">Terms of Service</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><p>© 2026 Universe Merch Africa. All rights reserved.</p><p class="italic">"Made with pride in Lagos ✦"</p></div>
+</div></footer>
+
+<script>
+const nav=document.getElementById('siteNav');
+window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>40)});
+const hamburger=document.getElementById('hamburger'),mobileMenu=document.getElementById('mobileMenu'),mobileClose=document.getElementById('mobileClose');
+function openMenu(){mobileMenu.classList.add('open');hamburger.classList.add('open');document.body.style.overflow='hidden'}
+function closeMenu(){mobileMenu.classList.remove('open');hamburger.classList.remove('open');document.body.style.overflow=''}
+hamburger.addEventListener('click',openMenu);mobileClose.addEventListener('click',closeMenu);
+document.querySelectorAll('.mobile-nav-link').forEach(l=>l.addEventListener('click',closeMenu));
+const ro=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')})},{threshold:.12});
+document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el=>ro.observe(el));
+</script>
+</body>
+</html>

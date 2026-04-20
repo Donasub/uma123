@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>New Drops — Universe Merch Africa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,900;1,9..144,300;1,9..144,400;1,9..144,600&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="universe-merch.css" />
+  <style>
+    /* Override page hero for the new-drops splash */
+    .drop-hero{background:var(--ink-deep);color:var(--cream);padding:9rem 0 0;position:relative;overflow:hidden}
+    .drop-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at top right,rgba(230,169,52,.2) 0%,transparent 50%);pointer-events:none}
+    .drop-hero-inner{position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;padding-bottom:5rem}
+    .drop-hero-crumbs{display:flex;align-items:center;gap:10px;font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(244,237,224,.5);margin-bottom:1.4rem;font-weight:500}
+    .drop-hero-crumbs a{color:var(--mustard)}
+    .drop-hero-crumbs .sep{color:rgba(244,237,224,.3)}
+    .live-pill{display:inline-flex;align-items:center;gap:8px;background:rgba(200,52,43,.15);border:1px solid rgba(200,52,43,.5);padding:.5rem 1rem;border-radius:999px;font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:#ff6b60;font-weight:600;margin-bottom:1.4rem}
+    .live-pill::before{content:'';width:7px;height:7px;border-radius:50%;background:#ff6b60;animation:pulse 1.8s ease-in-out infinite}
+    @keyframes pulse{50%{opacity:.3}}
+    .drop-hero h1{font-family:var(--font-display);font-size:clamp(2.8rem,5.2vw,4.8rem);font-weight:500;line-height:1.04;color:var(--cream);margin-bottom:1.2rem;letter-spacing:-.015em}
+    .drop-hero h1 em{font-style:italic;color:var(--mustard);font-weight:300}
+    .drop-hero-desc{font-size:1.05rem;color:rgba(244,237,224,.75);max-width:480px;line-height:1.7;margin-bottom:2rem}
+    .drop-meta{display:flex;gap:2.5rem;padding-top:2rem;border-top:1px solid rgba(230,169,52,.2);margin-top:2rem}
+    .drop-meta-item{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(244,237,224,.55);font-weight:600}
+    .drop-meta-item strong{display:block;font-family:var(--font-display);font-size:1.6rem;font-weight:600;color:var(--mustard);letter-spacing:0;text-transform:none;line-height:1;margin-top:.4rem}
+    .drop-meta-item strong em{font-style:italic;color:var(--cream);font-weight:400}
+
+    .drop-feature-card{position:relative;background:linear-gradient(155deg,var(--oxblood) 0%,var(--oxblood-deep) 100%);border-radius:16px;padding:3rem 2.5rem;color:var(--cream);border:1px solid rgba(230,169,52,.3);box-shadow:var(--shadow-lg);overflow:hidden;min-height:440px;display:flex;flex-direction:column;justify-content:space-between}
+    .drop-feature-card::before{content:'';position:absolute;top:-50px;right:-50px;width:200px;height:200px;border-radius:50%;border:2px solid rgba(230,169,52,.2)}
+    .drop-feature-card::after{content:'✦';position:absolute;top:30px;right:30px;font-size:1.5rem;color:var(--mustard);opacity:.4}
+    .drop-fc-top{position:relative;z-index:2}
+    .drop-fc-tag{display:inline-block;background:var(--mustard);color:var(--ink);padding:.35rem .9rem;font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;font-weight:700;border-radius:2px;margin-bottom:1.4rem}
+    .drop-fc-school{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(244,237,224,.55);margin-bottom:.6rem;font-weight:500}
+    .drop-fc-title{font-family:var(--font-display);font-size:2.4rem;font-weight:500;line-height:1.05;margin-bottom:1rem}
+    .drop-fc-title em{font-style:italic;color:var(--mustard);font-weight:300}
+    .drop-fc-desc{color:rgba(244,237,224,.75);line-height:1.65;margin-bottom:1.5rem}
+    .drop-fc-bottom{display:flex;justify-content:space-between;align-items:flex-end;position:relative;z-index:2}
+    .drop-fc-price{font-family:var(--font-display);font-size:2.2rem;font-weight:600;color:var(--cream);line-height:1}
+    .drop-fc-price small{font-size:1rem;color:rgba(244,237,224,.5);font-weight:400;margin-right:.4rem;text-decoration:line-through}
+    .drop-fc-link{display:inline-flex;align-items:center;gap:10px;font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--mustard);font-weight:600;border-bottom:1px solid var(--mustard);padding-bottom:4px;transition:gap var(--transition)}
+    .drop-fc-link:hover{gap:14px}
+
+    .drop-strip{background:var(--mustard);padding:1.2rem 0;overflow:hidden}
+    .drop-strip-inner{display:flex;gap:3rem;animation:stripScroll 20s linear infinite;white-space:nowrap;width:max-content}
+    .drop-strip-item{display:flex;align-items:center;gap:1rem;font-family:var(--font-display);font-size:1.1rem;font-style:italic;font-weight:500;color:var(--ink)}
+    .drop-strip-dot{width:6px;height:6px;border-radius:50%;background:var(--oxblood);flex-shrink:0}
+
+    .drops-grid-section{padding:5rem 0 6rem;background:var(--cream)}
+    .drops-toolbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:3rem;flex-wrap:wrap;gap:1rem}
+    .drops-toolbar h2{font-family:var(--font-display);font-size:2.2rem;font-weight:500;color:var(--ink);letter-spacing:-.01em}
+    .drops-toolbar h2 em{font-style:italic;color:var(--oxblood);font-weight:300}
+    .drops-filter{display:flex;gap:.5rem;flex-wrap:wrap}
+    .drops-filter button{padding:.6rem 1.1rem;background:var(--white);border:1px solid var(--border);border-radius:2px;font-family:var(--font-body);font-size:.7rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--text-mid);cursor:pointer;transition:all var(--transition)}
+    .drops-filter button:hover{border-color:var(--mustard);color:var(--ink)}
+    .drops-filter button.active{background:var(--ink);color:var(--cream);border-color:var(--ink)}
+
+    .product-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem}
+    .product-card{background:var(--white);border:1px solid var(--border);border-radius:10px;overflow:hidden;transition:all var(--transition);cursor:pointer;display:flex;flex-direction:column}
+    .product-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-md);border-color:var(--mustard)}
+    .product-img{aspect-ratio:4/5;position:relative;overflow:hidden;display:grid;place-items:center;background:linear-gradient(155deg,var(--cream-2) 0%,var(--cream) 100%)}
+    .product-img.ox{background:linear-gradient(155deg,var(--oxblood) 0%,var(--oxblood-deep) 100%)}
+    .product-img.ink{background:linear-gradient(155deg,var(--ink) 0%,#2a2520 100%)}
+    .product-img.mus{background:linear-gradient(155deg,var(--mustard) 0%,#c48a1a 100%)}
+    .product-img.grn{background:linear-gradient(155deg,#2a4020 0%,#1a280f 100%)}
+    .product-img.nav{background:linear-gradient(155deg,#1a2847 0%,#0c1428 100%)}
+    .product-img.oli{background:linear-gradient(155deg,var(--olive) 0%,#2a3617 100%)}
+    .product-crest{font-family:var(--font-display);font-size:3.6rem;font-weight:900;font-style:italic;color:rgba(244,237,224,.22);line-height:1;letter-spacing:-.02em}
+    .product-img.ox .product-crest,.product-img.ink .product-crest,.product-img.grn .product-crest,.product-img.nav .product-crest,.product-img.oli .product-crest{color:rgba(244,237,224,.22)}
+    .product-img .product-crest.dark{color:rgba(23,20,15,.2)}
+    .product-badge{position:absolute;top:.8rem;left:.8rem;background:var(--mustard);color:var(--ink);padding:.3rem .7rem;font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;font-weight:700;border-radius:2px}
+    .product-badge.sale{background:var(--red);color:var(--cream)}
+    .product-badge.restock{background:var(--olive);color:var(--cream)}
+    .product-info{padding:1.2rem 1.3rem 1.4rem}
+    .product-school{font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mustard);font-weight:600;margin-bottom:.4rem}
+    .product-name{font-family:var(--font-display);font-size:1.05rem;font-weight:600;color:var(--ink);line-height:1.2;margin-bottom:.6rem}
+    .product-name em{font-style:italic;color:var(--oxblood);font-weight:400}
+    .product-foot{display:flex;justify-content:space-between;align-items:center;padding-top:.6rem;border-top:1px dashed var(--border)}
+    .product-price{font-family:var(--font-display);font-size:1.15rem;font-weight:600;color:var(--ink)}
+    .product-price small{font-size:.85rem;color:var(--text-light);text-decoration:line-through;margin-right:.4rem;font-weight:400}
+    .product-sizes{font-size:.68rem;color:var(--text-light);letter-spacing:.1em;text-transform:uppercase}
+
+    @media(max-width:960px){
+      .drop-hero-inner{grid-template-columns:1fr;gap:3rem;padding-bottom:4rem}
+      .product-grid{grid-template-columns:1fr 1fr}
+      .drops-toolbar{flex-direction:column;align-items:flex-start}
+    }
+    @media(max-width:520px){
+      .product-grid{grid-template-columns:1fr 1fr;gap:1rem}
+      .drop-meta{flex-wrap:wrap;gap:1.5rem}
+      .drop-fc-title{font-size:1.9rem}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav class="site-nav" id="siteNav">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo">
+        <div class="logo-mark">U</div>
+        <div class="logo-text">Universe<em>Merch</em><span>Africa</span></div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="how-it-works_1.html">How It Works</a></li>
+        <li><a href="students_redesigned.html" class="active">For Students</a></li>
+        <li><a href="partner.html">Partner</a></li>
+        <li><a href="students_redesigned.html" class="nav-cta">Shop Now</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="mobile-close" id="mobileClose" aria-label="Close menu">✕</button>
+    <a href="how-it-works_1.html" class="mobile-nav-link">How It <em>Works</em></a>
+    <a href="students_redesigned.html" class="mobile-nav-link">For <em>Students</em></a>
+    <a href="partner.html" class="mobile-nav-link"><em>Partner</em></a>
+    <a href="students_redesigned.html" class="mobile-nav-link">Shop <em>Now</em></a>
+  </div>
+
+  <!-- DROP HERO -->
+  <section class="drop-hero">
+    <div class="container">
+      <div class="drop-hero-inner">
+        <div>
+          <div class="drop-hero-crumbs">
+            <a href="index.html">Home</a><span class="sep">/</span><span>Shop</span><span class="sep">/</span><span>New Drops</span>
+          </div>
+          <div class="live-pill">Live · Drop 14</div>
+          <h1>This week's <em>drop.</em><br>Fresh off the press.</h1>
+          <p class="drop-hero-desc">New releases every Thursday, 6pm WAT. Designed in Lagos, printed in-house, signed off by the schools themselves. Quantities are limited — when they're gone, they're gone.</p>
+          <div class="drop-meta">
+            <div class="drop-meta-item">Released<strong>April <em>17</em></strong></div>
+            <div class="drop-meta-item">Items<strong>12 <em>new</em></strong></div>
+            <div class="drop-meta-item">Next Drop<strong>7 <em>days</em></strong></div>
+          </div>
+        </div>
+        <div class="drop-feature-card reveal-right">
+          <div class="drop-fc-top">
+            <span class="drop-fc-tag">Featured</span>
+            <div class="drop-fc-school">University of Ibadan</div>
+            <h3 class="drop-fc-title">The <em>Centenary</em><br>Varsity Jacket</h3>
+            <p class="drop-fc-desc">Wool-blend body, leather sleeves, hand-stitched chenille crest. Limited to 300 pieces for the UI 75th anniversary drop.</p>
+          </div>
+          <div class="drop-fc-bottom">
+            <div class="drop-fc-price"><small>₦68,000</small>₦52,000</div>
+            <a href="students_redesigned.html" class="drop-fc-link">Shop Now →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="drop-strip" aria-hidden="true">
+    <div class="drop-strip-inner">
+      <span class="drop-strip-item"><span class="drop-strip-dot"></span>Drops Every Thursday</span>
+      <span class="drop-strip-item"><span class="drop-strip-dot"></span>Limited Quantities</span>
+      <span class="drop-strip-item"><span class="drop-strip-dot"></span>Free Campus Pickup</span>
+      <span class="drop-strip-item"><span class="drop-strip-dot"></span>Officially Licensed</span>
+      <span class="drop-strip-item"><span class="drop-strip-dot"></span>Drops Every Thursday</span>
+      <span class="drop-strip-item"><span class="drop-strip-dot"></span>Limited Quantities</span>
+      <span class="drop-strip-item"><span class="drop-strip-dot"></span>Free Campus Pickup</span>
+      <span class="drop-strip-item"><span class="drop-strip-dot"></span>Officially Licensed</span>
+    </div>
+  </div>
+
+  <!-- DROPS GRID -->
+  <section class="drops-grid-section">
+    <div class="container">
+      <div class="drops-toolbar reveal">
+        <h2>This week's <em>new releases</em></h2>
+        <div class="drops-filter">
+          <button class="active">All</button>
+          <button>Hoodies</button>
+          <button>Tees</button>
+          <button>Varsity</button>
+          <button>Caps</button>
+          <button>Accessories</button>
+        </div>
+      </div>
+
+      <div class="product-grid">
+        <a href="students_redesigned.html" class="product-card reveal delay-1">
+          <div class="product-img ox"><span class="product-badge">New</span><span class="product-crest">UI</span></div>
+          <div class="product-info">
+            <div class="product-school">University of Ibadan</div>
+            <div class="product-name">Centenary <em>Varsity</em> Jacket</div>
+            <div class="product-foot"><div class="product-price"><small>₦68k</small>₦52,000</div><div class="product-sizes">S–XXL</div></div>
+          </div>
+        </a>
+        <a href="students_redesigned.html" class="product-card reveal delay-1">
+          <div class="product-img ink"><span class="product-badge">New</span><span class="product-crest">UL</span></div>
+          <div class="product-info">
+            <div class="product-school">University of Lagos</div>
+            <div class="product-name">Akoka <em>Heavyweight</em> Hoodie</div>
+            <div class="product-foot"><div class="product-price">₦22,500</div><div class="product-sizes">S–XXL</div></div>
+          </div>
+        </a>
+        <a href="students_redesigned.html" class="product-card reveal delay-2">
+          <div class="product-img mus"><span class="product-badge sale">-15%</span><span class="product-crest dark">OAU</span></div>
+          <div class="product-info">
+            <div class="product-school">Obafemi Awolowo Uni.</div>
+            <div class="product-name">Great Ife <em>Crewneck</em></div>
+            <div class="product-foot"><div class="product-price"><small>₦18k</small>₦15,300</div><div class="product-sizes">S–XL</div></div>
+          </div>
+        </a>
+        <a href="students_redesigned.html" class="product-card reveal delay-2">
+          <div class="product-img grn"><span class="product-badge">New</span><span class="product-crest">UNN</span></div>
+          <div class="product-info">
+            <div class="product-school">University of Nigeria</div>
+            <div class="product-name">Lion's Den <em>Graphic</em> Tee</div>
+            <div class="product-foot"><div class="product-price">₦8,500</div><div class="product-sizes">XS–XXL</div></div>
+          </div>
+        </a>
+        <a href="students_redesigned.html" class="product-card reveal delay-3">
+          <div class="product-img nav"><span class="product-badge">New</span><span class="product-crest">ABU</span></div>
+          <div class="product-info">
+            <div class="product-school">Ahmadu Bello Uni.</div>
+            <div class="product-name">Zaria <em>Twill</em> Cap</div>
+            <div class="product-foot"><div class="product-price">₦6,500</div><div class="product-sizes">One Size</div></div>
+          </div>
+        </a>
+        <a href="students_redesigned.html" class="product-card reveal delay-3">
+          <div class="product-img oli"><span class="product-badge restock">Restock</span><span class="product-crest">UNIBEN</span></div>
+          <div class="product-info">
+            <div class="product-school">University of Benin</div>
+            <div class="product-name">UNIBEN <em>Classic</em> Polo</div>
+            <div class="product-foot"><div class="product-price">₦12,000</div><div class="product-sizes">S–XXL</div></div>
+          </div>
+        </a>
+        <a href="students_redesigned.html" class="product-card reveal delay-4">
+          <div class="product-img"><span class="product-badge">New</span><span class="product-crest dark">KC</span></div>
+          <div class="product-info">
+            <div class="product-school">King's College, Lagos</div>
+            <div class="product-name">Blue House <em>Rugby</em> Shirt</div>
+            <div class="product-foot"><div class="product-price">₦16,500</div><div class="product-sizes">S–XXL</div></div>
+          </div>
+        </a>
+        <a href="students_redesigned.html" class="product-card reveal delay-4">
+          <div class="product-img ox"><span class="product-badge">New</span><span class="product-crest">QC</span></div>
+          <div class="product-info">
+            <div class="product-school">Queen's College, Lagos</div>
+            <div class="product-name">QC <em>Essentials</em> Tee</div>
+            <div class="product-foot"><div class="product-price">₦7,500</div><div class="product-sizes">XS–XL</div></div>
+          </div>
+        </a>
+        <a href="students_redesigned.html" class="product-card reveal delay-1">
+          <div class="product-img ink"><span class="product-badge">New</span><span class="product-crest">COVENANT</span></div>
+          <div class="product-info">
+            <div class="product-school">Covenant University</div>
+            <div class="product-name">Eagles <em>Zip-Up</em> Hoodie</div>
+            <div class="product-foot"><div class="product-price">₦24,000</div><div class="product-sizes">S–XXL</div></div>
+          </div>
+        </a>
+        <a href="students_redesigned.html" class="product-card reveal delay-2">
+          <div class="product-img grn"><span class="product-badge">New</span><span class="product-crest">UG</span></div>
+          <div class="product-info">
+            <div class="product-school">University of Ghana</div>
+            <div class="product-name">Legon <em>Athletic</em> Shorts</div>
+            <div class="product-foot"><div class="product-price">GHS 180</div><div class="product-sizes">S–XXL</div></div>
+          </div>
+        </a>
+        <a href="students_redesigned.html" class="product-card reveal delay-3">
+          <div class="product-img mus"><span class="product-badge sale">-20%</span><span class="product-crest dark">LASU</span></div>
+          <div class="product-info">
+            <div class="product-school">Lagos State University</div>
+            <div class="product-name">Ojo <em>Snapback</em></div>
+            <div class="product-foot"><div class="product-price"><small>₦8k</small>₦6,400</div><div class="product-sizes">One Size</div></div>
+          </div>
+        </a>
+        <a href="students_redesigned.html" class="product-card reveal delay-4">
+          <div class="product-img nav"><span class="product-badge">New</span><span class="product-crest">UNIPORT</span></div>
+          <div class="product-info">
+            <div class="product-school">Uni. of Port Harcourt</div>
+            <div class="product-name">Choba <em>Wax Print</em> Tote</div>
+            <div class="product-foot"><div class="product-price">₦9,500</div><div class="product-sizes">Unisex</div></div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final-cta">
+    <div class="container">
+      <div class="ornament"><div class="ornament-line"></div><span class="ornament-text">Never Miss A Drop</span><div class="ornament-line right"></div></div>
+      <h2>Subscribe to<br><em>the drop list.</em></h2>
+      <p>We send one email every Thursday at 5pm WAT — one hour before each drop goes live. Early access, exclusive sizes, zero spam.</p>
+      <a href="contact.html" class="final-cta-btn">Join The Drop List<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="footer-logo"><div class="footer-logo-mark">U</div><div class="footer-logo-text">Universe<em>Merch</em></div></div>
+          <p class="footer-tagline">"Proper campus merch, officially licensed —<br>designed, printed, and shipped from Lagos."</p>
+        </div>
+        <div class="footer-col"><h4>Shop</h4><ul class="footer-links"><li><a href="universities.html">Universities</a></li><li><a href="high-schools.html">High Schools</a></li><li><a href="new-drops.html">New Drops</a></li><li><a href="gift-cards.html">Gift Cards</a></li></ul></div>
+        <div class="footer-col"><h4>Company</h4><ul class="footer-links"><li><a href="our-story.html">Our Story</a></li><li><a href="partners.html">Partners</a></li><li><a href="careers.html">Careers</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+        <div class="footer-col"><h4>Help</h4><ul class="footer-links"><li><a href="size-guide.html">Size Guide</a></li><li><a href="shipping-returns.html">Shipping & Returns</a></li><li><a href="privacy-policy.html">Privacy Policy</a></li><li><a href="terms-of-service.html">Terms of Service</a></li></ul></div>
+      </div>
+      <div class="footer-bottom"><p>© 2026 Universe Merch Africa. All rights reserved.</p><p class="italic">"Made with pride in Lagos ✦"</p></div>
+    </div>
+  </footer>
+
+  <script>
+    const nav=document.getElementById('siteNav');
+    window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>40)});
+    const hamburger=document.getElementById('hamburger'),mobileMenu=document.getElementById('mobileMenu'),mobileClose=document.getElementById('mobileClose');
+    function openMenu(){mobileMenu.classList.add('open');hamburger.classList.add('open');document.body.style.overflow='hidden'}
+    function closeMenu(){mobileMenu.classList.remove('open');hamburger.classList.remove('open');document.body.style.overflow=''}
+    hamburger.addEventListener('click',openMenu);mobileClose.addEventListener('click',closeMenu);
+    document.querySelectorAll('.mobile-nav-link').forEach(l=>l.addEventListener('click',closeMenu));
+    const ro=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')})},{threshold:.12});
+    document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el=>ro.observe(el));
+    document.querySelectorAll('.drops-filter button').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.drops-filter button').forEach(x=>x.classList.remove('active'));b.classList.add('active')}));
+  </script>
+</body>
+</html>

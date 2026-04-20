@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Universities — Universe Merch Africa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,900;1,9..144,300;1,9..144,400;1,9..144,600&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="universe-merch.css" />
+  <style>
+    /* UNIVERSITIES-PAGE-ONLY */
+    .filter-bar{background:var(--cream);padding:2rem 0;border-bottom:1px solid var(--border);position:sticky;top:72px;z-index:50;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);background:rgba(244,237,224,.95)}
+    .filter-inner{display:flex;gap:1.2rem;align-items:center;flex-wrap:wrap}
+    .search-box{flex:1;min-width:280px;position:relative}
+    .search-box input{width:100%;padding:.95rem 1.2rem .95rem 3rem;border:1px solid var(--border);border-radius:2px;background:var(--white);font-family:var(--font-body);font-size:.95rem;color:var(--ink);outline:none;transition:border-color var(--transition)}
+    .search-box input:focus{border-color:var(--mustard);box-shadow:0 0 0 3px rgba(230,169,52,.12)}
+    .search-box::before{content:'⌕';position:absolute;left:1.1rem;top:50%;transform:translateY(-50%);color:var(--oxblood);font-size:1.1rem;pointer-events:none}
+    .filter-chips{display:flex;gap:.6rem;flex-wrap:wrap}
+    .chip{padding:.65rem 1.2rem;background:var(--white);border:1px solid var(--border);border-radius:999px;font-family:var(--font-body);font-size:.72rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--text-mid);cursor:pointer;transition:all var(--transition)}
+    .chip:hover{border-color:var(--mustard);color:var(--ink)}
+    .chip.active{background:var(--ink);color:var(--cream);border-color:var(--ink)}
+
+    .featured{padding:5rem 0 3rem;background:var(--cream)}
+    .featured-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:2rem}
+    .featured-card{position:relative;border-radius:12px;overflow:hidden;aspect-ratio:4/5;display:flex;flex-direction:column;justify-content:flex-end;padding:2rem;color:var(--cream);cursor:pointer;transition:transform var(--transition)}
+    .featured-card:hover{transform:translateY(-6px)}
+    .featured-card::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 30%,rgba(0,0,0,.75) 100%);z-index:2}
+    .featured-card::after{content:'';position:absolute;inset:0;z-index:1}
+    .featured-card.uni-1::after{background:linear-gradient(135deg,var(--oxblood) 0%,var(--oxblood-deep) 100%)}
+    .featured-card.uni-2::after{background:linear-gradient(135deg,#1e3a2e 0%,#0c1a14 100%)}
+    .featured-card.uni-3::after{background:linear-gradient(135deg,#2d2159 0%,#140c2a 100%)}
+    .featured-card-crest{position:absolute;top:2rem;right:2rem;width:72px;height:72px;border-radius:50%;background:rgba(255,255,255,.14);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);display:grid;place-items:center;font-family:var(--font-display);font-weight:900;font-size:1.4rem;color:var(--cream);border:1.5px solid rgba(255,255,255,.3);z-index:3}
+    .featured-card-content{position:relative;z-index:3}
+    .featured-tag{display:inline-block;font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--mustard);font-weight:600;margin-bottom:.8rem}
+    .featured-card h3{font-family:var(--font-display);font-size:1.7rem;font-weight:500;line-height:1.1;margin-bottom:.4rem}
+    .featured-card h3 em{font-style:italic;color:var(--mustard);font-weight:300}
+    .featured-card-meta{font-size:.82rem;color:rgba(244,237,224,.7);display:flex;gap:1rem;align-items:center;margin-top:.6rem}
+    .featured-card-meta span::before{content:'·';margin-right:1rem;color:var(--mustard)}
+    .featured-card-meta span:first-child::before{display:none}
+
+    .unis-grid-section{padding:3rem 0 6rem;background:var(--cream)}
+    .unis-count{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text-light);margin-bottom:2rem;font-weight:500}
+    .unis-count strong{color:var(--oxblood);font-weight:600}
+    .unis-directory{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+    .uni-item{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:1.6rem;display:flex;align-items:center;gap:1.1rem;cursor:pointer;transition:all var(--transition);text-decoration:none;color:inherit}
+    .uni-item:hover{transform:translateY(-4px);box-shadow:var(--shadow-md);border-color:var(--mustard)}
+    .uni-crest{width:54px;height:54px;border-radius:50%;background:var(--oxblood);color:var(--cream);display:grid;place-items:center;font-family:var(--font-display);font-weight:900;font-size:1rem;flex-shrink:0;border:1.5px solid var(--mustard)}
+    .uni-crest.green{background:#1e3a2e}
+    .uni-crest.navy{background:#1a2847}
+    .uni-crest.purple{background:#2d2159}
+    .uni-crest.olive{background:var(--olive)}
+    .uni-info{flex:1;min-width:0}
+    .uni-name{font-family:var(--font-display);font-size:1.05rem;font-weight:600;color:var(--ink);line-height:1.2;margin-bottom:2px}
+    .uni-name em{font-style:italic;color:var(--oxblood);font-weight:400}
+    .uni-loc{font-size:.78rem;color:var(--text-light);letter-spacing:.06em}
+    .uni-arrow{color:var(--mustard);font-size:1.2rem;opacity:.5;transition:all var(--transition);flex-shrink:0}
+    .uni-item:hover .uni-arrow{opacity:1;transform:translateX(3px)}
+
+    .not-listed{margin-top:4rem;padding:3rem;background:linear-gradient(135deg,var(--oxblood) 0%,var(--oxblood-2) 100%);color:var(--cream);border-radius:14px;text-align:center;position:relative;overflow:hidden}
+    .not-listed::before{content:'';position:absolute;top:-60px;right:-60px;width:220px;height:220px;border-radius:50%;border:2px solid rgba(230,169,52,.25)}
+    .not-listed h3{font-family:var(--font-display);font-size:1.8rem;font-weight:500;line-height:1.2;margin-bottom:.8rem;position:relative;z-index:2}
+    .not-listed h3 em{font-style:italic;color:var(--mustard);font-weight:300}
+    .not-listed p{color:rgba(244,237,224,.8);margin-bottom:2rem;max-width:520px;margin-left:auto;margin-right:auto;position:relative;z-index:2}
+
+    @media(max-width:960px){
+      .featured-grid{grid-template-columns:1fr;gap:1.2rem}
+      .unis-directory{grid-template-columns:1fr 1fr;gap:1rem}
+      .filter-bar{position:static;top:auto}
+    }
+    @media(max-width:520px){
+      .unis-directory{grid-template-columns:1fr}
+      .filter-inner{flex-direction:column;align-items:stretch}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav class="site-nav solid" id="siteNav">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo">
+        <div class="logo-mark">U</div>
+        <div class="logo-text">Universe<em>Merch</em><span>Africa</span></div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="how-it-works_1.html">How It Works</a></li>
+        <li><a href="students_redesigned.html" class="active">For Students</a></li>
+        <li><a href="partner.html">Partner</a></li>
+        <li><a href="students_redesigned.html" class="nav-cta">Shop Now</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="mobile-close" id="mobileClose" aria-label="Close menu">✕</button>
+    <a href="how-it-works_1.html" class="mobile-nav-link">How It <em>Works</em></a>
+    <a href="students_redesigned.html" class="mobile-nav-link">For <em>Students</em></a>
+    <a href="partner.html" class="mobile-nav-link"><em>Partner</em></a>
+    <a href="students_redesigned.html" class="mobile-nav-link">Shop <em>Now</em></a>
+  </div>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="container">
+      <div class="page-hero-inner">
+        <div class="page-hero-crumbs">
+          <a href="index.html">Home</a><span class="sep">/</span><span>Shop</span><span class="sep">/</span><span>Universities</span>
+        </div>
+        <h1>Every campus.<br><em>One storefront.</em></h1>
+        <p class="page-hero-lede">"40+ African universities. One clean shop. Find your school, wear your school."</p>
+        <p class="page-hero-desc">Every university listed here has an active licensing partnership with us. Select your campus to see its dedicated collection — crests, colors, and cuts approved by the school itself.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FILTER BAR -->
+  <div class="filter-bar">
+    <div class="container">
+      <div class="filter-inner">
+        <div class="search-box">
+          <input type="text" placeholder="Search universities — e.g. Ibadan, UNILAG, Legon…" id="searchInput" />
+        </div>
+        <div class="filter-chips">
+          <button class="chip active" data-filter="all">All</button>
+          <button class="chip" data-filter="ng">Nigeria</button>
+          <button class="chip" data-filter="gh">Ghana</button>
+          <button class="chip" data-filter="ke">Kenya</button>
+          <button class="chip" data-filter="za">South Africa</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FEATURED UNIVERSITIES -->
+  <section class="featured">
+    <div class="container">
+      <div class="section-label">Flagship Campuses</div>
+      <div class="featured-grid">
+        <a href="students_redesigned.html" class="featured-card uni-1 reveal delay-1">
+          <div class="featured-card-crest">UI</div>
+          <div class="featured-card-content">
+            <span class="featured-tag">Most Shopped</span>
+            <h3>University of <em>Ibadan</em></h3>
+            <div class="featured-card-meta"><span>Oyo State</span><span>62 Products</span></div>
+          </div>
+        </a>
+        <a href="students_redesigned.html" class="featured-card uni-2 reveal delay-2">
+          <div class="featured-card-crest">UL</div>
+          <div class="featured-card-content">
+            <span class="featured-tag">New Collection</span>
+            <h3>University of <em>Lagos</em></h3>
+            <div class="featured-card-meta"><span>Lagos State</span><span>58 Products</span></div>
+          </div>
+        </a>
+        <a href="students_redesigned.html" class="featured-card uni-3 reveal delay-3">
+          <div class="featured-card-crest">OAU</div>
+          <div class="featured-card-content">
+            <span class="featured-tag">Staff Picks</span>
+            <h3>Obafemi <em>Awolowo</em></h3>
+            <div class="featured-card-meta"><span>Osun State</span><span>44 Products</span></div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FULL DIRECTORY -->
+  <section class="unis-grid-section">
+    <div class="container">
+      <div class="unis-count"><strong>42 partner universities</strong> · Updated this week</div>
+      <div class="unis-directory">
+        <a href="students_redesigned.html" class="uni-item reveal delay-1" data-country="ng">
+          <div class="uni-crest">UI</div>
+          <div class="uni-info"><div class="uni-name">University of <em>Ibadan</em></div><div class="uni-loc">Ibadan, Oyo State · Nigeria</div></div>
+          <span class="uni-arrow">→</span>
+        </a>
+        <a href="students_redesigned.html" class="uni-item reveal delay-1" data-country="ng">
+          <div class="uni-crest green">UL</div>
+          <div class="uni-info"><div class="uni-name">University of <em>Lagos</em></div><div class="uni-loc">Akoka, Lagos · Nigeria</div></div>
+          <span class="uni-arrow">→</span>
+        </a>
+        <a href="students_redesigned.html" class="uni-item reveal delay-2" data-country="ng">
+          <div class="uni-crest purple">OAU</div>
+          <div class="uni-info"><div class="uni-name">Obafemi <em>Awolowo</em> Uni.</div><div class="uni-loc">Ile-Ife, Osun State · Nigeria</div></div>
+          <span class="uni-arrow">→</span>
+        </a>
+        <a href="students_redesigned.html" class="uni-item reveal delay-2" data-country="ng">
+          <div class="uni-crest navy">UNN</div>
+          <div class="uni-info"><div class="uni-name">University of <em>Nigeria</em></div><div class="uni-loc">Nsukka, Enugu · Nigeria</div></div>
+          <span class="uni-arrow">→</span>
+        </a>
+        <a href="students_redesigned.html" class="uni-item reveal delay-3" data-country="ng">
+          <div class="uni-crest olive">ABU</div>
+          <div class="uni-info"><div class="uni-name">Ahmadu <em>Bello</em> Uni.</div><div class="uni-loc">Zaria, Kaduna · Nigeria</div></div>
+          <span class="uni-arrow">→</span>
+        </a>
+        <a href="students_redesigned.html" class="uni-item reveal delay-3" data-country="ng">
+          <div class="uni-crest">UNIBEN</div>
+          <div class="uni-info"><div class="uni-name">University of <em>Benin</em></div><div class="uni-loc">Benin City, Edo · Nigeria</div></div>
+          <span class="uni-arrow">→</span>
+        </a>
+        <a href="students_redesigned.html" class="uni-item reveal delay-1" data-country="ng">
+          <div class="uni-crest green">FUTA</div>
+          <div class="uni-info"><div class="uni-name">Fed. Uni. of <em>Technology</em></div><div class="uni-loc">Akure, Ondo · Nigeria</div></div>
+          <span class="uni-arrow">→</span>
+        </a>
+        <a href="students_redesigned.html" class="uni-item reveal delay-1" data-country="ng">
+          <div class="uni-crest purple">COVENANT</div>
+          <div class="uni-info"><div class="uni-name">Covenant <em>University</em></div><div class="uni-loc">Ota, Ogun · Nigeria</div></div>
+          <span class="uni-arrow">→</span>
+        </a>
+        <a href="students_redesigned.html" class="uni-item reveal delay-2" data-country="ng">
+          <div class="uni-crest navy">BABCOCK</div>
+          <div class="uni-info"><div class="uni-name">Babcock <em>University</em></div><div class="uni-loc">Ilishan-Remo · Nigeria</div></div>
+          <span class="uni-arrow">→</span>
+        </a>
+        <a href="students_redesigned.html" class="uni-item reveal delay-2" data-country="ng">
+          <div class="uni-crest">LASU</div>
+          <div class="uni-info"><div class="uni-name">Lagos State <em>University</em></div><div class="uni-loc">Ojo, Lagos · Nigeria</div></div>
+          <span class="uni-arrow">→</span>
+        </a>
+        <a href="students_redesigned.html" class="uni-item reveal delay-3" data-country="ng">
+          <div class="uni-crest olive">UNIPORT</div>
+          <div class="uni-info"><div class="uni-name">University of <em>Port Harcourt</em></div><div class="uni-loc">Choba, Rivers · Nigeria</div></div>
+          <span class="uni-arrow">→</span>
+        </a>
+        <a href="students_redesigned.html" class="uni-item reveal delay-3" data-country="ng">
+          <div class="uni-crest green">UNIJOS</div>
+          <div class="uni-info"><div class="uni-name">University of <em>Jos</em></div><div class="uni-loc">Jos, Plateau · Nigeria</div></div>
+          <span class="uni-arrow">→</span>
+        </a>
+        <a href="students_redesigned.html" class="uni-item reveal delay-1" data-country="gh">
+          <div class="uni-crest navy">UG</div>
+          <div class="uni-info"><div class="uni-name">University of <em>Ghana</em></div><div class="uni-loc">Legon, Accra · Ghana</div></div>
+          <span class="uni-arrow">→</span>
+        </a>
+        <a href="students_redesigned.html" class="uni-item reveal delay-1" data-country="gh">
+          <div class="uni-crest purple">KNUST</div>
+          <div class="uni-info"><div class="uni-name">Kwame <em>Nkrumah</em> Uni.</div><div class="uni-loc">Kumasi · Ghana</div></div>
+          <span class="uni-arrow">→</span>
+        </a>
+        <a href="students_redesigned.html" class="uni-item reveal delay-2" data-country="gh">
+          <div class="uni-crest">UCC</div>
+          <div class="uni-info"><div class="uni-name">University of <em>Cape Coast</em></div><div class="uni-loc">Cape Coast · Ghana</div></div>
+          <span class="uni-arrow">→</span>
+        </a>
+        <a href="students_redesigned.html" class="uni-item reveal delay-2" data-country="ke">
+          <div class="uni-crest olive">UoN</div>
+          <div class="uni-info"><div class="uni-name">University of <em>Nairobi</em></div><div class="uni-loc">Nairobi · Kenya</div></div>
+          <span class="uni-arrow">→</span>
+        </a>
+        <a href="students_redesigned.html" class="uni-item reveal delay-3" data-country="ke">
+          <div class="uni-crest green">KU</div>
+          <div class="uni-info"><div class="uni-name">Kenyatta <em>University</em></div><div class="uni-loc">Nairobi · Kenya</div></div>
+          <span class="uni-arrow">→</span>
+        </a>
+        <a href="students_redesigned.html" class="uni-item reveal delay-3" data-country="ke">
+          <div class="uni-crest navy">STRATH</div>
+          <div class="uni-info"><div class="uni-name">Strathmore <em>University</em></div><div class="uni-loc">Nairobi · Kenya</div></div>
+          <span class="uni-arrow">→</span>
+        </a>
+        <a href="students_redesigned.html" class="uni-item reveal delay-1" data-country="za">
+          <div class="uni-crest purple">UCT</div>
+          <div class="uni-info"><div class="uni-name">University of <em>Cape Town</em></div><div class="uni-loc">Cape Town · South Africa</div></div>
+          <span class="uni-arrow">→</span>
+        </a>
+        <a href="students_redesigned.html" class="uni-item reveal delay-1" data-country="za">
+          <div class="uni-crest">WITS</div>
+          <div class="uni-info"><div class="uni-name">University of the <em>Witwatersrand</em></div><div class="uni-loc">Johannesburg · South Africa</div></div>
+          <span class="uni-arrow">→</span>
+        </a>
+        <a href="students_redesigned.html" class="uni-item reveal delay-2" data-country="za">
+          <div class="uni-crest olive">UP</div>
+          <div class="uni-info"><div class="uni-name">University of <em>Pretoria</em></div><div class="uni-loc">Pretoria · South Africa</div></div>
+          <span class="uni-arrow">→</span>
+        </a>
+      </div>
+
+      <!-- Not listed? -->
+      <div class="not-listed reveal">
+        <h3>Don't see <em>your school?</em></h3>
+        <p>We're onboarding new universities every month. Tell us which campus to bring on next — or if you're in school leadership, let's talk about a partnership.</p>
+        <a href="partner.html" class="btn-primary" style="background:var(--mustard);border-color:var(--mustard);color:var(--ink)">Request A Campus<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="footer-logo"><div class="footer-logo-mark">U</div><div class="footer-logo-text">Universe<em>Merch</em></div></div>
+          <p class="footer-tagline">"Proper campus merch, officially licensed —<br>designed, printed, and shipped from Lagos."</p>
+        </div>
+        <div class="footer-col"><h4>Shop</h4><ul class="footer-links"><li><a href="universities.html">Universities</a></li><li><a href="high-schools.html">High Schools</a></li><li><a href="new-drops.html">New Drops</a></li><li><a href="gift-cards.html">Gift Cards</a></li></ul></div>
+        <div class="footer-col"><h4>Company</h4><ul class="footer-links"><li><a href="our-story.html">Our Story</a></li><li><a href="partners.html">Partners</a></li><li><a href="careers.html">Careers</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+        <div class="footer-col"><h4>Help</h4><ul class="footer-links"><li><a href="size-guide.html">Size Guide</a></li><li><a href="shipping-returns.html">Shipping & Returns</a></li><li><a href="privacy-policy.html">Privacy Policy</a></li><li><a href="terms-of-service.html">Terms of Service</a></li></ul></div>
+      </div>
+      <div class="footer-bottom"><p>© 2026 Universe Merch Africa. All rights reserved.</p><p class="italic">"Made with pride in Lagos ✦"</p></div>
+    </div>
+  </footer>
+
+  <script>
+    const nav=document.getElementById('siteNav');
+    window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>40)});
+    const hamburger=document.getElementById('hamburger'),mobileMenu=document.getElementById('mobileMenu'),mobileClose=document.getElementById('mobileClose');
+    function openMenu(){mobileMenu.classList.add('open');hamburger.classList.add('open');document.body.style.overflow='hidden'}
+    function closeMenu(){mobileMenu.classList.remove('open');hamburger.classList.remove('open');document.body.style.overflow=''}
+    hamburger.addEventListener('click',openMenu);mobileClose.addEventListener('click',closeMenu);
+    document.querySelectorAll('.mobile-nav-link').forEach(l=>l.addEventListener('click',closeMenu));
+    const ro=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')})},{threshold:.12});
+    document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el=>ro.observe(el));
+
+    // Filter + search
+    const chips=document.querySelectorAll('.chip');
+    const items=document.querySelectorAll('.uni-item');
+    const searchInput=document.getElementById('searchInput');
+    let activeFilter='all';
+    function applyFilters(){
+      const q=searchInput.value.toLowerCase().trim();
+      items.forEach(item=>{
+        const matchCountry=activeFilter==='all'||item.dataset.country===activeFilter;
+        const text=item.textContent.toLowerCase();
+        const matchSearch=!q||text.includes(q);
+        item.style.display=matchCountry&&matchSearch?'':'none';
+      });
+    }
+    chips.forEach(c=>c.addEventListener('click',()=>{chips.forEach(x=>x.classList.remove('active'));c.classList.add('active');activeFilter=c.dataset.filter;applyFilters()}));
+    searchInput.addEventListener('input',applyFilters);
+  </script>
+</body>
+</html>

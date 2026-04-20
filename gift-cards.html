@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gift Cards — Universe Merch Africa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,900;1,9..144,300;1,9..144,400;1,9..144,600&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="universe-merch.css" />
+  <style>
+    .gc-main{padding:5rem 0;background:var(--cream);position:relative;overflow:hidden}
+    .gc-main::before{content:'';position:absolute;top:-80px;right:-80px;width:320px;height:320px;border-radius:50%;border:60px solid rgba(230,169,52,.06);pointer-events:none}
+    .gc-layout{display:grid;grid-template-columns:1fr 1.1fr;gap:4rem;align-items:start;position:relative;z-index:2}
+
+    /* LEFT: Gift card preview */
+    .gc-preview-wrap{position:sticky;top:120px}
+    .gc-card{aspect-ratio:1.6/1;border-radius:16px;padding:2rem;color:var(--cream);position:relative;overflow:hidden;box-shadow:var(--shadow-lg);background:linear-gradient(155deg,var(--oxblood) 0%,var(--oxblood-deep) 100%);border:1px solid rgba(230,169,52,.3);transition:background var(--transition)}
+    .gc-card.theme-ink{background:linear-gradient(155deg,var(--ink) 0%,#2a2520 100%)}
+    .gc-card.theme-gold{background:linear-gradient(155deg,var(--mustard) 0%,#c48a1a 100%);color:var(--ink)}
+    .gc-card.theme-cream{background:linear-gradient(155deg,var(--cream) 0%,var(--cream-2) 100%);color:var(--ink);border-color:var(--oxblood)}
+    .gc-card::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;border-radius:50%;border:2px solid rgba(230,169,52,.3)}
+    .gc-card.theme-gold::before,.gc-card.theme-cream::before{border-color:rgba(91,26,26,.25)}
+    .gc-card-top{display:flex;justify-content:space-between;align-items:flex-start;position:relative;z-index:2}
+    .gc-card-logo{display:flex;align-items:center;gap:10px}
+    .gc-card-logo-mark{width:34px;height:34px;border-radius:50%;background:rgba(244,237,224,.14);border:1.5px solid var(--mustard);display:grid;place-items:center;font-family:var(--font-display);font-weight:900;font-size:.95rem}
+    .gc-card.theme-gold .gc-card-logo-mark,.gc-card.theme-cream .gc-card-logo-mark{background:var(--oxblood);color:var(--cream)}
+    .gc-card-logo-text{font-family:var(--font-display);font-size:1.05rem;font-weight:600}
+    .gc-card-logo-text em{font-style:italic;color:var(--mustard);font-weight:400}
+    .gc-card.theme-gold .gc-card-logo-text em{color:var(--oxblood)}
+    .gc-card-tag{font-size:.55rem;letter-spacing:.22em;text-transform:uppercase;color:var(--mustard);font-weight:600;padding:.3rem .7rem;border:1px solid currentColor;border-radius:2px}
+    .gc-card.theme-gold .gc-card-tag,.gc-card.theme-cream .gc-card-tag{color:var(--oxblood)}
+    .gc-card-center{position:relative;z-index:2;margin:1.5rem 0}
+    .gc-card-amount{font-family:var(--font-display);font-size:3.4rem;font-weight:600;line-height:1;letter-spacing:-.02em}
+    .gc-card-amount em{font-style:italic;color:var(--mustard);font-weight:300}
+    .gc-card.theme-gold .gc-card-amount em,.gc-card.theme-cream .gc-card-amount em{color:var(--oxblood)}
+    .gc-card-for{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;opacity:.6;margin-top:.6rem;font-weight:500}
+    .gc-card-recipient{font-family:var(--font-display);font-style:italic;font-size:1.15rem;margin-top:.2rem}
+    .gc-card-bottom{position:relative;z-index:2;display:flex;justify-content:space-between;align-items:flex-end;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;opacity:.5;font-weight:500}
+    .gc-card-message{margin-top:1rem;padding-top:1rem;border-top:1px dashed currentColor;opacity:.75;font-family:var(--font-display);font-style:italic;font-size:.92rem;line-height:1.4}
+
+    .theme-picker{display:flex;gap:.7rem;margin-top:1.5rem;justify-content:center}
+    .theme-swatch{width:36px;height:36px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:all var(--transition);background:linear-gradient(135deg,var(--oxblood),var(--oxblood-deep))}
+    .theme-swatch.s2{background:linear-gradient(135deg,var(--ink),#2a2520)}
+    .theme-swatch.s3{background:linear-gradient(135deg,var(--mustard),#c48a1a)}
+    .theme-swatch.s4{background:linear-gradient(135deg,var(--cream),var(--cream-2))}
+    .theme-swatch.active{border-color:var(--mustard);transform:scale(1.1);box-shadow:0 0 0 3px rgba(230,169,52,.2)}
+
+    .gc-perks{margin-top:2.5rem;padding:1.8rem;background:var(--white);border:1px solid var(--border);border-radius:10px}
+    .gc-perks h4{font-family:var(--font-display);font-size:1rem;font-weight:600;color:var(--ink);margin-bottom:1rem}
+    .gc-perks ul{list-style:none;display:flex;flex-direction:column;gap:.7rem}
+    .gc-perks li{display:flex;align-items:center;gap:12px;font-size:.86rem;color:var(--text-mid)}
+    .gc-perks li::before{content:'✦';color:var(--mustard);font-weight:700;flex-shrink:0}
+
+    /* RIGHT: Form */
+    .gc-form{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:2.5rem;box-shadow:var(--shadow-sm)}
+    .gc-form h2{font-family:var(--font-display);font-size:1.8rem;font-weight:500;color:var(--ink);margin-bottom:.4rem;letter-spacing:-.01em}
+    .gc-form h2 em{font-style:italic;color:var(--oxblood);font-weight:300}
+    .gc-form-intro{color:var(--text-mid);margin-bottom:2rem;font-size:.95rem}
+    .gc-section{margin-bottom:2.2rem}
+    .gc-section-label{font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--mustard);font-weight:600;margin-bottom:1rem;display:flex;align-items:center;gap:10px}
+    .gc-section-label::before{content:'';width:18px;height:1px;background:var(--mustard)}
+
+    .amount-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem}
+    .amount-btn{padding:1rem .8rem;background:var(--cream);border:1px solid var(--border);border-radius:2px;font-family:var(--font-display);font-size:1.1rem;font-weight:600;color:var(--ink);cursor:pointer;transition:all var(--transition);text-align:center}
+    .amount-btn small{display:block;font-family:var(--font-body);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text-light);margin-top:2px;font-weight:500}
+    .amount-btn:hover{border-color:var(--mustard);color:var(--oxblood)}
+    .amount-btn.active{background:var(--ink);color:var(--cream);border-color:var(--ink)}
+    .amount-btn.active small{color:var(--mustard)}
+    .custom-amount{margin-top:.8rem;position:relative}
+    .custom-amount input{width:100%;padding:1rem 1rem 1rem 2.6rem;border:1px solid var(--border);border-radius:2px;background:var(--cream);font-family:var(--font-display);font-size:1rem;color:var(--ink);outline:none;transition:all var(--transition)}
+    .custom-amount input:focus{border-color:var(--mustard);background:var(--white)}
+    .custom-amount::before{content:'₦';position:absolute;left:1rem;top:50%;transform:translateY(-50%);font-family:var(--font-display);font-weight:600;color:var(--oxblood);font-size:1.1rem}
+
+    .delivery-toggle{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+    .delivery-opt{padding:1.2rem;background:var(--cream);border:1px solid var(--border);border-radius:2px;cursor:pointer;transition:all var(--transition)}
+    .delivery-opt:hover{border-color:var(--mustard)}
+    .delivery-opt.active{background:var(--ink);color:var(--cream);border-color:var(--ink)}
+    .delivery-opt h5{font-family:var(--font-display);font-size:1.05rem;font-weight:600;margin-bottom:.3rem}
+    .delivery-opt p{font-size:.78rem;color:var(--text-mid);line-height:1.4}
+    .delivery-opt.active p{color:rgba(244,237,224,.7)}
+
+    .gc-input-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem}
+    .gc-field{display:flex;flex-direction:column;gap:6px}
+    .gc-field label{font-size:.62rem;text-transform:uppercase;letter-spacing:.18em;font-weight:600;color:var(--text-light)}
+    .gc-field input,.gc-field textarea{border:none;border-bottom:1px solid var(--border);background:transparent;padding:10px 0;font-family:var(--font-body);font-size:.95rem;outline:none;transition:border-color var(--transition);color:var(--ink);width:100%;resize:vertical}
+    .gc-field input:focus,.gc-field textarea:focus{border-bottom-width:2px;border-bottom-color:var(--mustard)}
+
+    .gc-total{padding:1.5rem 0;margin-top:1rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:baseline}
+    .gc-total-lbl{font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text-light);font-weight:600}
+    .gc-total-val{font-family:var(--font-display);font-size:2rem;font-weight:600;color:var(--oxblood)}
+
+    .gc-submit{width:100%;margin-top:1rem;display:inline-flex;align-items:center;justify-content:center;gap:10px;background:var(--mustard);color:var(--ink);padding:1.1rem 2rem;border-radius:2px;font-family:var(--font-body);font-size:.78rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;border:2px solid var(--mustard);cursor:pointer;transition:all var(--transition)}
+    .gc-submit:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(230,169,52,.35)}
+
+    .gc-disclaimer{text-align:center;margin-top:1rem;font-size:.74rem;color:var(--text-light);font-family:var(--font-display);font-style:italic}
+
+    @media(max-width:960px){
+      .gc-layout{grid-template-columns:1fr;gap:3rem}
+      .gc-preview-wrap{position:static}
+      .gc-form{padding:2rem}
+    }
+    @media(max-width:520px){
+      .amount-grid{grid-template-columns:1fr 1fr}
+      .delivery-toggle{grid-template-columns:1fr}
+      .gc-input-row{grid-template-columns:1fr}
+      .gc-card-amount{font-size:2.6rem}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav class="site-nav solid" id="siteNav">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo">
+        <div class="logo-mark">U</div>
+        <div class="logo-text">Universe<em>Merch</em><span>Africa</span></div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="how-it-works_1.html">How It Works</a></li>
+        <li><a href="students_redesigned.html" class="active">For Students</a></li>
+        <li><a href="partner.html">Partner</a></li>
+        <li><a href="students_redesigned.html" class="nav-cta">Shop Now</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="mobile-close" id="mobileClose" aria-label="Close menu">✕</button>
+    <a href="how-it-works_1.html" class="mobile-nav-link">How It <em>Works</em></a>
+    <a href="students_redesigned.html" class="mobile-nav-link">For <em>Students</em></a>
+    <a href="partner.html" class="mobile-nav-link"><em>Partner</em></a>
+    <a href="students_redesigned.html" class="mobile-nav-link">Shop <em>Now</em></a>
+  </div>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="container">
+      <div class="page-hero-inner">
+        <div class="page-hero-crumbs">
+          <a href="index.html">Home</a><span class="sep">/</span><span>Shop</span><span class="sep">/</span><span>Gift Cards</span>
+        </div>
+        <h1>Can't pick the fit?<br><em>Let them.</em></h1>
+        <p class="page-hero-lede">"For the graduation, the matriculation, the birthday, the care-package-from-abroad. Give them the gear, let them pick the size."</p>
+        <p class="page-hero-desc">Universe Merch gift cards work across all 40+ partner schools. No expiry, no fees, delivered in minutes. Physical cards available for wrapping.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN -->
+  <section class="gc-main">
+    <div class="container">
+      <div class="gc-layout">
+
+        <!-- LEFT: PREVIEW -->
+        <div class="gc-preview-wrap reveal-left">
+          <div class="gc-card" id="gcCard">
+            <div class="gc-card-top">
+              <div class="gc-card-logo"><div class="gc-card-logo-mark">U</div><div class="gc-card-logo-text">Universe<em>Merch</em></div></div>
+              <span class="gc-card-tag">Gift Card</span>
+            </div>
+            <div class="gc-card-center">
+              <div class="gc-card-amount">₦<span id="previewAmount">10,000</span></div>
+              <div class="gc-card-for">For</div>
+              <div class="gc-card-recipient" id="previewRecipient">Your friend</div>
+            </div>
+            <div class="gc-card-message" id="previewMessage">"Wear it well. Love, me."</div>
+            <div class="gc-card-bottom">
+              <span>Redeemable at universemerch.africa</span>
+              <span>No Expiry</span>
+            </div>
+          </div>
+          <div class="theme-picker">
+            <div class="theme-swatch active" data-theme=""></div>
+            <div class="theme-swatch s2" data-theme="theme-ink"></div>
+            <div class="theme-swatch s3" data-theme="theme-gold"></div>
+            <div class="theme-swatch s4" data-theme="theme-cream"></div>
+          </div>
+
+          <div class="gc-perks">
+            <h4>Why a Universe Merch gift card?</h4>
+            <ul>
+              <li>Works across all 40+ partner schools</li>
+              <li>Never expires. Full balance forever.</li>
+              <li>Digital delivery in under 2 minutes</li>
+              <li>Physical cards ship free in Lagos</li>
+              <li>Fully refundable if unused</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- RIGHT: FORM -->
+        <div class="gc-form reveal-right">
+          <h2>Build the <em>gift.</em></h2>
+          <p class="gc-form-intro">Four quick steps, one well-dressed recipient.</p>
+
+          <!-- Amount -->
+          <div class="gc-section">
+            <div class="gc-section-label">Step 1 — Choose Amount</div>
+            <div class="amount-grid">
+              <button class="amount-btn" data-amt="5000">₦5,000<small>Starter</small></button>
+              <button class="amount-btn active" data-amt="10000">₦10,000<small>Classic Tee</small></button>
+              <button class="amount-btn" data-amt="20000">₦20,000<small>Hoodie</small></button>
+              <button class="amount-btn" data-amt="35000">₦35,000<small>Premium Fit</small></button>
+              <button class="amount-btn" data-amt="50000">₦50,000<small>Varsity</small></button>
+              <button class="amount-btn" data-amt="100000">₦100,000<small>Full Kit</small></button>
+            </div>
+            <div class="custom-amount">
+              <input type="number" placeholder="Or enter custom amount (min ₦2,000)" id="customInput" />
+            </div>
+          </div>
+
+          <!-- Delivery -->
+          <div class="gc-section">
+            <div class="gc-section-label">Step 2 — Delivery Method</div>
+            <div class="delivery-toggle">
+              <div class="delivery-opt active" data-delivery="digital">
+                <h5>Digital</h5>
+                <p>Emailed instantly · Free</p>
+              </div>
+              <div class="delivery-opt" data-delivery="physical">
+                <h5>Physical Card</h5>
+                <p>Mailed in 2-4 days · +₦1,500</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Recipient -->
+          <div class="gc-section">
+            <div class="gc-section-label">Step 3 — Recipient Details</div>
+            <div class="gc-input-row">
+              <div class="gc-field"><label>Their Name</label><input id="nameInput" placeholder="Adaeze" value="Your friend" /></div>
+              <div class="gc-field"><label>Their Email</label><input type="email" placeholder="adaeze@email.com" /></div>
+            </div>
+            <div class="gc-field"><label>Your Message (optional)</label><textarea rows="2" id="msgInput" placeholder="Wear it well. Congrats on graduation.">"Wear it well. Love, me."</textarea></div>
+          </div>
+
+          <!-- Sender -->
+          <div class="gc-section">
+            <div class="gc-section-label">Step 4 — From You</div>
+            <div class="gc-input-row">
+              <div class="gc-field"><label>Your Name</label><input placeholder="Your name" /></div>
+              <div class="gc-field"><label>Your Email</label><input type="email" placeholder="you@email.com" /></div>
+            </div>
+          </div>
+
+          <div class="gc-total">
+            <span class="gc-total-lbl">Total</span>
+            <span class="gc-total-val">₦<span id="totalAmt">10,000</span></span>
+          </div>
+
+          <button class="gc-submit" onclick="alert('Gift card ordered — this is a demo.')">Send The Gift<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg></button>
+          <p class="gc-disclaimer">Paid securely. No expiry. Always refundable.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="footer-logo"><div class="footer-logo-mark">U</div><div class="footer-logo-text">Universe<em>Merch</em></div></div>
+          <p class="footer-tagline">"Proper campus merch, officially licensed —<br>designed, printed, and shipped from Lagos."</p>
+        </div>
+        <div class="footer-col"><h4>Shop</h4><ul class="footer-links"><li><a href="universities.html">Universities</a></li><li><a href="high-schools.html">High Schools</a></li><li><a href="new-drops.html">New Drops</a></li><li><a href="gift-cards.html">Gift Cards</a></li></ul></div>
+        <div class="footer-col"><h4>Company</h4><ul class="footer-links"><li><a href="our-story.html">Our Story</a></li><li><a href="partners.html">Partners</a></li><li><a href="careers.html">Careers</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+        <div class="footer-col"><h4>Help</h4><ul class="footer-links"><li><a href="size-guide.html">Size Guide</a></li><li><a href="shipping-returns.html">Shipping & Returns</a></li><li><a href="privacy-policy.html">Privacy Policy</a></li><li><a href="terms-of-service.html">Terms of Service</a></li></ul></div>
+      </div>
+      <div class="footer-bottom"><p>© 2026 Universe Merch Africa. All rights reserved.</p><p class="italic">"Made with pride in Lagos ✦"</p></div>
+    </div>
+  </footer>
+
+  <script>
+    const nav=document.getElementById('siteNav');
+    window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>40)});
+    const hamburger=document.getElementById('hamburger'),mobileMenu=document.getElementById('mobileMenu'),mobileClose=document.getElementById('mobileClose');
+    function openMenu(){mobileMenu.classList.add('open');hamburger.classList.add('open');document.body.style.overflow='hidden'}
+    function closeMenu(){mobileMenu.classList.remove('open');hamburger.classList.remove('open');document.body.style.overflow=''}
+    hamburger.addEventListener('click',openMenu);mobileClose.addEventListener('click',closeMenu);
+    document.querySelectorAll('.mobile-nav-link').forEach(l=>l.addEventListener('click',closeMenu));
+    const ro=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')})},{threshold:.12});
+    document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el=>ro.observe(el));
+
+    // Gift card interactivity
+    const fmt=n=>Number(n).toLocaleString();
+    const previewAmount=document.getElementById('previewAmount'),previewRecipient=document.getElementById('previewRecipient'),previewMessage=document.getElementById('previewMessage'),totalAmt=document.getElementById('totalAmt'),customInput=document.getElementById('customInput'),nameInput=document.getElementById('nameInput'),msgInput=document.getElementById('msgInput'),gcCard=document.getElementById('gcCard');
+    let currentAmt=10000,deliveryFee=0;
+    function update(){
+      const total=currentAmt+deliveryFee;
+      previewAmount.textContent=fmt(currentAmt);
+      totalAmt.textContent=fmt(total);
+      previewRecipient.textContent=nameInput.value||'Your friend';
+      previewMessage.textContent=msgInput.value||'"Wear it well."';
+    }
+    document.querySelectorAll('.amount-btn').forEach(b=>b.addEventListener('click',()=>{
+      document.querySelectorAll('.amount-btn').forEach(x=>x.classList.remove('active'));
+      b.classList.add('active');
+      currentAmt=parseInt(b.dataset.amt);
+      customInput.value='';
+      update();
+    }));
+    customInput.addEventListener('input',()=>{
+      if(customInput.value){
+        document.querySelectorAll('.amount-btn').forEach(x=>x.classList.remove('active'));
+        currentAmt=parseInt(customInput.value)||0;
+        update();
+      }
+    });
+    document.querySelectorAll('.delivery-opt').forEach(d=>d.addEventListener('click',()=>{
+      document.querySelectorAll('.delivery-opt').forEach(x=>x.classList.remove('active'));
+      d.classList.add('active');
+      deliveryFee=d.dataset.delivery==='physical'?1500:0;
+      update();
+    }));
+    nameInput.addEventListener('input',update);
+    msgInput.addEventListener('input',update);
+    // Theme picker
+    document.querySelectorAll('.theme-swatch').forEach(s=>s.addEventListener('click',()=>{
+      document.querySelectorAll('.theme-swatch').forEach(x=>x.classList.remove('active'));
+      s.classList.add('active');
+      gcCard.className='gc-card '+s.dataset.theme;
+    }));
+  </script>
+</body>
+</html>

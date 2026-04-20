@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Terms of Service — Universe Merch Africa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,900;1,9..144,300;1,9..144,400;1,9..144,600&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="universe-merch.css"/>
+<style>
+/* Meta bar under hero */
+.legal-meta{padding:1.8rem 0;background:var(--cream-2);border-bottom:1px solid var(--border)}
+.legal-meta-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.legal-meta-chip{display:inline-flex;align-items:center;gap:.6rem;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text-mid);font-weight:500}
+.legal-meta-chip strong{color:var(--oxblood);font-weight:600}
+.legal-meta-chip .dot{width:5px;height:5px;border-radius:50%;background:var(--mustard)}
+.legal-meta-actions{display:flex;gap:.6rem}
+.legal-btn{padding:.55rem 1.1rem;font-family:var(--font-body);font-size:.7rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;background:var(--cream);color:var(--ink);border:1px solid var(--border);border-radius:2px;cursor:pointer;transition:all var(--transition);text-decoration:none;display:inline-flex;align-items:center;gap:.5rem}
+.legal-btn:hover{border-color:var(--mustard);color:var(--oxblood)}
+
+/* Main layout */
+.legal-main{padding:4rem 0 6rem;background:var(--cream)}
+.legal-layout{display:grid;grid-template-columns:260px 1fr;gap:5rem;align-items:start}
+
+/* TOC */
+.legal-toc{position:sticky;top:6rem}
+.toc-label{font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--mustard);font-weight:600;margin-bottom:1rem;padding-bottom:1rem;border-bottom:1px dashed var(--border)}
+.toc-nav{display:flex;flex-direction:column;gap:.1rem}
+.toc-nav a{padding:.55rem 0 .55rem 1.2rem;font-size:.88rem;color:var(--text-mid);transition:color var(--transition),border-color var(--transition),padding var(--transition);border-left:2px solid var(--border);font-weight:400;line-height:1.4}
+.toc-nav a:hover{color:var(--oxblood);border-left-color:var(--mustard)}
+.toc-nav a.active{color:var(--oxblood);border-left-color:var(--oxblood);font-weight:500}
+
+/* Content */
+.legal-content{font-family:var(--font-body);color:var(--text-mid);line-height:1.8;font-size:1rem;max-width:720px}
+.legal-content section{padding-bottom:3rem;margin-bottom:3rem;border-bottom:1px dashed var(--border);scroll-margin-top:6rem}
+.legal-content section:last-of-type{border-bottom:none}
+.legal-content .section-num{font-family:var(--font-display);font-style:italic;font-size:.95rem;color:var(--mustard);font-weight:300;letter-spacing:-.01em;margin-bottom:.3rem;display:block}
+.legal-content h2{font-family:var(--font-display);font-size:clamp(1.6rem,2.6vw,2rem);font-weight:500;color:var(--ink);line-height:1.2;letter-spacing:-.01em;margin-bottom:1.2rem}
+.legal-content h2 em{font-style:italic;color:var(--oxblood);font-weight:300}
+.legal-content h3{font-family:var(--font-display);font-size:1.15rem;font-weight:500;color:var(--ink);margin:1.8rem 0 .8rem;letter-spacing:-.005em}
+.legal-content p{margin-bottom:1.1rem}
+.legal-content p strong{color:var(--ink);font-weight:600}
+.legal-content a{color:var(--oxblood);text-decoration:underline;text-decoration-color:rgba(91,26,26,.35);text-underline-offset:3px;transition:text-decoration-color var(--transition)}
+.legal-content a:hover{text-decoration-color:var(--oxblood)}
+.legal-content ul{list-style:none;margin:1rem 0 1.4rem;padding-left:0}
+.legal-content ul li{padding:.35rem 0 .35rem 1.6rem;position:relative;line-height:1.7}
+.legal-content ul li::before{content:'✦';position:absolute;left:0;color:var(--mustard);font-size:.85rem;top:.6rem}
+.legal-content .callout{background:var(--cream-2);border-left:3px solid var(--mustard);padding:1.4rem 1.6rem;border-radius:2px;margin:1.4rem 0;font-size:.95rem}
+.legal-content .callout strong{color:var(--oxblood)}
+.legal-content .warning{background:#fef2e8;border-left:3px solid var(--red);padding:1.4rem 1.6rem;border-radius:2px;margin:1.4rem 0;font-size:.95rem}
+.legal-content .warning strong{color:var(--red)}
+
+/* Contact legal block */
+.dpo-block{margin-top:2rem;padding:2rem 2rem;background:var(--oxblood-deep);color:var(--cream);border-radius:3px;position:relative;overflow:hidden}
+.dpo-block::before{content:'';position:absolute;top:-40px;right:-40px;width:120px;height:120px;border-radius:50%;border:1px solid rgba(230,169,52,.2)}
+.dpo-block .dpo-label{font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--mustard);font-weight:600;margin-bottom:.6rem}
+.dpo-block h3{font-family:var(--font-display);font-size:1.4rem;font-weight:500;color:var(--cream);margin-bottom:.6rem;letter-spacing:-.01em;margin-top:0}
+.dpo-block h3 em{font-style:italic;color:var(--mustard-light);font-weight:300}
+.dpo-block p{color:rgba(244,237,224,.78);margin-bottom:.5rem;font-size:.95rem}
+.dpo-block a{color:var(--mustard);text-decoration:none;font-weight:500}
+.dpo-block a:hover{color:var(--cream)}
+
+/* Definitions block */
+.def-grid{display:grid;grid-template-columns:160px 1fr;gap:.8rem 1.5rem;margin:1.2rem 0 1.6rem;padding:1.4rem 1.6rem;background:var(--cream-2);border-radius:2px;border:1px solid var(--border);font-size:.92rem}
+.def-grid dt{font-family:var(--font-display);font-style:italic;color:var(--oxblood);font-weight:500;line-height:1.5}
+.def-grid dd{margin:0;line-height:1.6}
+
+@media(max-width:960px){
+  .legal-layout{grid-template-columns:1fr;gap:2rem}
+  .legal-toc{position:static;padding:1.5rem;background:var(--cream-2);border-radius:3px;border:1px solid var(--border)}
+  .toc-nav{display:grid;grid-template-columns:1fr 1fr}
+  .toc-nav a{padding-left:.8rem}
+  .legal-meta-inner{flex-direction:column;align-items:flex-start}
+  .def-grid{grid-template-columns:1fr;gap:.2rem 0}
+  .def-grid dt{margin-top:.6rem}
+}
+@media(max-width:520px){
+  .toc-nav{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<nav class="site-nav solid" id="siteNav">
+  <div class="container nav-inner">
+    <a href="index.html" class="nav-logo">
+      <div class="logo-mark">U</div>
+      <div class="logo-text">Universe<em>Merch</em><span>Africa</span></div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="how-it-works_1.html">How It Works</a></li>
+      <li><a href="students_redesigned.html">For Students</a></li>
+      <li><a href="partner.html">Partner</a></li>
+      <li><a href="students_redesigned.html" class="nav-cta">Shop Now</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" id="mobileClose" aria-label="Close menu">✕</button>
+  <a href="how-it-works_1.html" class="mobile-nav-link">How It <em>Works</em></a>
+  <a href="students_redesigned.html" class="mobile-nav-link">For <em>Students</em></a>
+  <a href="partner.html" class="mobile-nav-link"><em>Partner</em></a>
+  <a href="students_redesigned.html" class="mobile-nav-link">Shop <em>Now</em></a>
+</div>
+
+<section class="page-hero-light">
+  <div class="container">
+    <div class="page-hero-inner">
+      <div class="page-hero-crumbs"><a href="index.html">Home</a><span class="sep">/</span><span>Help</span><span class="sep">/</span><span>Terms of Service</span></div>
+      <h1>Terms of <em>Service.</em></h1>
+      <p class="page-hero-lede">"The rulebook. Written plainly where it can be, precisely where it must be — because a handshake deserves the same respect on paper."</p>
+      <p class="page-hero-desc">These Terms form a binding agreement between you and Universe Merch Africa Limited, governing your use of universemerch.africa and any purchase you make from us. By using the Site or placing an order, you agree to what follows.</p>
+    </div>
+  </div>
+</section>
+
+<section class="legal-meta">
+  <div class="container">
+    <div class="legal-meta-inner">
+      <div class="legal-meta-chip"><span class="dot"></span>Last updated: <strong>14 April 2026</strong></div>
+      <div class="legal-meta-chip"><span class="dot"></span>Version <strong>2.4</strong></div>
+      <div class="legal-meta-chip"><span class="dot"></span>Governing law: <strong>Nigeria</strong></div>
+      <div class="legal-meta-actions">
+        <a href="#" class="legal-btn">Download PDF</a>
+        <a href="#" class="legal-btn">Previous versions</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="legal-main">
+  <div class="container">
+    <div class="legal-layout">
+      <aside class="legal-toc">
+        <div class="toc-label">On this page</div>
+        <div class="toc-nav" id="tocNav">
+          <a href="#acceptance">1. Acceptance of terms</a>
+          <a href="#definitions">2. Definitions</a>
+          <a href="#account">3. Your account</a>
+          <a href="#use">4. Use of the service</a>
+          <a href="#orders">5. Orders &amp; payment</a>
+          <a href="#shipping">6. Shipping &amp; returns</a>
+          <a href="#licensing">7. Licensing &amp; IP</a>
+          <a href="#user-content">8. User content</a>
+          <a href="#prohibited">9. Prohibited conduct</a>
+          <a href="#disclaimers">10. Disclaimers</a>
+          <a href="#liability">11. Limitation of liability</a>
+          <a href="#indemnity">12. Indemnification</a>
+          <a href="#termination">13. Termination</a>
+          <a href="#law">14. Governing law</a>
+          <a href="#changes">15. Changes to terms</a>
+          <a href="#contact">16. Contact legal</a>
+        </div>
+      </aside>
+
+      <article class="legal-content">
+        <section id="acceptance">
+          <span class="section-num">§01</span>
+          <h2>Acceptance of <em>terms.</em></h2>
+          <p>By accessing universemerch.africa (the "Site"), creating an account, or placing an order, you confirm that you have read, understood, and agreed to be bound by these Terms of Service ("Terms") and our <a href="privacy-policy.html">Privacy Policy</a>. If you do not agree, please stop using the Site.</p>
+          <p>You must be at least <strong>16 years old</strong> to create an account or place an order independently. Minors between 13 and 16 may use the Site only with verifiable consent from a parent or legal guardian who agrees to these Terms on their behalf.</p>
+          <div class="callout"><strong>In short:</strong> using the Site means you accept the rules on this page. If you're shopping for a child, you're accepting on their behalf too.</div>
+        </section>
+
+        <section id="definitions">
+          <span class="section-num">§02</span>
+          <h2>Key <em>definitions.</em></h2>
+          <p>Throughout these Terms, certain words have specific meanings. To keep things clear:</p>
+          <dl class="def-grid">
+            <dt>"We," "us," "our"</dt>
+            <dd>Universe Merch Africa Limited, a company incorporated in Nigeria with registered office at Plot 14, Industrial Avenue, Ilupeju Bypass, Ikeja, Lagos 100252.</dd>
+            <dt>"You," "your"</dt>
+            <dd>Any person who visits the Site, creates an account, or places an order.</dd>
+            <dt>"Institution"</dt>
+            <dd>A university, college, secondary school, or similar educational body whose crest, logo, name, or identity is licensed to us under a signed agreement.</dd>
+            <dt>"Products"</dt>
+            <dd>The physical goods offered for sale on the Site, including apparel, accessories, and gift cards.</dd>
+            <dt>"Drop"</dt>
+            <dd>A limited-edition release made available for a defined window of time.</dd>
+          </dl>
+        </section>
+
+        <section id="account">
+          <span class="section-num">§03</span>
+          <h2>Your <em>account.</em></h2>
+          <p>You don't need an account to browse the Site, but you do need one to place an order, save sizes, or track shipments. When you register, you agree to:</p>
+          <ul>
+            <li>Provide accurate, current, and complete information</li>
+            <li>Keep your password confidential — don't share it, don't write it on a sticky note</li>
+            <li>Notify us immediately if you suspect unauthorised access at <a href="mailto:security@universemerch.africa">security@universemerch.africa</a></li>
+            <li>Accept responsibility for all activity that happens under your account</li>
+          </ul>
+          <p>We may suspend or terminate accounts that violate these Terms, contain false information, or show signs of fraudulent activity. Where possible, we'll tell you first.</p>
+        </section>
+
+        <section id="use">
+          <span class="section-num">§04</span>
+          <h2>Use of the <em>service.</em></h2>
+          <p>We grant you a limited, non-exclusive, non-transferable, revocable licence to access and use the Site for personal, non-commercial purposes, in line with these Terms.</p>
+          <p>You may not, without our prior written permission:</p>
+          <ul>
+            <li>Scrape, mirror, frame, or systematically download any part of the Site</li>
+            <li>Use the Site to build a competing product or service</li>
+            <li>Resell Products in bulk for commercial gain (see Section 7 on licensing)</li>
+            <li>Interfere with the security, integrity, or performance of the Site</li>
+            <li>Impersonate any person or misrepresent your affiliation with any institution</li>
+          </ul>
+        </section>
+
+        <section id="orders">
+          <span class="section-num">§05</span>
+          <h2>Orders &amp; <em>payment.</em></h2>
+          <h3>Placing an order</h3>
+          <p>When you complete checkout, you are making an offer to buy the Products in your cart at the prices shown. We accept that offer by sending you an <strong>order confirmation email</strong> — at which point a contract is formed. A pending order that hasn't been confirmed is not yet accepted.</p>
+          <p>We reserve the right to decline or cancel any order, including after confirmation, for reasons such as: stock unavailability, pricing or product description errors, failed fraud checks, or shipping restrictions to your region. If we cancel, we will refund any amounts charged within 7 working days.</p>
+          <h3>Pricing &amp; currency</h3>
+          <p>Prices are listed in Nigerian Naira (₦) by default. Where you have selected another currency (GHS, KES, ZAR, USD, GBP, EUR), amounts are converted at our prevailing exchange rate and may include a small currency-conversion margin. VAT and local taxes are shown at checkout before you pay.</p>
+          <h3>Payment methods</h3>
+          <p>We accept payments through <strong>Paystack</strong>, <strong>Flutterwave</strong>, and <strong>Stripe</strong> (for international cards). We do not store your full card details — those stay with the payment processor. By submitting payment, you warrant that you are authorised to use the payment method and that the funds are your own.</p>
+          <div class="warning"><strong>Heads up:</strong> we will never ask for your card PIN, CVV, or banking password by email, SMS, or phone. If someone claiming to be from Universe Merch asks for these — it's a scam. Report it to <a href="mailto:security@universemerch.africa">security@universemerch.africa</a>.</div>
+        </section>
+
+        <section id="shipping">
+          <span class="section-num">§06</span>
+          <h2>Shipping &amp; <em>returns.</em></h2>
+          <p>Full details on delivery zones, timelines, and our returns policy live on the <a href="shipping-returns.html">Shipping &amp; Returns</a> page and are incorporated into these Terms by reference. A short summary:</p>
+          <ul>
+            <li>Delivery timelines vary by zone — 2–5 days within Nigeria, 7–14 days internationally</li>
+            <li>Risk of loss passes to you on delivery to the address you provided</li>
+            <li>Unworn, unwashed Products in original condition may be returned within 14 days</li>
+            <li>Customised, personalised, or sale Products are non-returnable unless faulty</li>
+            <li>Refunds are issued to the original payment method within 7 working days of receipt</li>
+          </ul>
+          <p>Under Nigeria's Federal Competition and Consumer Protection Act 2018, nothing in these Terms excludes or limits your statutory rights as a consumer.</p>
+        </section>
+
+        <section id="licensing">
+          <span class="section-num">§07</span>
+          <h2>Licensing &amp; intellectual <em>property.</em></h2>
+          <p>Every crest, logo, and identifier belonging to a partner Institution is used under an active licensing agreement between that Institution and Universe Merch Africa Limited. This is the whole point of what we do — <em>official</em> merch, not counterfeits.</p>
+          <p><strong>Our marks.</strong> "Universe Merch," "Universe Merch Africa," the stylised "U" mark, and the overall look-and-feel of the Site are trademarks and copyrighted works of Universe Merch Africa Limited. All other trademarks shown on the Site belong to their respective owners and are used under licence.</p>
+          <p><strong>What you can do.</strong> When you buy a Product, you own the physical item. You can wear it, gift it, photograph it, post about it, and love it forever.</p>
+          <p><strong>What you can't do.</strong> Buying a Product does not transfer ownership of any underlying intellectual property. Specifically, you may not:</p>
+          <ul>
+            <li>Reproduce the design on other garments or goods for resale</li>
+            <li>Use Institution crests or our marks to imply official endorsement of your own business</li>
+            <li>Create derivative merchandise that competes with licensed products</li>
+            <li>Remove or alter any labels, tags, or identifying marks for the purpose of resale</li>
+          </ul>
+          <div class="callout"><strong>If you're a collector or reseller:</strong> second-hand resale of a single item you personally own is fine. Large-scale commercial resale is not — please reach out to <a href="mailto:partners@universemerch.africa">partners@universemerch.africa</a> to discuss a wholesale arrangement.</div>
+        </section>
+
+        <section id="user-content">
+          <span class="section-num">§08</span>
+          <h2>User <em>content.</em></h2>
+          <p>When you post reviews, photos, comments, or other content to the Site (or tag us on social platforms using hashtags we've created), you grant us a <strong>non-exclusive, royalty-free, worldwide licence</strong> to use, reproduce, and display that content for marketing, product development, and community purposes. You can revoke this licence at any time by contacting <a href="mailto:hello@universemerch.africa">hello@universemerch.africa</a> — we'll remove the content from our channels within 30 days.</p>
+          <p>You warrant that any content you submit is your own, does not infringe anyone else's rights, and is not unlawful, defamatory, or obscene. We may remove user content that breaches these Terms or that we consider inappropriate, at our discretion.</p>
+        </section>
+
+        <section id="prohibited">
+          <span class="section-num">§09</span>
+          <h2>Prohibited <em>conduct.</em></h2>
+          <p>You agree not to, and not to permit any third party to:</p>
+          <ul>
+            <li>Use the Site for any unlawful purpose or in violation of Nigerian or local law</li>
+            <li>Place fraudulent orders, use stolen payment details, or evade fraud checks</li>
+            <li>Upload viruses, malware, or any code designed to harm the Site or other users</li>
+            <li>Harass, threaten, or abuse other users, our staff, or our customer support team</li>
+            <li>Attempt to gain unauthorised access to any part of the Site, our servers, or related systems</li>
+            <li>Use automated bots, scripts, or scrapers to interact with the Site — especially during Drops</li>
+            <li>Post hate speech, discriminatory content, or content that violates the rights of others</li>
+          </ul>
+          <p>Breach of this section may result in immediate account termination, order cancellation, and — where warranted — referral to law enforcement under the Cybercrimes (Prohibition, Prevention, etc.) Act 2015.</p>
+        </section>
+
+        <section id="disclaimers">
+          <span class="section-num">§10</span>
+          <h2>Disclaimers.</h2>
+          <p>We work hard to keep the Site accurate, available, and secure — but we can't promise perfection. The Site is provided on an <strong>"as is"</strong> and <strong>"as available"</strong> basis.</p>
+          <p>We do not warrant that:</p>
+          <ul>
+            <li>The Site will be uninterrupted, timely, secure, or error-free at all times</li>
+            <li>Product colours shown on your screen will match the physical item exactly (screens vary — we do our best)</li>
+            <li>The information on the Site will always be complete, current, or free of typographical errors</li>
+            <li>The Site will be free of viruses or other harmful components</li>
+          </ul>
+          <p>To the fullest extent permitted by law, we disclaim all warranties, express or implied, including warranties of merchantability, fitness for a particular purpose, and non-infringement — except those expressly set out in these Terms or required by Nigerian consumer law.</p>
+        </section>
+
+        <section id="liability">
+          <span class="section-num">§11</span>
+          <h2>Limitation of <em>liability.</em></h2>
+          <p>Nothing in these Terms excludes or limits our liability for:</p>
+          <ul>
+            <li>Death or personal injury caused by our negligence</li>
+            <li>Fraud or fraudulent misrepresentation</li>
+            <li>Any liability that cannot be excluded under Nigerian law, including your rights under the Federal Competition and Consumer Protection Act 2018</li>
+          </ul>
+          <p>Subject to the above, our total aggregate liability to you for any claim arising out of or in connection with these Terms or your use of the Site shall not exceed the <strong>greater of (a) the amount you paid us in the 12 months preceding the claim, or (b) ₦50,000</strong>.</p>
+          <p>We will not be liable for any indirect, incidental, special, consequential, or punitive damages, including loss of profits, loss of data, or loss of goodwill, however caused.</p>
+        </section>
+
+        <section id="indemnity">
+          <span class="section-num">§12</span>
+          <h2>Indemnification.</h2>
+          <p>You agree to indemnify, defend, and hold harmless Universe Merch Africa Limited, its directors, officers, employees, partner Institutions, and service providers from and against any claims, damages, losses, liabilities, costs, and expenses (including reasonable legal fees) arising out of or related to:</p>
+          <ul>
+            <li>Your breach of these Terms</li>
+            <li>Your misuse of the Site or Products</li>
+            <li>Your violation of any law or the rights of a third party</li>
+            <li>Any user content you post that infringes a third party's rights</li>
+          </ul>
+        </section>
+
+        <section id="termination">
+          <span class="section-num">§13</span>
+          <h2>Termination.</h2>
+          <p>You may close your account at any time by emailing <a href="mailto:hello@universemerch.africa">hello@universemerch.africa</a> or by using the "Delete account" option in your settings.</p>
+          <p>We may suspend or terminate your access to the Site, with or without notice, if we reasonably believe you have breached these Terms, misused the service, or caused harm to us, other users, or partner Institutions. On termination:</p>
+          <ul>
+            <li>Pending orders may be cancelled and refunded</li>
+            <li>Any outstanding balances remain payable</li>
+            <li>Sections that by their nature should survive termination (including IP, liability, indemnity, and governing law) will continue to apply</li>
+          </ul>
+        </section>
+
+        <section id="law">
+          <span class="section-num">§14</span>
+          <h2>Governing <em>law.</em></h2>
+          <p>These Terms and any dispute arising from them are governed by the laws of the <strong>Federal Republic of Nigeria</strong>, without regard to conflict-of-laws principles. You and we agree to submit to the exclusive jurisdiction of the <strong>courts of Lagos State</strong> for any dispute that is not resolved informally.</p>
+          <p>Before taking any formal legal action, we ask that you contact us at <a href="mailto:legal@universemerch.africa">legal@universemerch.africa</a> so we can try to resolve things directly. Most things can be sorted out over email in a week — let's start there.</p>
+          <p>If you are a consumer resident in another country, you may also have the benefit of the mandatory provisions of consumer protection law in your country of residence. Nothing in these Terms removes those rights.</p>
+        </section>
+
+        <section id="changes">
+          <span class="section-num">§15</span>
+          <h2>Changes to these <em>terms.</em></h2>
+          <p>We may update these Terms from time to time — to reflect new features, new partner relationships, changes in the law, or lessons we've learned. When we do:</p>
+          <ul>
+            <li>We'll update the "Last updated" date at the top of this page</li>
+            <li>We'll increment the version number</li>
+            <li>For material changes, we'll email account holders at least 14 days in advance</li>
+            <li>Past versions will remain accessible from the "Previous versions" link</li>
+          </ul>
+          <p>Your continued use of the Site after updated Terms come into effect means you accept the new version. If you don't agree with a change, please stop using the Site and close your account before the effective date.</p>
+        </section>
+
+        <section id="contact">
+          <span class="section-num">§16</span>
+          <h2>Contact our <em>legal team.</em></h2>
+          <p>Questions, concerns, formal notices, or anything that sounds like it needs a lawyer — send it our way. We'll respond within 5 working days for general queries, sooner for urgent matters.</p>
+          <div class="dpo-block">
+            <div class="dpo-label">Legal &amp; Compliance</div>
+            <h3>Universe Merch <em>Africa Limited</em></h3>
+            <p>Email — <a href="mailto:legal@universemerch.africa">legal@universemerch.africa</a></p>
+            <p>Post — Attn: Legal, Plot 14 Industrial Avenue, Ilupeju Bypass, Ikeja, Lagos 100252, Nigeria</p>
+            <p>Phone — +234 (0) 801 234 5678 (Mon–Fri, 9am–5pm WAT)</p>
+            <p style="margin-top:1rem;font-size:.85rem;opacity:.7">For privacy or data-protection matters, please see our <a href="privacy-policy.html" style="color:var(--mustard-light)">Privacy Policy</a> and contact our DPO directly.</p>
+          </div>
+        </section>
+      </article>
+    </div>
+  </div>
+</section>
+
+<footer><div class="container">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-logo"><div class="footer-logo-mark">U</div><div class="footer-logo-text">Universe<em>Merch</em></div></div>
+      <p class="footer-tagline">"Proper campus merch, officially licensed —<br/>designed, printed, and shipped from Lagos."</p>
+    </div>
+    <div class="footer-col"><h4>Shop</h4><ul class="footer-links"><li><a href="universities.html">Universities</a></li><li><a href="high-schools.html">High Schools</a></li><li><a href="new-drops.html">New Drops</a></li><li><a href="gift-cards.html">Gift Cards</a></li></ul></div>
+    <div class="footer-col"><h4>Company</h4><ul class="footer-links"><li><a href="our-story.html">Our Story</a></li><li><a href="partners.html">Partners</a></li><li><a href="careers.html">Careers</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+    <div class="footer-col"><h4>Help</h4><ul class="footer-links"><li><a href="size-guide.html">Size Guide</a></li><li><a href="shipping-returns.html">Shipping &amp; Returns</a></li><li><a href="privacy-policy.html">Privacy Policy</a></li><li><a href="terms-of-service.html">Terms of Service</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><p>© 2026 Universe Merch Africa. All rights reserved.</p><p class="italic">"Made with pride in Lagos ✦"</p></div>
+</div></footer>
+
+<script>
+const nav=document.getElementById('siteNav');
+window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>40)});
+const hamburger=document.getElementById('hamburger'),mobileMenu=document.getElementById('mobileMenu'),mobileClose=document.getElementById('mobileClose');
+function openMenu(){mobileMenu.classList.add('open');hamburger.classList.add('open');document.body.style.overflow='hidden'}
+function closeMenu(){mobileMenu.classList.remove('open');hamburger.classList.remove('open');document.body.style.overflow=''}
+hamburger.addEventListener('click',openMenu);mobileClose.addEventListener('click',closeMenu);
+document.querySelectorAll('.mobile-nav-link').forEach(l=>l.addEventListener('click',closeMenu));
+
+// TOC active state
+const sections=document.querySelectorAll('.legal-content section');
+const tocLinks=document.querySelectorAll('#tocNav a');
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      tocLinks.forEach(l=>l.classList.remove('active'));
+      const link=document.querySelector('#tocNav a[href="#'+e.target.id+'"]');
+      if(link)link.classList.add('active');
+    }
+  });
+},{rootMargin:'-20% 0px -70% 0px'});
+sections.forEach(s=>obs.observe(s));
+
+// Smooth scroll
+tocLinks.forEach(link=>{
+  link.addEventListener('click',e=>{
+    e.preventDefault();
+    document.querySelector(link.getAttribute('href')).scrollIntoView({behavior:'smooth'});
+  });
+});
+</script>
+</body>
+</html>

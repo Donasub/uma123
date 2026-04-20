@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Partners — Universe Merch Africa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,900;1,9..144,300;1,9..144,400;1,9..144,600&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="universe-merch.css"/>
+<style>
+/* Partners page specific */
+.partners-intro{padding:6rem 0 4rem;background:var(--cream)}
+.partners-intro-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:5rem;align-items:center}
+.partners-intro-copy h2{font-family:var(--font-display);font-size:clamp(2rem,3.6vw,2.8rem);font-weight:500;line-height:1.15;color:var(--ink);margin-bottom:1.3rem;letter-spacing:-.01em}
+.partners-intro-copy h2 em{font-style:italic;color:var(--oxblood);font-weight:300}
+.partners-intro-copy p{font-size:1.02rem;color:var(--text-mid);line-height:1.8;margin-bottom:1.2rem}
+.partners-intro-pullquote{background:var(--oxblood-deep);color:var(--cream);padding:2.4rem 2rem;border-radius:2px;position:relative}
+.partners-intro-pullquote::before{content:'"';position:absolute;top:-.5rem;left:1.6rem;font-family:var(--font-display);font-size:5rem;color:var(--mustard);line-height:1;font-weight:600}
+.partners-intro-pullquote p{font-family:var(--font-display);font-style:italic;font-size:1.35rem;line-height:1.5;color:var(--cream);margin-bottom:1.2rem;padding-top:1rem}
+.partners-intro-pullquote cite{display:block;font-family:var(--font-body);font-style:normal;font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--mustard);font-weight:500}
+
+/* Impact stats */
+.impact{padding:5rem 0;background:var(--ink-deep);color:var(--cream)}
+.impact-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;margin-top:3rem}
+.impact-stat{text-align:center;padding:2rem 1rem;border:1px solid rgba(230,169,52,.18);border-radius:2px;background:rgba(230,169,52,.03)}
+.impact-num{font-family:var(--font-display);font-size:clamp(2.4rem,4vw,3.4rem);font-weight:500;color:var(--mustard);line-height:1;margin-bottom:.8rem;letter-spacing:-.02em}
+.impact-num em{font-style:italic;font-weight:300}
+.impact-label{font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(244,237,224,.75);font-weight:500;line-height:1.5}
+
+/* Partner showcase */
+.showcase{padding:6rem 0;background:var(--cream-2)}
+.showcase-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:3rem}
+.partner-card{background:var(--cream);border-radius:3px;overflow:hidden;border:1px solid var(--border);transition:transform .3s,box-shadow .3s}
+.partner-card:hover{transform:translateY(-4px);box-shadow:0 14px 34px rgba(23,20,15,.1)}
+.partner-card-top{height:160px;background:var(--oxblood);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.partner-card-top::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 40%,rgba(230,169,52,.14) 0%,transparent 60%)}
+.partner-card.varsity-2 .partner-card-top{background:var(--olive)}
+.partner-card.varsity-3 .partner-card-top{background:var(--ink)}
+.partner-card.varsity-4 .partner-card-top{background:var(--oxblood-2)}
+.partner-card.varsity-5 .partner-card-top{background:#1a3a3f}
+.partner-card.varsity-6 .partner-card-top{background:#4a2518}
+.partner-crest{width:68px;height:68px;border-radius:50%;background:var(--cream);border:3px solid var(--mustard);display:grid;place-items:center;font-family:var(--font-display);font-weight:900;color:var(--oxblood);font-size:1.2rem;position:relative;z-index:2;letter-spacing:-.02em}
+.partner-card-body{padding:1.5rem 1.4rem 1.6rem}
+.partner-card-uni{font-family:var(--font-display);font-size:1.15rem;font-weight:500;color:var(--ink);margin-bottom:.3rem;line-height:1.25}
+.partner-card-loc{font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text-light);font-weight:500;margin-bottom:1rem}
+.partner-card-meta{display:flex;justify-content:space-between;padding-top:1rem;border-top:1px dashed var(--border);font-size:.78rem;color:var(--text-mid)}
+.partner-card-meta strong{font-family:var(--font-display);color:var(--oxblood);font-weight:600}
+.partner-card-since{font-family:var(--font-display);font-style:italic;font-size:.85rem;color:var(--text-mid)}
+
+/* Testimonials */
+.testimonials{padding:6rem 0;background:var(--cream);position:relative}
+.testi-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2.2rem;margin-top:3rem}
+.testi-card{background:var(--cream-2);padding:2.2rem 2rem;border-radius:3px;border-left:3px solid var(--mustard);position:relative}
+.testi-card::before{content:'"';position:absolute;top:1.2rem;right:1.6rem;font-family:var(--font-display);font-size:4rem;color:rgba(91,26,26,.12);line-height:1;font-weight:600}
+.testi-quote{font-family:var(--font-display);font-style:italic;font-size:1.08rem;color:var(--ink);line-height:1.65;margin-bottom:1.6rem;position:relative;z-index:2}
+.testi-source{display:flex;align-items:center;gap:1rem;padding-top:1.2rem;border-top:1px dashed var(--border)}
+.testi-avatar{width:46px;height:46px;border-radius:50%;background:var(--oxblood);color:var(--cream);display:grid;place-items:center;font-family:var(--font-display);font-weight:600;font-size:1rem;flex-shrink:0}
+.testi-avatar.green{background:var(--olive)}
+.testi-avatar.ink{background:var(--ink)}
+.testi-avatar.mustard{background:var(--mustard);color:var(--ink)}
+.testi-who{flex:1;min-width:0}
+.testi-name{font-family:var(--font-body);font-size:.92rem;font-weight:600;color:var(--ink);margin-bottom:.15rem}
+.testi-role{font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text-light);font-weight:500}
+
+/* How partnership works */
+.how-partner{padding:6rem 0;background:var(--ink-deep);color:var(--cream)}
+.how-partner .section-head h2{color:var(--cream)}
+.how-partner .section-head h2 em{color:var(--mustard)}
+.how-partner-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.6rem;margin-top:3rem}
+.partner-step{padding:2rem 1.6rem;border:1px solid rgba(230,169,52,.18);border-radius:2px;background:rgba(230,169,52,.025);transition:all .3s;position:relative}
+.partner-step:hover{border-color:rgba(230,169,52,.45);background:rgba(230,169,52,.05);transform:translateY(-3px)}
+.partner-step-num{font-family:var(--font-display);font-style:italic;font-size:2.8rem;font-weight:300;color:var(--mustard);line-height:.9;margin-bottom:1rem}
+.partner-step h3{font-family:var(--font-display);font-size:1.15rem;font-weight:500;color:var(--cream);margin-bottom:.7rem;letter-spacing:-.01em}
+.partner-step p{font-size:.9rem;color:rgba(244,237,224,.68);line-height:1.65}
+
+@media(max-width:960px){
+  .partners-intro-grid{grid-template-columns:1fr;gap:2.5rem}
+  .impact-grid{grid-template-columns:repeat(2,1fr)}
+  .showcase-grid{grid-template-columns:repeat(2,1fr)}
+  .testi-grid{grid-template-columns:1fr}
+  .how-partner-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:520px){
+  .impact-grid{grid-template-columns:1fr}
+  .showcase-grid{grid-template-columns:1fr}
+  .how-partner-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<nav class="site-nav solid" id="siteNav">
+  <div class="container nav-inner">
+    <a href="index.html" class="nav-logo">
+      <div class="logo-mark">U</div>
+      <div class="logo-text">Universe<em>Merch</em><span>Africa</span></div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="how-it-works_1.html">How It Works</a></li>
+      <li><a href="students_redesigned.html">For Students</a></li>
+      <li><a href="partner.html">Partner</a></li>
+      <li><a href="students_redesigned.html" class="nav-cta">Shop Now</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" id="mobileClose" aria-label="Close menu">✕</button>
+  <a href="how-it-works_1.html" class="mobile-nav-link">How It <em>Works</em></a>
+  <a href="students_redesigned.html" class="mobile-nav-link">For <em>Students</em></a>
+  <a href="partner.html" class="mobile-nav-link"><em>Partner</em></a>
+  <a href="students_redesigned.html" class="mobile-nav-link">Shop <em>Now</em></a>
+</div>
+
+<section class="page-hero">
+  <div class="container">
+    <div class="page-hero-inner">
+      <div class="page-hero-crumbs"><a href="index.html">Home</a><span class="sep">/</span><span>Company</span><span class="sep">/</span><span>Partners</span></div>
+      <h1>The institutions <em>we build with.</em></h1>
+      <p class="page-hero-lede">"A licensing partner isn't just a logo agreement. It's a promise to treat your crest like we'd treat our own."</p>
+      <p class="page-hero-desc">We work directly with university administrations, student affairs offices, and alumni associations across Africa. Every sale returns a royalty to the institution — funding scholarships, facilities, and student programmes. This page is where we celebrate them.</p>
+    </div>
+  </div>
+</section>
+
+<section class="partners-intro">
+  <div class="container">
+    <div class="partners-intro-grid">
+      <div class="partners-intro-copy reveal">
+        <span class="section-label">Our approach</span>
+        <h2>Licensing done <em>properly.</em></h2>
+        <p>When we say "officially licensed," we mean signed agreements with your VC's office. Approved artwork. Audited royalty statements, delivered quarterly. A proper paper trail — because that's what protects your institution.</p>
+        <p>Every partner gets a dedicated account manager, a co-branded landing page, pre-launch review on every product, and full transparency into what's selling, to whom, and where.</p>
+      </div>
+      <div class="partners-intro-pullquote reveal delay-2">
+        <p>"They're the first company that actually showed up with a proper MOU, a royalty model, and a team that understood what a crest means to an institution like ours."</p>
+        <cite>— Deputy Registrar, partner university</cite>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="impact">
+  <div class="container">
+    <div class="section-head" style="text-align:center">
+      <div class="ornament" style="justify-content:center"><span class="ornament-line"></span><span class="ornament-text">Partnership impact</span><span class="ornament-line right"></span></div>
+      <h2 style="font-family:var(--font-display);font-size:clamp(2rem,4vw,3rem);font-weight:500;color:var(--cream);line-height:1.1;margin-bottom:.8rem">Royalties that <em style="font-style:italic;color:var(--mustard);font-weight:300">actually arrive.</em></h2>
+      <p style="font-size:1rem;color:rgba(244,237,224,.7);max-width:560px;margin:0 auto;line-height:1.7">Figures updated quarterly. Audit reports available to all partner institutions on request.</p>
+    </div>
+    <div class="impact-grid">
+      <div class="impact-stat reveal delay-1"><div class="impact-num">40<em>+</em></div><div class="impact-label">Partner<br/>Universities</div></div>
+      <div class="impact-stat reveal delay-2"><div class="impact-num">₦480<em>M</em></div><div class="impact-label">Royalties<br/>Paid Out</div></div>
+      <div class="impact-stat reveal delay-3"><div class="impact-num">4</div><div class="impact-label">Countries<br/>Across Africa</div></div>
+      <div class="impact-stat reveal delay-4"><div class="impact-num">200<em>k+</em></div><div class="impact-label">Pieces<br/>Shipped</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="showcase">
+  <div class="container">
+    <div class="section-head" style="text-align:center;margin-bottom:1rem">
+      <span class="section-label center">Current partners</span>
+      <h2 style="font-family:var(--font-display);font-size:clamp(2rem,4vw,3rem);font-weight:500;color:var(--ink);line-height:1.1;margin-bottom:.8rem">Featured <em style="font-style:italic;color:var(--oxblood);font-weight:300">institutions.</em></h2>
+      <p style="font-size:1rem;color:var(--text-mid);max-width:560px;margin:0 auto;line-height:1.7">A selection of the universities we work with across Nigeria, Ghana, Kenya, and South Africa.</p>
+    </div>
+    <div class="showcase-grid">
+      <div class="partner-card reveal delay-1">
+        <div class="partner-card-top"><div class="partner-crest">UI</div></div>
+        <div class="partner-card-body">
+          <h3 class="partner-card-uni">University of Ibadan</h3>
+          <div class="partner-card-loc">Ibadan · Nigeria</div>
+          <div class="partner-card-meta"><span>Partner since <strong>Mar 2024</strong></span><span class="partner-card-since">Est. 1948</span></div>
+        </div>
+      </div>
+      <div class="partner-card varsity-2 reveal delay-2">
+        <div class="partner-card-top"><div class="partner-crest">UL</div></div>
+        <div class="partner-card-body">
+          <h3 class="partner-card-uni">University of Lagos</h3>
+          <div class="partner-card-loc">Akoka · Nigeria</div>
+          <div class="partner-card-meta"><span>Partner since <strong>May 2024</strong></span><span class="partner-card-since">Est. 1962</span></div>
+        </div>
+      </div>
+      <div class="partner-card varsity-3 reveal delay-3">
+        <div class="partner-card-top"><div class="partner-crest">OAU</div></div>
+        <div class="partner-card-body">
+          <h3 class="partner-card-uni">Obafemi Awolowo University</h3>
+          <div class="partner-card-loc">Ile-Ife · Nigeria</div>
+          <div class="partner-card-meta"><span>Partner since <strong>Jun 2024</strong></span><span class="partner-card-since">Est. 1961</span></div>
+        </div>
+      </div>
+      <div class="partner-card varsity-4 reveal delay-1">
+        <div class="partner-card-top"><div class="partner-crest">UG</div></div>
+        <div class="partner-card-body">
+          <h3 class="partner-card-uni">University of Ghana</h3>
+          <div class="partner-card-loc">Legon · Ghana</div>
+          <div class="partner-card-meta"><span>Partner since <strong>Oct 2024</strong></span><span class="partner-card-since">Est. 1948</span></div>
+        </div>
+      </div>
+      <div class="partner-card varsity-5 reveal delay-2">
+        <div class="partner-card-top"><div class="partner-crest">UoN</div></div>
+        <div class="partner-card-body">
+          <h3 class="partner-card-uni">University of Nairobi</h3>
+          <div class="partner-card-loc">Nairobi · Kenya</div>
+          <div class="partner-card-meta"><span>Partner since <strong>Jan 2025</strong></span><span class="partner-card-since">Est. 1970</span></div>
+        </div>
+      </div>
+      <div class="partner-card varsity-6 reveal delay-3">
+        <div class="partner-card-top"><div class="partner-crest">UCT</div></div>
+        <div class="partner-card-body">
+          <h3 class="partner-card-uni">University of Cape Town</h3>
+          <div class="partner-card-loc">Cape Town · South Africa</div>
+          <div class="partner-card-meta"><span>Partner since <strong>Mar 2025</strong></span><span class="partner-card-since">Est. 1829</span></div>
+        </div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:3rem">
+      <a href="universities.html" class="btn-outline-dark">View full directory →</a>
+    </div>
+  </div>
+</section>
+
+<section class="testimonials">
+  <div class="container">
+    <div class="section-head" style="text-align:center;margin-bottom:1rem">
+      <span class="section-label center">In their own words</span>
+      <h2 style="font-family:var(--font-display);font-size:clamp(2rem,4vw,3rem);font-weight:500;color:var(--ink);line-height:1.1;margin-bottom:.8rem">What our <em style="font-style:italic;color:var(--oxblood);font-weight:300">partners say.</em></h2>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card reveal delay-1">
+        <p class="testi-quote">The royalty cheques are real. The quality is real. And our students actually want to wear this stuff — that's the part we couldn't get right with the bootleg sellers at the gate.</p>
+        <div class="testi-source">
+          <div class="testi-avatar">PO</div>
+          <div class="testi-who">
+            <div class="testi-name">Prof. P. Ogundipe</div>
+            <div class="testi-role">Dean of Student Affairs · UI</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card reveal delay-2">
+        <p class="testi-quote">We've been approached by a lot of merch companies. Universe Merch was the only one that came with a lawyer, a designer, and a sample. That told us everything.</p>
+        <div class="testi-source">
+          <div class="testi-avatar green">NK</div>
+          <div class="testi-who">
+            <div class="testi-name">N. Kolawole</div>
+            <div class="testi-role">Registrar's Office · UNILAG</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card reveal delay-3">
+        <p class="testi-quote">Our alumni network loves that the crest is protected. Our students love that the hoodies actually fit. Everyone wins — including our scholarship fund.</p>
+        <div class="testi-source">
+          <div class="testi-avatar ink">AM</div>
+          <div class="testi-who">
+            <div class="testi-name">Dr. A. Mensah</div>
+            <div class="testi-role">Alumni Relations · University of Ghana</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card reveal delay-4">
+        <p class="testi-quote">What sold it for me was the transparency. Every quarter, I can see exactly what's been sold, to whom, in what size. Most merch deals are a black box. This isn't.</p>
+        <div class="testi-source">
+          <div class="testi-avatar mustard">SW</div>
+          <div class="testi-who">
+            <div class="testi-name">S. Wambui</div>
+            <div class="testi-role">Licensing Office · UoN Nairobi</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="how-partner">
+  <div class="container">
+    <div class="section-head" style="text-align:center;margin-bottom:1rem">
+      <div class="ornament" style="justify-content:center"><span class="ornament-line"></span><span class="ornament-text">How it works</span><span class="ornament-line right"></span></div>
+      <h2>From conversation to <em>crest on a hoodie.</em></h2>
+      <p style="font-size:1rem;color:rgba(244,237,224,.7);max-width:560px;margin:0 auto;line-height:1.7">A typical partnership moves from first call to first drop in about 6–8 weeks.</p>
+    </div>
+    <div class="how-partner-grid">
+      <div class="partner-step reveal delay-1">
+        <div class="partner-step-num">01</div>
+        <h3>First conversation</h3>
+        <p>A call with your student affairs or alumni office. No pitch deck — just a proper chat about what your institution needs.</p>
+      </div>
+      <div class="partner-step reveal delay-2">
+        <div class="partner-step-num">02</div>
+        <h3>MOU &amp; royalty model</h3>
+        <p>We draft a licensing agreement with your legal team, agreed royalty rate, and pre-launch approval clause. Nothing moves without signatures.</p>
+      </div>
+      <div class="partner-step reveal delay-3">
+        <div class="partner-step-num">03</div>
+        <h3>Design &amp; sampling</h3>
+        <p>Our design team works with your brand guidelines. You review physical samples before anything ships or sells.</p>
+      </div>
+      <div class="partner-step reveal delay-4">
+        <div class="partner-step-num">04</div>
+        <h3>Launch &amp; royalties</h3>
+        <p>Your co-branded storefront goes live. Quarterly royalty statements + audit reports, on the same schedule every time.</p>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:3.5rem">
+      <a href="partner.html" class="btn-primary">Start a partnership →</a>
+    </div>
+  </div>
+</section>
+
+<footer><div class="container">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-logo"><div class="footer-logo-mark">U</div><div class="footer-logo-text">Universe<em>Merch</em></div></div>
+      <p class="footer-tagline">"Proper campus merch, officially licensed —<br/>designed, printed, and shipped from Lagos."</p>
+    </div>
+    <div class="footer-col"><h4>Shop</h4><ul class="footer-links"><li><a href="universities.html">Universities</a></li><li><a href="high-schools.html">High Schools</a></li><li><a href="new-drops.html">New Drops</a></li><li><a href="gift-cards.html">Gift Cards</a></li></ul></div>
+    <div class="footer-col"><h4>Company</h4><ul class="footer-links"><li><a href="our-story.html">Our Story</a></li><li><a href="partners.html">Partners</a></li><li><a href="careers.html">Careers</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+    <div class="footer-col"><h4>Help</h4><ul class="footer-links"><li><a href="size-guide.html">Size Guide</a></li><li><a href="shipping-returns.html">Shipping &amp; Returns</a></li><li><a href="privacy-policy.html">Privacy Policy</a></li><li><a href="terms-of-service.html">Terms of Service</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><p>© 2026 Universe Merch Africa. All rights reserved.</p><p class="italic">"Made with pride in Lagos ✦"</p></div>
+</div></footer>
+
+<script>
+const nav=document.getElementById('siteNav');
+window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>40)});
+const hamburger=document.getElementById('hamburger'),mobileMenu=document.getElementById('mobileMenu'),mobileClose=document.getElementById('mobileClose');
+function openMenu(){mobileMenu.classList.add('open');hamburger.classList.add('open');document.body.style.overflow='hidden'}
+function closeMenu(){mobileMenu.classList.remove('open');hamburger.classList.remove('open');document.body.style.overflow=''}
+hamburger.addEventListener('click',openMenu);mobileClose.addEventListener('click',closeMenu);
+document.querySelectorAll('.mobile-nav-link').forEach(l=>l.addEventListener('click',closeMenu));
+const ro=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')})},{threshold:.12});
+document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el=>ro.observe(el));
+</script>
+</body>
+</html>

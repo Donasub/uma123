@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>High Schools — Universe Merch Africa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,900;1,9..144,300;1,9..144,400;1,9..144,600&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="universe-merch.css" />
+  <style>
+    .hs-intro{padding:5rem 0 2rem;background:var(--cream)}
+    .hs-intro-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:2rem}
+    .hs-stat{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:2rem;text-align:center;transition:all var(--transition)}
+    .hs-stat:hover{transform:translateY(-4px);box-shadow:var(--shadow-md);border-color:var(--mustard)}
+    .hs-stat-num{font-family:var(--font-display);font-size:2.6rem;font-weight:600;color:var(--oxblood);line-height:1;margin-bottom:.4rem}
+    .hs-stat-num em{font-style:italic;color:var(--mustard);font-weight:400;font-size:1.6rem}
+    .hs-stat-lbl{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text-mid);font-weight:600}
+
+    .hs-directory{padding:4rem 0 6rem;background:var(--cream)}
+    .state-group{margin-bottom:3.5rem}
+    .state-header{display:flex;align-items:baseline;gap:1.2rem;margin-bottom:1.6rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}
+    .state-name{font-family:var(--font-display);font-size:1.7rem;font-weight:600;color:var(--ink)}
+    .state-name em{font-style:italic;color:var(--oxblood);font-weight:400}
+    .state-count{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text-light);font-weight:500}
+    .hs-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem}
+    .hs-card{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:1.5rem 1.3rem;transition:all var(--transition);display:flex;flex-direction:column;gap:.8rem;min-height:140px;cursor:pointer}
+    .hs-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-md);border-color:var(--mustard)}
+    .hs-card-top{display:flex;align-items:center;gap:.8rem}
+    .hs-crest-mini{width:36px;height:36px;border-radius:50%;background:var(--oxblood);color:var(--cream);display:grid;place-items:center;font-family:var(--font-display);font-weight:900;font-size:.8rem;flex-shrink:0}
+    .hs-crest-mini.g{background:#1e3a2e}.hs-crest-mini.n{background:#1a2847}.hs-crest-mini.p{background:#2d2159}.hs-crest-mini.o{background:var(--olive)}
+    .hs-established{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mustard);font-weight:600}
+    .hs-name{font-family:var(--font-display);font-size:.98rem;font-weight:600;color:var(--ink);line-height:1.25;flex:1}
+    .hs-name em{font-style:italic;color:var(--oxblood);font-weight:400}
+    .hs-foot{display:flex;justify-content:space-between;align-items:center;padding-top:.6rem;border-top:1px dashed var(--border);margin-top:auto}
+    .hs-products{font-size:.72rem;color:var(--text-light);letter-spacing:.04em}
+    .hs-products strong{color:var(--oxblood);font-weight:600}
+    .hs-arrow{color:var(--mustard);transition:transform var(--transition)}
+    .hs-card:hover .hs-arrow{transform:translateX(3px)}
+
+    .hs-legacy{padding:5rem 0;background:var(--ink);color:var(--cream);position:relative;overflow:hidden}
+    .hs-legacy::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at bottom left,rgba(230,169,52,.14) 0%,transparent 55%);pointer-events:none}
+    .hs-legacy-inner{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;position:relative;z-index:2}
+    .hs-legacy h2{font-family:var(--font-display);font-size:clamp(2.2rem,4vw,3.2rem);font-weight:500;line-height:1.1;margin-bottom:1.4rem;color:var(--cream)}
+    .hs-legacy h2 em{font-style:italic;color:var(--mustard);font-weight:300}
+    .hs-legacy p{color:rgba(244,237,224,.75);margin-bottom:1.2rem;line-height:1.75}
+    .hs-legacy-quote{background:rgba(244,237,224,.04);border:1px solid rgba(230,169,52,.25);border-radius:12px;padding:2.4rem;position:relative}
+    .hs-legacy-quote::before{content:'"';position:absolute;top:-10px;left:24px;font-family:var(--font-display);font-size:5rem;color:var(--mustard);line-height:1}
+    .hs-legacy-quote blockquote{font-family:var(--font-display);font-style:italic;font-size:1.2rem;line-height:1.6;color:var(--cream);margin-bottom:1.4rem;padding-left:1rem}
+    .hs-legacy-quote cite{display:block;font-family:var(--font-body);font-style:normal;font-size:.82rem;letter-spacing:.08em;color:var(--mustard)}
+    .hs-legacy-quote cite span{display:block;color:rgba(244,237,224,.5);font-size:.72rem;margin-top:2px;letter-spacing:.14em;text-transform:uppercase}
+
+    @media(max-width:960px){
+      .hs-intro-grid{grid-template-columns:1fr;gap:1rem}
+      .hs-grid{grid-template-columns:1fr 1fr}
+      .hs-legacy-inner{grid-template-columns:1fr;gap:2.5rem}
+    }
+    @media(max-width:520px){
+      .hs-grid{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav class="site-nav solid" id="siteNav">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo">
+        <div class="logo-mark">U</div>
+        <div class="logo-text">Universe<em>Merch</em><span>Africa</span></div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="how-it-works_1.html">How It Works</a></li>
+        <li><a href="students_redesigned.html" class="active">For Students</a></li>
+        <li><a href="partner.html">Partner</a></li>
+        <li><a href="students_redesigned.html" class="nav-cta">Shop Now</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="mobile-close" id="mobileClose" aria-label="Close menu">✕</button>
+    <a href="how-it-works_1.html" class="mobile-nav-link">How It <em>Works</em></a>
+    <a href="students_redesigned.html" class="mobile-nav-link">For <em>Students</em></a>
+    <a href="partner.html" class="mobile-nav-link"><em>Partner</em></a>
+    <a href="students_redesigned.html" class="mobile-nav-link">Shop <em>Now</em></a>
+  </div>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="container">
+      <div class="page-hero-inner">
+        <div class="page-hero-crumbs">
+          <a href="index.html">Home</a><span class="sep">/</span><span>Shop</span><span class="sep">/</span><span>High Schools</span>
+        </div>
+        <h1>For the <em>real OGs.</em><br>Rep the school<br>that raised you.</h1>
+        <p class="page-hero-lede">"Secondary school loyalty hits different. Your house, your year, your colours — properly pressed and ready."</p>
+        <p class="page-hero-desc">Old boys, old girls, current students, and everybody in between. Over 80 federal, state, and private secondary schools across Africa now have officially licensed merchandise through Universe Merch.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTRO STATS -->
+  <section class="hs-intro">
+    <div class="container">
+      <div class="section-label">By The Numbers</div>
+      <div class="hs-intro-grid">
+        <div class="hs-stat reveal delay-1"><div class="hs-stat-num">80<em>+</em></div><div class="hs-stat-lbl">Secondary Schools</div></div>
+        <div class="hs-stat reveal delay-2"><div class="hs-stat-num">12<em>states</em></div><div class="hs-stat-lbl">Coverage Nationwide</div></div>
+        <div class="hs-stat reveal delay-3"><div class="hs-stat-num">60<em>%</em></div><div class="hs-stat-lbl">Buyers Are Alumni</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DIRECTORY BY STATE -->
+  <section class="hs-directory">
+    <div class="container">
+
+      <div class="state-group reveal">
+        <div class="state-header">
+          <h3 class="state-name">Lagos <em>State</em></h3>
+          <span class="state-count">14 Schools</span>
+        </div>
+        <div class="hs-grid">
+          <a href="students_redesigned.html" class="hs-card">
+            <div class="hs-card-top"><div class="hs-crest-mini">KC</div><span class="hs-established">Est. 1909</span></div>
+            <div class="hs-name">King's <em>College</em>, Lagos</div>
+            <div class="hs-foot"><span class="hs-products"><strong>24</strong> products</span><span class="hs-arrow">→</span></div>
+          </a>
+          <a href="students_redesigned.html" class="hs-card">
+            <div class="hs-card-top"><div class="hs-crest-mini g">QC</div><span class="hs-established">Est. 1927</span></div>
+            <div class="hs-name">Queen's <em>College</em>, Lagos</div>
+            <div class="hs-foot"><span class="hs-products"><strong>22</strong> products</span><span class="hs-arrow">→</span></div>
+          </a>
+          <a href="students_redesigned.html" class="hs-card">
+            <div class="hs-card-top"><div class="hs-crest-mini n">CMS</div><span class="hs-established">Est. 1859</span></div>
+            <div class="hs-name">CMS <em>Grammar</em> School</div>
+            <div class="hs-foot"><span class="hs-products"><strong>18</strong> products</span><span class="hs-arrow">→</span></div>
+          </a>
+          <a href="students_redesigned.html" class="hs-card">
+            <div class="hs-card-top"><div class="hs-crest-mini p">MMS</div><span class="hs-established">Est. 1878</span></div>
+            <div class="hs-name">Methodist <em>Boys'</em> HS</div>
+            <div class="hs-foot"><span class="hs-products"><strong>16</strong> products</span><span class="hs-arrow">→</span></div>
+          </a>
+          <a href="students_redesigned.html" class="hs-card">
+            <div class="hs-card-top"><div class="hs-crest-mini o">IGS</div><span class="hs-established">Est. 1961</span></div>
+            <div class="hs-name">Igbobi <em>College</em></div>
+            <div class="hs-foot"><span class="hs-products"><strong>20</strong> products</span><span class="hs-arrow">→</span></div>
+          </a>
+          <a href="students_redesigned.html" class="hs-card">
+            <div class="hs-card-top"><div class="hs-crest-mini">LGN</div><span class="hs-established">Est. 1974</span></div>
+            <div class="hs-name">Lagoon <em>School</em></div>
+            <div class="hs-foot"><span class="hs-products"><strong>12</strong> products</span><span class="hs-arrow">→</span></div>
+          </a>
+          <a href="students_redesigned.html" class="hs-card">
+            <div class="hs-card-top"><div class="hs-crest-mini g">GRA</div><span class="hs-established">Est. 1955</span></div>
+            <div class="hs-name">Grange <em>School</em></div>
+            <div class="hs-foot"><span class="hs-products"><strong>14</strong> products</span><span class="hs-arrow">→</span></div>
+          </a>
+          <a href="students_redesigned.html" class="hs-card">
+            <div class="hs-card-top"><div class="hs-crest-mini n">ATL</div><span class="hs-established">Est. 1994</span></div>
+            <div class="hs-name">Atlantic <em>Hall</em></div>
+            <div class="hs-foot"><span class="hs-products"><strong>15</strong> products</span><span class="hs-arrow">→</span></div>
+          </a>
+        </div>
+      </div>
+
+      <div class="state-group reveal">
+        <div class="state-header">
+          <h3 class="state-name">Oyo <em>State</em></h3>
+          <span class="state-count">9 Schools</span>
+        </div>
+        <div class="hs-grid">
+          <a href="students_redesigned.html" class="hs-card">
+            <div class="hs-card-top"><div class="hs-crest-mini p">ICI</div><span class="hs-established">Est. 1929</span></div>
+            <div class="hs-name">International School <em>Ibadan</em></div>
+            <div class="hs-foot"><span class="hs-products"><strong>19</strong> products</span><span class="hs-arrow">→</span></div>
+          </a>
+          <a href="students_redesigned.html" class="hs-card">
+            <div class="hs-card-top"><div class="hs-crest-mini o">IGC</div><span class="hs-established">Est. 1929</span></div>
+            <div class="hs-name">Ibadan <em>Grammar</em> School</div>
+            <div class="hs-foot"><span class="hs-products"><strong>17</strong> products</span><span class="hs-arrow">→</span></div>
+          </a>
+          <a href="students_redesigned.html" class="hs-card">
+            <div class="hs-card-top"><div class="hs-crest-mini">LFG</div><span class="hs-established">Est. 1959</span></div>
+            <div class="hs-name">Loyola <em>College</em>, Ibadan</div>
+            <div class="hs-foot"><span class="hs-products"><strong>15</strong> products</span><span class="hs-arrow">→</span></div>
+          </a>
+          <a href="students_redesigned.html" class="hs-card">
+            <div class="hs-card-top"><div class="hs-crest-mini g">OAS</div><span class="hs-established">Est. 1945</span></div>
+            <div class="hs-name">Olivet Baptist <em>HS</em></div>
+            <div class="hs-foot"><span class="hs-products"><strong>11</strong> products</span><span class="hs-arrow">→</span></div>
+          </a>
+        </div>
+      </div>
+
+      <div class="state-group reveal">
+        <div class="state-header">
+          <h3 class="state-name">Abuja <em>FCT</em></h3>
+          <span class="state-count">11 Schools</span>
+        </div>
+        <div class="hs-grid">
+          <a href="students_redesigned.html" class="hs-card">
+            <div class="hs-card-top"><div class="hs-crest-mini n">LAI</div><span class="hs-established">Est. 2003</span></div>
+            <div class="hs-name">Loyola Jesuit <em>College</em></div>
+            <div class="hs-foot"><span class="hs-products"><strong>16</strong> products</span><span class="hs-arrow">→</span></div>
+          </a>
+          <a href="students_redesigned.html" class="hs-card">
+            <div class="hs-card-top"><div class="hs-crest-mini p">TUR</div><span class="hs-established">Est. 1998</span></div>
+            <div class="hs-name">Nigerian Turkish <em>College</em></div>
+            <div class="hs-foot"><span class="hs-products"><strong>13</strong> products</span><span class="hs-arrow">→</span></div>
+          </a>
+          <a href="students_redesigned.html" class="hs-card">
+            <div class="hs-card-top"><div class="hs-crest-mini o">REG</div><span class="hs-established">Est. 2006</span></div>
+            <div class="hs-name">Regent <em>School</em> Abuja</div>
+            <div class="hs-foot"><span class="hs-products"><strong>14</strong> products</span><span class="hs-arrow">→</span></div>
+          </a>
+          <a href="students_redesigned.html" class="hs-card">
+            <div class="hs-card-top"><div class="hs-crest-mini">CHR</div><span class="hs-established">Est. 1988</span></div>
+            <div class="hs-name">Christland <em>Schools</em></div>
+            <div class="hs-foot"><span class="hs-products"><strong>10</strong> products</span><span class="hs-arrow">→</span></div>
+          </a>
+        </div>
+      </div>
+
+      <div class="state-group reveal">
+        <div class="state-header">
+          <h3 class="state-name">Ogun <em>State</em></h3>
+          <span class="state-count">7 Schools</span>
+        </div>
+        <div class="hs-grid">
+          <a href="students_redesigned.html" class="hs-card">
+            <div class="hs-card-top"><div class="hs-crest-mini g">MAY</div><span class="hs-established">Est. 1859</span></div>
+            <div class="hs-name">Mayflower <em>School</em>, Ikenne</div>
+            <div class="hs-foot"><span class="hs-products"><strong>14</strong> products</span><span class="hs-arrow">→</span></div>
+          </a>
+          <a href="students_redesigned.html" class="hs-card">
+            <div class="hs-card-top"><div class="hs-crest-mini n">ABE</div><span class="hs-established">Est. 1908</span></div>
+            <div class="hs-name">Abeokuta <em>Grammar</em></div>
+            <div class="hs-foot"><span class="hs-products"><strong>12</strong> products</span><span class="hs-arrow">→</span></div>
+          </a>
+          <a href="students_redesigned.html" class="hs-card">
+            <div class="hs-card-top"><div class="hs-crest-mini p">BAP</div><span class="hs-established">Est. 1908</span></div>
+            <div class="hs-name">Baptist <em>Boys'</em> HS</div>
+            <div class="hs-foot"><span class="hs-products"><strong>11</strong> products</span><span class="hs-arrow">→</span></div>
+          </a>
+          <a href="students_redesigned.html" class="hs-card">
+            <div class="hs-card-top"><div class="hs-crest-mini o">FGA</div><span class="hs-established">Est. 1988</span></div>
+            <div class="hs-name">FGC <em>Ijanikin</em></div>
+            <div class="hs-foot"><span class="hs-products"><strong>9</strong> products</span><span class="hs-arrow">→</span></div>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- LEGACY / OLD STUDENTS SECTION -->
+  <section class="hs-legacy">
+    <div class="container">
+      <div class="hs-legacy-inner">
+        <div class="reveal-left">
+          <div class="section-label">For Old Students</div>
+          <h2>Reunion-ready,<br><em>year after year.</em></h2>
+          <p>Old student associations run on three things — jollof, stories, and the merch at the annual gathering. We handle the third one so you can focus on the first two.</p>
+          <p>Bulk orders, custom year-class drops, reunion-specific designs. If your set is planning a 10-year, 25-year, or 50-year, let's talk.</p>
+          <a href="contact.html" class="btn-primary" style="margin-top:1rem">Reunion Orders<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+        </div>
+        <div class="hs-legacy-quote reveal-right">
+          <blockquote>Our class of '98 wore Universe Merch to the 25-year reunion at King's. People still ask where we got them. That's the quality we've been missing.</blockquote>
+          <cite>Tunde Adebayo<span>King's College, Class of 1998</span></cite>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final-cta">
+    <div class="container">
+      <div class="ornament"><div class="ornament-line"></div><span class="ornament-text">Don't See Your School?</span><div class="ornament-line right"></div></div>
+      <h2>Add your<br><em>alma mater.</em></h2>
+      <p>If your school isn't listed yet, let us know. We work with old student associations and school boards to bring legacy institutions onto the platform.</p>
+      <a href="partner.html" class="final-cta-btn">Request Your School<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="footer-logo"><div class="footer-logo-mark">U</div><div class="footer-logo-text">Universe<em>Merch</em></div></div>
+          <p class="footer-tagline">"Proper campus merch, officially licensed —<br>designed, printed, and shipped from Lagos."</p>
+        </div>
+        <div class="footer-col"><h4>Shop</h4><ul class="footer-links"><li><a href="universities.html">Universities</a></li><li><a href="high-schools.html">High Schools</a></li><li><a href="new-drops.html">New Drops</a></li><li><a href="gift-cards.html">Gift Cards</a></li></ul></div>
+        <div class="footer-col"><h4>Company</h4><ul class="footer-links"><li><a href="our-story.html">Our Story</a></li><li><a href="partners.html">Partners</a></li><li><a href="careers.html">Careers</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+        <div class="footer-col"><h4>Help</h4><ul class="footer-links"><li><a href="size-guide.html">Size Guide</a></li><li><a href="shipping-returns.html">Shipping & Returns</a></li><li><a href="privacy-policy.html">Privacy Policy</a></li><li><a href="terms-of-service.html">Terms of Service</a></li></ul></div>
+      </div>
+      <div class="footer-bottom"><p>© 2026 Universe Merch Africa. All rights reserved.</p><p class="italic">"Made with pride in Lagos ✦"</p></div>
+    </div>
+  </footer>
+
+  <script>
+    const nav=document.getElementById('siteNav');
+    window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>40)});
+    const hamburger=document.getElementById('hamburger'),mobileMenu=document.getElementById('mobileMenu'),mobileClose=document.getElementById('mobileClose');
+    function openMenu(){mobileMenu.classList.add('open');hamburger.classList.add('open');document.body.style.overflow='hidden'}
+    function closeMenu(){mobileMenu.classList.remove('open');hamburger.classList.remove('open');document.body.style.overflow=''}
+    hamburger.addEventListener('click',openMenu);mobileClose.addEventListener('click',closeMenu);
+    document.querySelectorAll('.mobile-nav-link').forEach(l=>l.addEventListener('click',closeMenu));
+    const ro=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')})},{threshold:.12});
+    document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el=>ro.observe(el));
+  </script>
+</body>
+</html>

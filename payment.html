@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Payment — Universe Merch Africa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,900;1,9..144,300;1,9..144,400;1,9..144,600&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="universe-merch.css" />
+  <style>
+    /* PAYMENT PAGE STYLES */
+    .payment-page {
+      background: var(--cream);
+      min-height: 100vh;
+      padding: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .payment-container {
+      background: var(--white);
+      border-radius: 12px;
+      box-shadow: 0 20px 60px rgba(23, 20, 15, 0.16);
+      width: 100%;
+      max-width: 600px;
+      padding: 3rem 2.5rem;
+      position: relative;
+      animation: fadeSlideUp 0.8s ease;
+    }
+
+    @keyframes fadeSlideUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .payment-header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .payment-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 1.5rem;
+    }
+
+    .payment-logo-mark {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--oxblood);
+      color: var(--cream);
+      display: grid;
+      place-items: center;
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: 1.3rem;
+      border: 2px solid var(--mustard);
+    }
+
+    .payment-logo-text {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .payment-logo-text em {
+      font-style: italic;
+      color: var(--mustard);
+      font-weight: 400;
+    }
+
+    .payment-title {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      font-weight: 500;
+      color: var(--ink);
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.015em;
+    }
+
+    .payment-subtitle {
+      font-size: 1rem;
+      color: var(--text-mid);
+      margin-bottom: 1rem;
+    }
+
+    .payment-amount {
+      font-family: var(--font-display);
+      font-size: 2.5rem;
+      font-weight: 600;
+      color: var(--mustard);
+      margin-bottom: 0.5rem;
+    }
+
+    .payment-method {
+      font-size: 0.9rem;
+      color: var(--text-light);
+    }
+
+    /* PAYMENT FORM */
+    .payment-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .form-label {
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+
+    .form-input {
+      padding: 1rem 1.2rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      color: var(--ink);
+      background: var(--white);
+      transition: all var(--transition);
+      outline: none;
+    }
+
+    .form-input:focus {
+      border-color: var(--mustard);
+      box-shadow: 0 0 0 4px rgba(230, 169, 52, 0.12);
+    }
+
+    .form-input::placeholder {
+      color: var(--text-light);
+    }
+
+    .card-inputs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .card-inputs .form-group {
+      grid-column: span 1;
+    }
+
+    .card-inputs .form-group.expiry {
+      grid-column: span 1;
+    }
+
+    .card-inputs .form-group.cvv {
+      grid-column: span 1;
+    }
+
+    .card-inputs .form-group.number {
+      grid-column: span 2;
+    }
+
+    /* PAYMENT METHODS */
+    .payment-methods {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .payment-method-btn {
+      flex: 1;
+      padding: 0.8rem 1rem;
+      border: 2px solid var(--border);
+      background: transparent;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .payment-method-btn:hover,
+    .payment-method-btn.active {
+      border-color: var(--mustard);
+      background: rgba(230, 169, 52, 0.1);
+      color: var(--mustard);
+    }
+
+    /* PAYMENT BUTTON */
+    .btn-pay {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: var(--mustard);
+      color: var(--ink);
+      padding: 1.2rem 2rem;
+      font-family: var(--font-body);
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      border-radius: 8px;
+      border: 2px solid var(--mustard);
+      cursor: pointer;
+      transition: all var(--transition);
+      margin-top: 1rem;
+    }
+
+    .btn-pay:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(230, 169, 52, 0.35);
+    }
+
+    .btn-pay:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .btn-pay.processing {
+      position: relative;
+    }
+
+    .btn-pay.processing::after {
+      content: '';
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(23, 20, 15, 0.2);
+      border-top-color: var(--ink);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* SECURE BADGE */
+    .secure-badge {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1.5rem;
+      padding: 0.8rem;
+      background: rgba(26, 87, 39, 0.1);
+      border-radius: 6px;
+      font-size: 0.85rem;
+      color: #1a5727;
+    }
+
+    .secure-badge-icon {
+      font-size: 1rem;
+    }
+
+    /* BACK LINK */
+    .payment-back {
+      position: absolute;
+      top: 1.5rem;
+      left: 1.5rem;
+      color: var(--oxblood);
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: color var(--transition);
+    }
+
+    .payment-back:hover {
+      color: var(--mustard);
+    }
+
+    /* ERROR MESSAGE */
+    .error-message {
+      background: rgba(200, 52, 43, 0.1);
+      color: var(--red);
+      padding: 1rem;
+      border-radius: 6px;
+      border-left: 3px solid var(--red);
+      margin-bottom: 1rem;
+      font-size: 0.9rem;
+      display: none;
+    }
+
+    .error-message.show {
+      display: block;
+    }
+
+    /* SUCCESS MESSAGE */
+    .success-message {
+      background: rgba(26, 87, 39, 0.1);
+      color: #1a5727;
+      padding: 1rem;
+      border-radius: 6px;
+      border-left: 3px solid #1a5727;
+      margin-bottom: 1rem;
+      font-size: 0.9rem;
+      display: none;
+    }
+
+    .success-message.show {
+      display: block;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 520px) {
+      .payment-container {
+        padding: 2rem 1.5rem;
+      }
+
+      .payment-title {
+        font-size: 1.8rem;
+      }
+
+      .payment-amount {
+        font-size: 2rem;
+      }
+
+      .card-inputs {
+        grid-template-columns: 1fr;
+      }
+
+      .card-inputs .form-group.number {
+        grid-column: span 1;
+      }
+
+      .payment-methods {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="payment-page">
+    <div class="payment-container">
+      
+      <!-- BACK LINK -->
+      <div class="payment-back" onclick="goBack()">← Back to Checkout</div>
+
+      <!-- HEADER -->
+      <div class="payment-header">
+        <div class="payment-logo">
+          <div class="payment-logo-mark">U</div>
+          <div class="payment-logo-text">Universe<em>Merch</em></div>
+        </div>
+        <h1 class="payment-title">Complete Payment</h1>
+        <p class="payment-subtitle">Secure payment powered by Paystack</p>
+        <div class="payment-amount" id="paymentAmount">₦0</div>
+        <div class="payment-method" id="paymentMethod">Credit/Debit Card</div>
+      </div>
+
+      <!-- ERROR/SUCCESS MESSAGES -->
+      <div class="error-message" id="errorMessage"></div>
+      <div class="success-message" id="successMessage"></div>
+
+      <!-- PAYMENT FORM -->
+      <form class="payment-form" id="paymentForm" novalidate>
+        
+        <!-- PAYMENT METHOD SELECTION -->
+        <div class="form-group">
+          <label class="form-label">Payment Method</label>
+          <div class="payment-methods">
+            <button type="button" class="payment-method-btn active" onclick="selectPaymentMethod('card')" id="cardBtn">
+              💳 Card
+            </button>
+            <button type="button" class="payment-method-btn" onclick="selectPaymentMethod('bank')" id="bankBtn">
+              🏦 Bank Transfer
+            </button>
+          </div>
+        </div>
+
+        <!-- CARD PAYMENT FORM -->
+        <div id="cardForm" class="card-form">
+          <div class="card-inputs">
+            <div class="form-group number">
+              <label class="form-label" for="cardNumber">Card Number</label>
+              <input
+                type="text"
+                id="cardNumber"
+                class="form-input"
+                placeholder="1234 5678 9012 3456"
+                maxlength="19"
+                required
+              />
+            </div>
+
+            <div class="form-group expiry">
+              <label class="form-label" for="expiryDate">Expiry Date</label>
+              <input
+                type="text"
+                id="expiryDate"
+                class="form-input"
+                placeholder="MM/YY"
+                maxlength="5"
+                required
+              />
+            </div>
+
+            <div class="form-group cvv">
+              <label class="form-label" for="cvv">CVV</label>
+              <input
+                type="text"
+                id="cvv"
+                class="form-input"
+                placeholder="123"
+                maxlength="4"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="cardName">Cardholder Name</label>
+            <input
+              type="text"
+              id="cardName"
+              class="form-input"
+              placeholder="John Doe"
+              required
+            />
+          </div>
+        </div>
+
+        <!-- BANK TRANSFER INFO -->
+        <div id="bankForm" class="bank-form" style="display: none;">
+          <div class="form-group">
+            <label class="form-label">Bank Transfer Details</label>
+            <div style="padding: 1rem; background: var(--cream); border-radius: 6px; font-size: 0.9rem; line-height: 1.5;">
+              <p><strong>Bank:</strong> Access Bank</p>
+              <p><strong>Account Name:</strong> Universe Merch Africa Ltd</p>
+              <p><strong>Account Number:</strong> 0123456789</p>
+              <p><strong>Reference:</strong> <span id="bankReference">UMA-ORDER-12345</span></p>
+              <br>
+              <p style="color: var(--text-mid); font-size: 0.8rem;">
+                Transfer the exact amount above to the account details provided. 
+                Your order will be confirmed once payment is received.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- PAY BUTTON -->
+        <button type="submit" class="btn-pay" id="payBtn">
+          Pay Now
+        </button>
+      </form>
+
+      <!-- SECURE BADGE -->
+      <div class="secure-badge">
+        <span class="secure-badge-icon">🔒</span>
+        <span>Your payment information is secure and encrypted</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- INCLUDE UMA CLIENT -->
+  <script src="universe-merch-backend/public/uma-client.js"></script>
+  <script>
+    UMA.init({ apiUrl: 'http://localhost:4000/api' });
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const orderId = urlParams.get('order_id');
+    const paymentAmount = urlParams.get('amount') || '0';
+    const paymentMethod = urlParams.get('method') || 'card';
+
+    // DOM Elements
+    const paymentAmountEl = document.getElementById('paymentAmount');
+    const paymentMethodEl = document.getElementById('paymentMethod');
+    const errorMessage = document.getElementById('errorMessage');
+    const successMessage = document.getElementById('successMessage');
+    const payBtn = document.getElementById('payBtn');
+    const cardForm = document.getElementById('cardForm');
+    const bankForm = document.getElementById('bankForm');
+    const cardBtn = document.getElementById('cardBtn');
+    const bankBtn = document.getElementById('bankBtn');
+    const bankReference = document.getElementById('bankReference');
+
+    let currentPaymentMethod = 'card';
+
+    // Initialize page
+    function initPayment() {
+      if (!orderId) {
+        showError('Order not found. Please go back to checkout.');
+        return;
+      }
+
+      // Format amount
+      const amount = parseFloat(paymentAmount);
+      paymentAmountEl.textContent = `₦${amount.toLocaleString()}`;
+
+      // Set payment method
+      selectPaymentMethod(paymentMethod);
+
+      // Generate bank reference
+      bankReference.textContent = `UMA-ORDER-${orderId.slice(-6).toUpperCase()}`;
+    }
+
+    // Show error
+    function showError(message) {
+      errorMessage.textContent = message;
+      errorMessage.classList.add('show');
+      successMessage.classList.remove('show');
+    }
+
+    // Show success
+    function showSuccess(message) {
+      successMessage.textContent = message;
+      successMessage.classList.add('show');
+      errorMessage.classList.remove('show');
+    }
+
+    // Select payment method
+    function selectPaymentMethod(method) {
+      currentPaymentMethod = method;
+
+      // Update buttons
+      cardBtn.classList.remove('active');
+      bankBtn.classList.remove('active');
+
+      if (method === 'card') {
+        cardBtn.classList.add('active');
+        cardForm.style.display = 'block';
+        bankForm.style.display = 'none';
+        paymentMethodEl.textContent = 'Credit/Debit Card';
+        payBtn.textContent = 'Pay Now';
+      } else {
+        bankBtn.classList.add('active');
+        cardForm.style.display = 'none';
+        bankForm.style.display = 'block';
+        paymentMethodEl.textContent = 'Bank Transfer';
+        payBtn.textContent = 'Complete Bank Transfer';
+      }
+    }
+
+    // Format card number
+    document.getElementById('cardNumber').addEventListener('input', function(e) {
+      let value = e.target.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+      let formattedValue = value.match(/.{1,4}/g)?.join(' ') || value;
+      e.target.value = formattedValue;
+    });
+
+    // Format expiry date
+    document.getElementById('expiryDate').addEventListener('input', function(e) {
+      let value = e.target.value.replace(/\D/g, '');
+      if (value.length >= 2) {
+        value = value.substring(0, 2) + '/' + value.substring(2, 4);
+      }
+      e.target.value = value;
+    });
+
+    // Handle payment form submission
+    document.getElementById('paymentForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      if (currentPaymentMethod === 'card') {
+        await processCardPayment();
+      } else {
+        await processBankTransfer();
+      }
+    });
+
+    // Process card payment
+    async function processCardPayment() {
+      const cardData = {
+        number: document.getElementById('cardNumber').value.replace(/\s/g, ''),
+        expiry: document.getElementById('expiryDate').value,
+        cvv: document.getElementById('cvv').value,
+        name: document.getElementById('cardName').value.trim()
+      };
+
+      // Basic validation
+      if (!cardData.number || cardData.number.length < 13) {
+        showError('Please enter a valid card number');
+        return;
+      }
+
+      if (!cardData.expiry || !cardData.expiry.match(/^\d{2}\/\d{2}$/)) {
+        showError('Please enter a valid expiry date (MM/YY)');
+        return;
+      }
+
+      if (!cardData.cvv || cardData.cvv.length < 3) {
+        showError('Please enter a valid CVV');
+        return;
+      }
+
+      if (!cardData.name) {
+        showError('Please enter the cardholder name');
+        return;
+      }
+
+      try {
+        payBtn.disabled = true;
+        payBtn.classList.add('processing');
+        payBtn.textContent = 'Processing...';
+
+        // Simulate Paystack integration
+        // In real implementation, this would initialize Paystack popup
+        await new Promise(resolve => setTimeout(resolve, 2000)); // Simulate processing
+
+        // Call backend to confirm payment
+        const result = await UMA.orders.confirmPayment(orderId, {
+          method: 'card',
+          amount: parseFloat(paymentAmount),
+          card_last_four: cardData.number.slice(-4)
+        });
+
+        showSuccess('Payment successful! Redirecting...');
+
+        setTimeout(() => {
+          window.location.href = `order-confirmation.html?order_id=${orderId}`;
+        }, 2000);
+
+      } catch (error) {
+        payBtn.disabled = false;
+        payBtn.classList.remove('processing');
+        payBtn.textContent = 'Pay Now';
+        showError(error.message || 'Payment failed. Please try again.');
+      }
+    }
+
+    // Process bank transfer
+    async function processBankTransfer() {
+      try {
+        payBtn.disabled = true;
+        payBtn.textContent = 'Processing...';
+
+        // Call backend to update payment method
+        await UMA.orders.updatePaymentMethod(orderId, 'bank_transfer');
+
+        showSuccess('Bank transfer initiated. Please complete the transfer using the details above.');
+
+        setTimeout(() => {
+          window.location.href = `order-confirmation.html?order_id=${orderId}&payment_pending=true`;
+        }, 3000);
+
+      } catch (error) {
+        payBtn.disabled = false;
+        payBtn.textContent = 'Complete Bank Transfer';
+        showError(error.message || 'Failed to initiate bank transfer.');
+      }
+    }
+
+    // Navigation
+    function goBack() {
+      window.location.href = 'checkout.html';
+    }
+
+    // Initialize
+    initPayment();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checkout — Universe Merch Africa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,900;1,9..144,300;1,9..144,400;1,9..144,600&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="universe-merch.css" />
+  <style>
+    /* CHECKOUT PAGE STYLES */
+    .checkout-page {
+      background: var(--cream);
+      min-height: 100vh;
+      padding: 2rem;
+    }
+
+    /* HEADER */
+    .checkout-header {
+      background: var(--white);
+      padding: 1.5rem 2rem;
+      margin-bottom: 2rem;
+      border-radius: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .checkout-header-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+
+    .checkout-back {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--oxblood);
+      cursor: pointer;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color var(--transition);
+    }
+
+    .checkout-back:hover {
+      color: var(--mustard);
+    }
+
+    .checkout-title {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin: 0;
+      flex: 1;
+      text-align: center;
+    }
+
+    .checkout-secure {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.85rem;
+      color: var(--text-mid);
+    }
+
+    .checkout-secure-icon {
+      color: var(--mustard);
+    }
+
+    /* MAIN GRID */
+    .checkout-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 400px;
+      gap: 2rem;
+    }
+
+    /* LEFT COLUMN - FORMS */
+    .checkout-forms {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    /* FORM SECTIONS */
+    .checkout-section {
+      background: var(--white);
+      border-radius: 8px;
+      padding: 2rem;
+      box-shadow: 0 2px 12px rgba(23, 20, 15, 0.08);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--mustard);
+      color: var(--ink);
+      display: grid;
+      place-items: center;
+      font-size: 1.2rem;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin: 0;
+    }
+
+    /* DELIVERY FORM */
+    .delivery-form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .form-group.full-width {
+      grid-column: 1 / -1;
+    }
+
+    .form-label {
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+
+    .form-input,
+    .form-select {
+      padding: 1rem 1.2rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      color: var(--ink);
+      background: var(--white);
+      transition: all var(--transition);
+      outline: none;
+    }
+
+    .form-input:focus,
+    .form-select:focus {
+      border-color: var(--mustard);
+      box-shadow: 0 0 0 4px rgba(230, 169, 52, 0.12);
+    }
+
+    .form-input::placeholder {
+      color: var(--text-light);
+    }
+
+    .form-select {
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%235b1a1a' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+      padding-right: 3rem;
+    }
+
+    /* PAYMENT METHODS */
+    .payment-methods {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .payment-method {
+      border: 2px solid var(--border);
+      border-radius: 8px;
+      padding: 1.2rem;
+      cursor: pointer;
+      transition: all var(--transition);
+      background: var(--white);
+    }
+
+    .payment-method:hover {
+      border-color: var(--mustard);
+    }
+
+    .payment-method.selected {
+      border-color: var(--mustard);
+      background: rgba(230, 169, 52, 0.05);
+    }
+
+    .payment-method-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .payment-method-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 6px;
+      background: var(--cream);
+      display: grid;
+      place-items: center;
+      font-size: 1.2rem;
+    }
+
+    .payment-method-info {
+      flex: 1;
+    }
+
+    .payment-method-name {
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 0.2rem;
+    }
+
+    .payment-method-desc {
+      font-size: 0.85rem;
+      color: var(--text-mid);
+    }
+
+    .payment-radio {
+      width: 18px;
+      height: 18px;
+      border: 2px solid var(--border);
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+
+    .payment-method.selected .payment-radio {
+      border-color: var(--mustard);
+      background: var(--mustard);
+    }
+
+    .payment-method.selected .payment-radio::after {
+      content: '';
+      display: block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--ink);
+      margin: 2px;
+    }
+
+    /* RIGHT COLUMN - ORDER SUMMARY */
+    .order-summary {
+      background: var(--white);
+      border-radius: 8px;
+      padding: 2rem;
+      box-shadow: 0 2px 12px rgba(23, 20, 15, 0.08);
+      height: fit-content;
+      position: sticky;
+      top: 2rem;
+    }
+
+    .summary-title {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin: 0 0 1.5rem;
+    }
+
+    .summary-items {
+      margin-bottom: 2rem;
+    }
+
+    .summary-item {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .summary-item:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .summary-item-image {
+      width: 60px;
+      height: 60px;
+      background: var(--cream);
+      border-radius: 4px;
+      display: grid;
+      place-items: center;
+      font-size: 1.5rem;
+    }
+
+    .summary-item-details {
+      flex: 1;
+      font-size: 0.9rem;
+    }
+
+    .summary-item-name {
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 0.3rem;
+    }
+
+    .summary-item-meta {
+      color: var(--text-mid);
+      margin-bottom: 0.3rem;
+    }
+
+    .summary-item-price {
+      font-weight: 600;
+      color: var(--mustard);
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+      color: var(--text-mid);
+    }
+
+    .summary-row.total {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--ink);
+      border-top: 2px solid var(--border);
+      padding-top: 1rem;
+      margin-top: 1rem;
+    }
+
+    .summary-row.total .value {
+      color: var(--mustard);
+      font-size: 1.4rem;
+    }
+
+    /* PLACE ORDER BUTTON */
+    .btn-place-order {
+      width: 100%;
+      padding: 1.2rem;
+      background: var(--mustard);
+      color: var(--ink);
+      border: 2px solid var(--mustard);
+      border-radius: 8px;
+      cursor: pointer;
+      font-family: var(--font-body);
+      font-size: 1rem;
+      font-weight: 700;
+      margin-top: 1.5rem;
+      transition: all var(--transition);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+    }
+
+    .btn-place-order:hover:not(:disabled) {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(230, 169, 52, 0.3);
+    }
+
+    .btn-place-order:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .btn-place-order.loading {
+      position: relative;
+    }
+
+    .btn-place-order.loading::after {
+      content: '';
+      position: absolute;
+      right: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(23, 20, 15, 0.3);
+      border-top-color: var(--ink);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .order-note {
+      font-size: 0.8rem;
+      color: var(--text-light);
+      text-align: center;
+      margin-top: 1rem;
+    }
+
+    /* ERROR MESSAGES */
+    .error-message {
+      background: rgba(200, 52, 43, 0.1);
+      color: var(--red);
+      padding: 1rem;
+      border-radius: 6px;
+      border-left: 3px solid var(--red);
+      margin-bottom: 1rem;
+      font-size: 0.9rem;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .checkout-container {
+        grid-template-columns: 1fr;
+      }
+
+      .order-summary {
+        position: static;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .checkout-page {
+        padding: 1rem;
+      }
+
+      .checkout-title {
+        font-size: 1.5rem;
+      }
+
+      .delivery-form {
+        grid-template-columns: 1fr;
+      }
+
+      .checkout-section {
+        padding: 1.5rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .checkout-header {
+        padding: 1rem;
+      }
+
+      .checkout-header-content {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .checkout-title {
+        font-size: 1.2rem;
+      }
+
+      .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+      }
+
+      .order-summary {
+        padding: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="checkout-page">
+    
+    <!-- HEADER -->
+    <div class="checkout-header">
+      <div class="checkout-header-content">
+        <a class="checkout-back" onclick="goBack()">← Back to Cart</a>
+        <h1 class="checkout-title">Checkout</h1>
+        <div class="checkout-secure">
+          <span class="checkout-secure-icon">🔒</span>
+          <span>Secure Checkout</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="checkout-container">
+      
+      <!-- LEFT COLUMN - FORMS -->
+      <div class="checkout-forms">
+        
+        <!-- DELIVERY ADDRESS -->
+        <div class="checkout-section">
+          <div class="section-header">
+            <div class="section-icon">📍</div>
+            <h2 class="section-title">Delivery Address</h2>
+          </div>
+
+          <form class="delivery-form" id="deliveryForm">
+            <div class="form-group">
+              <label class="form-label" for="firstName">First Name</label>
+              <input
+                type="text"
+                id="firstName"
+                class="form-input"
+                placeholder="John"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="lastName">Last Name</label>
+              <input
+                type="text"
+                id="lastName"
+                class="form-input"
+                placeholder="Doe"
+                required
+              />
+            </div>
+
+            <div class="form-group full-width">
+              <label class="form-label" for="email">Email Address</label>
+              <input
+                type="email"
+                id="email"
+                class="form-input"
+                placeholder="john.doe@example.com"
+                required
+              />
+            </div>
+
+            <div class="form-group full-width">
+              <label class="form-label" for="phone">Phone Number</label>
+              <input
+                type="tel"
+                id="phone"
+                class="form-input"
+                placeholder="+234 (0)8012345678"
+                required
+              />
+            </div>
+
+            <div class="form-group full-width">
+              <label class="form-label" for="address">Street Address</label>
+              <input
+                type="text"
+                id="address"
+                class="form-input"
+                placeholder="123 Main Street"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="city">City</label>
+              <input
+                type="text"
+                id="city"
+                class="form-input"
+                placeholder="Lagos"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="state">State</label>
+              <select id="state" class="form-select" required>
+                <option value="">Select State</option>
+                <option value="lagos">Lagos</option>
+                <option value="abuja">Abuja (FCT)</option>
+                <option value="ogun">Ogun</option>
+                <option value="oyo">Oyo</option>
+                <option value="rivers">Rivers</option>
+                <option value="kano">Kano</option>
+                <option value="kaduna">Kaduna</option>
+                <option value="delta">Delta</option>
+                <option value="edo">Edo</option>
+                <option value="anambra">Anambra</option>
+                <option value="enugu">Enugu</option>
+                <option value="abia">Abia</option>
+                <option value="akwa-ibom">Akwa Ibom</option>
+                <option value="bauchi">Bauchi</option>
+                <option value="bayelsa">Bayelsa</option>
+                <option value="benue">Benue</option>
+                <option value="borno">Borno</option>
+                <option value="cross-river">Cross River</option>
+                <option value="ebonyi">Ebonyi</option>
+                <option value="ekiti">Ekiti</option>
+                <option value="gombe">Gombe</option>
+                <option value="imo">Imo</option>
+                <option value="jigawa">Jigawa</option>
+                <option value="kebbi">Kebbi</option>
+                <option value="kogi">Kogi</option>
+                <option value="kwara">Kwara</option>
+                <option value="nasarawa">Nasarawa</option>
+                <option value="niger">Niger</option>
+                <option value="ondo">Ondo</option>
+                <option value="osun">Osun</option>
+                <option value="plateau">Plateau</option>
+                <option value="sokoto">Sokoto</option>
+                <option value="taraba">Taraba</option>
+                <option value="yobe">Yobe</option>
+                <option value="zamfara">Zamfara</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="postalCode">Postal Code</label>
+              <input
+                type="text"
+                id="postalCode"
+                class="form-input"
+                placeholder="100001"
+              />
+            </div>
+          </form>
+        </div>
+
+        <!-- PAYMENT METHOD -->
+        <div class="checkout-section">
+          <div class="section-header">
+            <div class="section-icon">💳</div>
+            <h2 class="section-title">Payment Method</h2>
+          </div>
+
+          <div class="payment-methods">
+            <div class="payment-method selected" onclick="selectPayment('card')">
+              <div class="payment-method-header">
+                <div class="payment-method-icon">💳</div>
+                <div class="payment-method-info">
+                  <div class="payment-method-name">Credit/Debit Card</div>
+                  <div class="payment-method-desc">Visa, Mastercard, Verve</div>
+                </div>
+                <div class="payment-radio"></div>
+              </div>
+            </div>
+
+            <div class="payment-method" onclick="selectPayment('bank')">
+              <div class="payment-method-header">
+                <div class="payment-method-icon">🏦</div>
+                <div class="payment-method-info">
+                  <div class="payment-method-name">Bank Transfer</div>
+                  <div class="payment-method-desc">Direct bank transfer</div>
+                </div>
+                <div class="payment-radio"></div>
+              </div>
+            </div>
+
+            <div class="payment-method" onclick="selectPayment('wallet')">
+              <div class="payment-method-header">
+                <div class="payment-method-icon">📱</div>
+                <div class="payment-method-info">
+                  <div class="payment-method-name">Mobile Money</div>
+                  <div class="payment-method-desc">MTN, Airtel, Glo, 9mobile</div>
+                </div>
+                <div class="payment-radio"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- RIGHT COLUMN - ORDER SUMMARY -->
+      <div class="order-summary">
+        <h3 class="summary-title">Order Summary</h3>
+
+        <div class="summary-items" id="summaryItems">
+          <!-- Items will be populated by JavaScript -->
+        </div>
+
+        <div class="summary-row">
+          <span class="label">Subtotal</span>
+          <span class="value" id="subtotal">₦0</span>
+        </div>
+
+        <div class="summary-row">
+          <span class="label">Shipping</span>
+          <span class="value" id="shipping">Free</span>
+        </div>
+
+        <div class="summary-row">
+          <span class="label">Tax</span>
+          <span class="value" id="tax">₦0</span>
+        </div>
+
+        <div class="summary-row total">
+          <span class="label">Total</span>
+          <span class="value" id="total">₦0</span>
+        </div>
+
+        <div id="errorMessage" class="error-message" style="display: none;"></div>
+
+        <button class="btn-place-order" id="placeOrderBtn" onclick="placeOrder()">
+          Place Order
+        </button>
+
+        <p class="order-note">By placing your order, you agree to our Terms of Service and Privacy Policy</p>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- INCLUDE UMA CLIENT -->
+  <script src="universe-merch-backend/public/uma-client.js"></script>
+  <script>
+    UMA.init({ apiUrl: 'http://localhost:4000/api' });
+
+    const placeOrderBtn = document.getElementById('placeOrderBtn');
+    const errorMessage = document.getElementById('errorMessage');
+    const summaryItems = document.getElementById('summaryItems');
+
+    let cartData = [];
+    let selectedPayment = 'card';
+
+    // Load cart and populate summary
+    function loadCheckout() {
+      const cart = JSON.parse(localStorage.getItem('UMA_CART') || '{}');
+      cartData = Object.entries(cart).map(([key, item]) => ({
+        key,
+        ...item
+      }));
+
+      if (cartData.length === 0) {
+        window.location.href = 'cart.html';
+        return;
+      }
+
+      renderOrderSummary();
+      updateTotals();
+      loadUserData();
+    }
+
+    // Render order summary items
+    function renderOrderSummary() {
+      summaryItems.innerHTML = cartData.map(item => `
+        <div class="summary-item">
+          <div class="summary-item-image">📦</div>
+          <div class="summary-item-details">
+            <div class="summary-item-name">${item.name}</div>
+            <div class="summary-item-meta">Size: ${item.size || 'One Size'} • Color: ${item.color || 'N/A'} • Qty: ${item.quantity}</div>
+            <div class="summary-item-price">₦${(item.price * item.quantity).toLocaleString()}</div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Update totals
+    function updateTotals() {
+      const subtotal = cartData.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+      const tax = subtotal * 0.075; // 7.5% tax
+      const shipping = subtotal > 10000 ? 0 : 2500;
+      const total = subtotal + tax + shipping;
+
+      document.getElementById('subtotal').textContent = `₦${subtotal.toLocaleString()}`;
+      document.getElementById('tax').textContent = `₦${tax.toLocaleString()}`;
+      document.getElementById('shipping').textContent = shipping === 0 ? 'Free' : `₦${shipping.toLocaleString()}`;
+      document.getElementById('total').textContent = `₦${total.toLocaleString()}`;
+    }
+
+    // Load user data if logged in
+    function loadUserData() {
+      const token = localStorage.getItem('UMA_TOKEN');
+      if (token) {
+        // Could fetch user profile data here
+        // For now, we'll just pre-fill from localStorage if available
+        const userData = JSON.parse(localStorage.getItem('UMA_USER_DATA') || '{}');
+        if (userData.first_name) document.getElementById('firstName').value = userData.first_name;
+        if (userData.last_name) document.getElementById('lastName').value = userData.last_name;
+        if (userData.email) document.getElementById('email').value = userData.email;
+        if (userData.phone) document.getElementById('phone').value = userData.phone;
+      }
+    }
+
+    // Select payment method
+    function selectPayment(method) {
+      selectedPayment = method;
+      document.querySelectorAll('.payment-method').forEach(pm => pm.classList.remove('selected'));
+      event.currentTarget.classList.add('selected');
+    }
+
+    // Show error
+    function showError(message) {
+      errorMessage.textContent = message;
+      errorMessage.style.display = 'block';
+      errorMessage.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Hide error
+    function hideError() {
+      errorMessage.style.display = 'none';
+    }
+
+    // Place order
+    async function placeOrder() {
+      hideError();
+
+      // Validate form
+      const form = document.getElementById('deliveryForm');
+      if (!form.checkValidity()) {
+        showError('Please fill in all required fields');
+        return;
+      }
+
+      // Get form data
+      const deliveryData = {
+        first_name: document.getElementById('firstName').value.trim(),
+        last_name: document.getElementById('lastName').value.trim(),
+        email: document.getElementById('email').value.trim(),
+        phone: document.getElementById('phone').value.trim(),
+        address: document.getElementById('address').value.trim(),
+        city: document.getElementById('city').value.trim(),
+        state: document.getElementById('state').value.trim(),
+        postal_code: document.getElementById('postalCode').value.trim()
+      };
+
+      // Prepare order data
+      const orderItems = cartData.map(item => ({
+        product_id: item.product_id,
+        quantity: item.quantity,
+        size: item.size,
+        color: item.color,
+        price: item.price
+      }));
+
+      const orderData = {
+        items: orderItems,
+        delivery_address: deliveryData,
+        payment_method: selectedPayment
+      };
+
+      try {
+        placeOrderBtn.disabled = true;
+        placeOrderBtn.classList.add('loading');
+        placeOrderBtn.textContent = 'Processing...';
+
+        // Call backend API
+        const order = await UMA.orders.create(orderData);
+
+        // Clear cart
+        localStorage.removeItem('UMA_CART');
+
+        // Redirect to confirmation
+        window.location.href = `order-confirmation.html?order_id=${order.id}`;
+
+      } catch (error) {
+        placeOrderBtn.disabled = false;
+        placeOrderBtn.classList.remove('loading');
+        placeOrderBtn.textContent = 'Place Order';
+        showError(error.message || 'Failed to place order. Please try again.');
+      }
+    }
+
+    // Navigation
+    function goBack() {
+      window.location.href = 'cart.html';
+    }
+
+    // Initial load
+    loadCheckout();
+  </script>
+
+</body>
+</html>

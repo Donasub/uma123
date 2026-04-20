@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Story — Universe Merch Africa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,900;1,9..144,300;1,9..144,400;1,9..144,600&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="universe-merch.css" />
+  <style>
+    /* Story-specific */
+    .story-intro{padding:6rem 0 4rem;background:var(--cream);position:relative}
+    .story-intro::before{content:'';position:absolute;top:-60px;left:-60px;width:240px;height:240px;border-radius:50%;border:45px solid rgba(91,26,26,.05);pointer-events:none}
+    .story-intro-inner{max-width:760px;margin:0 auto;position:relative;z-index:2}
+    .story-dropcap{font-family:var(--font-display);font-size:4.8rem;font-weight:600;color:var(--oxblood);float:left;line-height:.85;padding-right:1rem;padding-top:.3rem;font-style:italic}
+    .story-intro p{font-size:1.1rem;color:var(--text-mid);line-height:1.8;margin-bottom:1.5rem}
+    .story-intro p em{font-style:italic;color:var(--ink);font-weight:500}
+    .story-pull{font-family:var(--font-display);font-style:italic;font-size:1.6rem;line-height:1.35;color:var(--ink);padding:2rem 0 2rem 2rem;border-left:3px solid var(--mustard);margin:2rem 0;max-width:620px}
+    .story-pull em{color:var(--oxblood);font-weight:500}
+
+    /* Founder quote */
+    .founder{padding:5rem 0;background:var(--ink);color:var(--cream);position:relative;overflow:hidden}
+    .founder::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center right,rgba(230,169,52,.14) 0%,transparent 55%);pointer-events:none}
+    .founder-inner{display:grid;grid-template-columns:0.8fr 1.2fr;gap:4rem;align-items:center;position:relative;z-index:2}
+    .founder-portrait{aspect-ratio:3/4;background:linear-gradient(160deg,var(--oxblood) 0%,var(--oxblood-deep) 100%);border-radius:12px;position:relative;overflow:hidden;border:1px solid rgba(230,169,52,.3);display:grid;place-items:center}
+    .founder-portrait::before{content:'';position:absolute;top:-40px;right:-40px;width:160px;height:160px;border-radius:50%;border:2px solid rgba(230,169,52,.25)}
+    .founder-portrait-initials{font-family:var(--font-display);font-size:7rem;font-weight:300;font-style:italic;color:rgba(244,237,224,.3);line-height:1;letter-spacing:-.03em}
+    .founder-quote blockquote{font-family:var(--font-display);font-style:italic;font-size:clamp(1.5rem,2.5vw,2.1rem);line-height:1.3;color:var(--cream);margin-bottom:2rem}
+    .founder-quote blockquote em{color:var(--mustard);font-weight:400}
+    .founder-quote blockquote::before{content:'"';font-size:3rem;color:var(--mustard);line-height:1;margin-right:.4rem;font-weight:400}
+    .founder-byline{display:flex;align-items:center;gap:1.2rem;padding-top:1.5rem;border-top:1px solid rgba(230,169,52,.2)}
+    .founder-dot{width:12px;height:12px;border-radius:50%;background:var(--mustard)}
+    .founder-byline strong{font-family:var(--font-body);font-size:.9rem;font-weight:600;color:var(--cream);display:block}
+    .founder-byline span{font-size:.72rem;color:rgba(244,237,224,.6);letter-spacing:.12em;text-transform:uppercase;font-weight:500}
+
+    /* Timeline */
+    .timeline{padding:6rem 0;background:var(--cream)}
+    .timeline-list{max-width:800px;margin:3rem auto 0;position:relative}
+    .timeline-list::before{content:'';position:absolute;left:6rem;top:1rem;bottom:1rem;width:1px;background:linear-gradient(180deg,var(--mustard) 0%,transparent 100%)}
+    .tl-item{display:grid;grid-template-columns:5rem 1fr;gap:3.5rem;margin-bottom:3rem;position:relative}
+    .tl-year{font-family:var(--font-display);font-style:italic;font-size:1.8rem;font-weight:600;color:var(--oxblood);text-align:right;line-height:1.1;padding-top:.3rem}
+    .tl-year em{font-style:normal;display:block;font-size:.8rem;color:var(--mustard);letter-spacing:.2em;text-transform:uppercase;font-weight:600;margin-top:.3rem;font-family:var(--font-body)}
+    .tl-content{position:relative;padding-left:2rem}
+    .tl-content::before{content:'';position:absolute;left:-.8rem;top:.6rem;width:14px;height:14px;border-radius:50%;background:var(--mustard);border:3px solid var(--cream);box-shadow:0 0 0 1px var(--mustard)}
+    .tl-content h3{font-family:var(--font-display);font-size:1.4rem;font-weight:600;color:var(--ink);line-height:1.2;margin-bottom:.6rem}
+    .tl-content h3 em{font-style:italic;color:var(--oxblood);font-weight:400}
+    .tl-content p{color:var(--text-mid);line-height:1.7;font-size:.96rem}
+
+    /* Values */
+    .values{padding:6rem 0;background:var(--oxblood);color:var(--cream);position:relative;overflow:hidden}
+    .values::before{content:'';position:absolute;top:-100px;right:-100px;width:340px;height:340px;border-radius:50%;border:2px solid var(--mustard);opacity:.15}
+    .values::after{content:'';position:absolute;bottom:-60px;left:-60px;width:220px;height:220px;border-radius:50%;border:2px solid rgba(244,237,224,.1)}
+    .values-head{text-align:center;max-width:640px;margin:0 auto 3.5rem;position:relative;z-index:2}
+    .values-head h2{font-family:var(--font-display);font-size:clamp(2.2rem,4vw,3.2rem);font-weight:500;line-height:1.1;color:var(--cream);margin-bottom:1.2rem}
+    .values-head h2 em{font-style:italic;color:var(--mustard);font-weight:300}
+    .values-head p{color:rgba(244,237,224,.75);line-height:1.7}
+    .values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;position:relative;z-index:2}
+    .value-card{background:rgba(244,237,224,.04);border:1px solid rgba(230,169,52,.25);border-radius:12px;padding:2.2rem;transition:all var(--transition)}
+    .value-card:hover{background:rgba(244,237,224,.07);border-color:var(--mustard);transform:translateY(-6px)}
+    .value-num{font-family:var(--font-display);font-size:2.8rem;font-style:italic;font-weight:300;color:var(--mustard);line-height:.9;margin-bottom:.6rem}
+    .value-card h4{font-family:var(--font-display);font-size:1.3rem;font-weight:600;color:var(--cream);line-height:1.2;margin-bottom:.7rem}
+    .value-card h4 em{font-style:italic;color:var(--mustard);font-weight:400}
+    .value-card p{font-size:.92rem;color:rgba(244,237,224,.72);line-height:1.65}
+
+    /* Numbers */
+    .story-nums{padding:5rem 0;background:var(--cream-2)}
+    .story-nums-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;text-align:center}
+    .story-num-item{padding:1.5rem}
+    .story-num{font-family:var(--font-display);font-size:3.2rem;font-weight:600;color:var(--oxblood);line-height:1;margin-bottom:.6rem}
+    .story-num em{font-style:italic;color:var(--mustard);font-weight:400;font-size:2rem}
+    .story-num-lbl{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text-mid);font-weight:600}
+    .story-num-sub{font-family:var(--font-display);font-style:italic;font-size:.88rem;color:var(--text-light);margin-top:.4rem}
+
+    @media(max-width:960px){
+      .founder-inner{grid-template-columns:1fr;gap:3rem}
+      .founder-portrait{max-width:320px;margin:0 auto}
+      .timeline-list::before{left:3rem}
+      .tl-item{grid-template-columns:3.5rem 1fr;gap:2rem}
+      .tl-year{font-size:1.4rem}
+      .values-grid{grid-template-columns:1fr;gap:1.2rem}
+      .story-nums-grid{grid-template-columns:1fr 1fr}
+    }
+    @media(max-width:520px){
+      .story-dropcap{font-size:3.8rem}
+      .story-pull{font-size:1.3rem;padding-left:1.2rem}
+      .tl-year{font-size:1.2rem}
+      .tl-content h3{font-size:1.2rem}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav class="site-nav solid" id="siteNav">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo">
+        <div class="logo-mark">U</div>
+        <div class="logo-text">Universe<em>Merch</em><span>Africa</span></div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="how-it-works_1.html">How It Works</a></li>
+        <li><a href="students_redesigned.html">For Students</a></li>
+        <li><a href="partner.html">Partner</a></li>
+        <li><a href="students_redesigned.html" class="nav-cta">Shop Now</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="mobile-close" id="mobileClose" aria-label="Close menu">✕</button>
+    <a href="how-it-works_1.html" class="mobile-nav-link">How It <em>Works</em></a>
+    <a href="students_redesigned.html" class="mobile-nav-link">For <em>Students</em></a>
+    <a href="partner.html" class="mobile-nav-link"><em>Partner</em></a>
+    <a href="students_redesigned.html" class="mobile-nav-link">Shop <em>Now</em></a>
+  </div>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="container">
+      <div class="page-hero-inner">
+        <div class="page-hero-crumbs">
+          <a href="index.html">Home</a><span class="sep">/</span><span>Company</span><span class="sep">/</span><span>Our Story</span>
+        </div>
+        <h1>Built in Lagos.<br><em>For every campus</em><br>worth repping.</h1>
+        <p class="page-hero-lede">"We started this because we were tired of paying ₦12,000 for a t-shirt shipped from Atlanta — with our own university's crest on it. Spelled wrong."</p>
+        <p class="page-hero-desc">Universe Merch Africa is an officially licensed campus apparel platform designed, printed, and fulfilled out of Lagos. We partner directly with schools so students can rep their campuses without getting ripped off.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- STORY INTRO -->
+  <section class="story-intro">
+    <div class="container">
+      <div class="story-intro-inner">
+        <div class="section-label">The Origin</div>
+        <p><span class="story-dropcap">L</span>agos, 2023. Two friends at a UI homecoming, trying to buy a hoodie. The only options: a stall selling fakes printed on t-shirt blanks that had clearly been through a war, or a Shopify store shipping from Atlanta for a six-week lead time and a $40 price tag. We bought neither.</p>
+        <p>Then we asked around. Every single person we knew — whether UNILAG, Ibadan, OAU, Covenant, ABU — had the same frustration. Their school had a beautiful crest, a legitimate brand, a hundred thousand students ready to represent, and <em>nowhere to buy proper merchandise.</em> Meanwhile the schools themselves were losing revenue to third parties printing knockoffs.</p>
+
+        <div class="story-pull">"What if the schools controlled the brand, the students got the quality, and everyone kept <em>the money on the continent?</em>"</div>
+
+        <p>So we built it. We started with three universities — UI, UNILAG, OAU — and one rule: nothing ships unless the school's brand team signs off on it. Every crest is licensed. Every design is approved. Every royalty goes back to the institution.</p>
+        <p>That was early 2024. Today we're in 40+ universities and 80+ secondary schools across Nigeria, Ghana, Kenya, and South Africa, with a dedicated print facility in Ikeja, Lagos, and a team of 34 designers, operators, and campus reps who — almost to a person — are alumni of the schools they serve.</p>
+        <p>We're still just getting started.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOUNDER -->
+  <section class="founder">
+    <div class="container">
+      <div class="founder-inner">
+        <div class="founder-portrait reveal-left">
+          <span class="founder-portrait-initials">AO</span>
+        </div>
+        <div class="founder-quote reveal-right">
+          <div class="section-label">From The Founder</div>
+          <blockquote>The schools on this continent are some of the most <em>storied institutions</em> on earth. UI is older than most Ivy League brands. Achimota produced three African presidents. We're not building a store — we're <em>giving the brand back</em> to the people who earned it.</blockquote>
+          <div class="founder-byline">
+            <span class="founder-dot"></span>
+            <div><strong>Ayodele Oduwole</strong><span>Co-founder & CEO · UI '18</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIMELINE -->
+  <section class="timeline">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-label center">The Road So Far</div>
+        <h2>Three years,<br>forty campuses,<br><em>zero knockoffs.</em></h2>
+      </div>
+
+      <div class="timeline-list">
+        <div class="tl-item reveal">
+          <div class="tl-year">2023<em>Q3</em></div>
+          <div class="tl-content">
+            <h3>A <em>conversation</em> at a homecoming</h3>
+            <p>Co-founders Ayo and Kemi realize every African university has a huge brand problem: beautiful crests, no authorized merchandise, millions in revenue flowing to unlicensed sellers overseas.</p>
+          </div>
+        </div>
+        <div class="tl-item reveal delay-1">
+          <div class="tl-year">2024<em>Q1</em></div>
+          <div class="tl-content">
+            <h3>First licensing deals <em>signed</em></h3>
+            <p>Universities of Ibadan, Lagos, and Obafemi Awolowo become Universe Merch's founding partners. First drop — the OG Varsity Hoodie — sells out in 72 hours.</p>
+          </div>
+        </div>
+        <div class="tl-item reveal delay-2">
+          <div class="tl-year">2024<em>Q3</em></div>
+          <div class="tl-content">
+            <h3>Lagos <em>print facility</em> goes live</h3>
+            <p>2,400 sq ft in Ikeja with DTG printers, embroidery machines, and a pattern room. No more outsourcing. No more delays. Everything under one roof.</p>
+          </div>
+        </div>
+        <div class="tl-item reveal delay-3">
+          <div class="tl-year">2025<em>Q2</em></div>
+          <div class="tl-content">
+            <h3>Expansion across <em>West Africa</em></h3>
+            <p>University of Ghana, KNUST, and University of Cape Coast come on. First Ghana-based campus rep hired. Cross-border fulfillment via partners in Accra.</p>
+          </div>
+        </div>
+        <div class="tl-item reveal delay-4">
+          <div class="tl-year">2025<em>Q4</em></div>
+          <div class="tl-content">
+            <h3>Secondary schools <em>launch</em></h3>
+            <p>Old-student associations become the most-requested customer segment. We launch a dedicated high-school division with King's College, Queen's College, and Mayflower as flagship partners.</p>
+          </div>
+        </div>
+        <div class="tl-item reveal delay-5">
+          <div class="tl-year">2026<em>Today</em></div>
+          <div class="tl-content">
+            <h3>40+ schools and <em>counting</em></h3>
+            <p>Over 200,000 pieces shipped. ₦480M in royalties returned to partner schools. Active presence in four countries. Still no knockoffs. Still made in Lagos.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALUES -->
+  <section class="values">
+    <div class="container">
+      <div class="values-head reveal">
+        <div class="section-label center" style="color:var(--mustard)">What We Stand For</div>
+        <h2>Six principles.<br><em>No exceptions.</em></h2>
+        <p>Everyone says they have values. These are the ones we actually argue about in meetings, hire against, and fire for.</p>
+      </div>
+      <div class="values-grid">
+        <div class="value-card reveal delay-1">
+          <div class="value-num">01</div>
+          <h4>Licensing is <em>non-negotiable</em></h4>
+          <p>If the school hasn't signed off, we don't print it. No "gray market" stock. No "limited test runs" without permission. Ever.</p>
+        </div>
+        <div class="value-card reveal delay-2">
+          <div class="value-num">02</div>
+          <h4>Made <em>here</em></h4>
+          <p>Every shirt, hoodie, and cap is printed in Ikeja. We're not a dropshipper. We're a manufacturer. Jobs stay on the continent.</p>
+        </div>
+        <div class="value-card reveal delay-3">
+          <div class="value-num">03</div>
+          <h4>Students come <em>first</em></h4>
+          <p>Every product is priced so a Nigerian student can actually afford it. Margins are thinner because the mission matters more.</p>
+        </div>
+        <div class="value-card reveal delay-4">
+          <div class="value-num">04</div>
+          <h4>Design like we <em>went there</em></h4>
+          <p>Because we mostly did. Every school design is led by an alum of that school. Campus nicknames get honored. Inside jokes get referenced.</p>
+        </div>
+        <div class="value-card reveal delay-5">
+          <div class="value-num">05</div>
+          <h4>Royalties <em>always</em></h4>
+          <p>Every partner school earns a share on every item sold. Transparent reporting, monthly payouts, no backroom deals.</p>
+        </div>
+        <div class="value-card reveal delay-6">
+          <div class="value-num">06</div>
+          <h4>Build for <em>the long haul</em></h4>
+          <p>We're not chasing a quick exit. We're building the merchandising layer for African education — a 20-year project, not a 2-year sprint.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STORY NUMBERS -->
+  <section class="story-nums">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-label center">By The Numbers</div>
+        <h2>Where we are <em>today.</em></h2>
+      </div>
+      <div class="story-nums-grid">
+        <div class="story-num-item reveal delay-1"><div class="story-num">40<em>+</em></div><div class="story-num-lbl">Partner Universities</div><div class="story-num-sub">Across 4 countries</div></div>
+        <div class="story-num-item reveal delay-2"><div class="story-num">200<em>k</em></div><div class="story-num-lbl">Pieces Shipped</div><div class="story-num-sub">Since launch</div></div>
+        <div class="story-num-item reveal delay-3"><div class="story-num">₦480<em>M</em></div><div class="story-num-lbl">Royalties Returned</div><div class="story-num-sub">To partner schools</div></div>
+        <div class="story-num-item reveal delay-4"><div class="story-num">34</div><div class="story-num-lbl">Team Members</div><div class="story-num-sub">Mostly alumni</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final-cta">
+    <div class="container">
+      <div class="ornament"><div class="ornament-line"></div><span class="ornament-text">Join The Movement</span><div class="ornament-line right"></div></div>
+      <h2>Two ways<br><em>to get involved.</em></h2>
+      <p>Students — pick your campus and shop the drop. Schools — partner with us and start earning royalties on your own brand. Careers — we're hiring across design, ops, and campus relations.</p>
+      <a href="careers.html" class="final-cta-btn">See Open Roles<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="footer-logo"><div class="footer-logo-mark">U</div><div class="footer-logo-text">Universe<em>Merch</em></div></div>
+          <p class="footer-tagline">"Proper campus merch, officially licensed —<br>designed, printed, and shipped from Lagos."</p>
+        </div>
+        <div class="footer-col"><h4>Shop</h4><ul class="footer-links"><li><a href="universities.html">Universities</a></li><li><a href="high-schools.html">High Schools</a></li><li><a href="new-drops.html">New Drops</a></li><li><a href="gift-cards.html">Gift Cards</a></li></ul></div>
+        <div class="footer-col"><h4>Company</h4><ul class="footer-links"><li><a href="our-story.html">Our Story</a></li><li><a href="partners.html">Partners</a></li><li><a href="careers.html">Careers</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+        <div class="footer-col"><h4>Help</h4><ul class="footer-links"><li><a href="size-guide.html">Size Guide</a></li><li><a href="shipping-returns.html">Shipping & Returns</a></li><li><a href="privacy-policy.html">Privacy Policy</a></li><li><a href="terms-of-service.html">Terms of Service</a></li></ul></div>
+      </div>
+      <div class="footer-bottom"><p>© 2026 Universe Merch Africa. All rights reserved.</p><p class="italic">"Made with pride in Lagos ✦"</p></div>
+    </div>
+  </footer>
+
+  <script>
+    const nav=document.getElementById('siteNav');
+    window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>40)});
+    const hamburger=document.getElementById('hamburger'),mobileMenu=document.getElementById('mobileMenu'),mobileClose=document.getElementById('mobileClose');
+    function openMenu(){mobileMenu.classList.add('open');hamburger.classList.add('open');document.body.style.overflow='hidden'}
+    function closeMenu(){mobileMenu.classList.remove('open');hamburger.classList.remove('open');document.body.style.overflow=''}
+    hamburger.addEventListener('click',openMenu);mobileClose.addEventListener('click',closeMenu);
+    document.querySelectorAll('.mobile-nav-link').forEach(l=>l.addEventListener('click',closeMenu));
+    const ro=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')})},{threshold:.12});
+    document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el=>ro.observe(el));
+  </script>
+</body>
+</html>

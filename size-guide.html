@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Size Guide — Universe Merch Africa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,900;1,9..144,300;1,9..144,400;1,9..144,600&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="universe-merch.css"/>
+<style>
+/* Unit toggle + tabs */
+.size-controls{padding:2.5rem 0 1rem;background:var(--cream);border-bottom:1px solid var(--border)}
+.size-controls-inner{display:flex;gap:1.5rem;justify-content:space-between;align-items:center;flex-wrap:wrap}
+.unit-toggle{display:inline-flex;background:var(--cream-2);border-radius:999px;padding:4px;gap:2px;border:1px solid var(--border)}
+.unit-btn{padding:.55rem 1.2rem;font-family:var(--font-body);font-size:.72rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;border:none;background:transparent;color:var(--text-mid);border-radius:999px;cursor:pointer;transition:all var(--transition)}
+.unit-btn.active{background:var(--ink);color:var(--cream)}
+.product-tabs{display:flex;gap:.4rem;flex-wrap:wrap}
+.prod-tab{padding:.75rem 1.4rem;font-family:var(--font-body);font-size:.72rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;background:var(--cream-2);color:var(--ink);border:1px solid var(--border);border-radius:2px;cursor:pointer;transition:all var(--transition)}
+.prod-tab:hover{border-color:var(--mustard)}
+.prod-tab.active{background:var(--oxblood);color:var(--cream);border-color:var(--oxblood)}
+
+/* Content panel */
+.size-panel{padding:4rem 0 5rem;background:var(--cream);display:none}
+.size-panel.active{display:block}
+.size-layout{display:grid;grid-template-columns:1.3fr 1fr;gap:4rem;align-items:start}
+.size-table-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:2px;background:var(--cream-2)}
+.size-table{width:100%;border-collapse:collapse;font-family:var(--font-body)}
+.size-table thead{background:var(--ink);color:var(--cream)}
+.size-table th{padding:1rem .9rem;font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;font-weight:600;text-align:left;border-bottom:1px solid var(--oxblood)}
+.size-table th:first-child{color:var(--mustard)}
+.size-table td{padding:1rem .9rem;font-size:.92rem;color:var(--text-mid);border-bottom:1px solid var(--border);background:var(--cream-2)}
+.size-table tbody tr:last-child td{border-bottom:none}
+.size-table tbody tr:hover td{background:var(--cream)}
+.size-table td:first-child{font-family:var(--font-display);font-weight:600;color:var(--oxblood);font-size:1rem}
+.size-note{margin-top:1rem;padding:1rem 1.3rem;background:var(--cream-2);border-left:3px solid var(--mustard);border-radius:2px;font-size:.85rem;color:var(--text-mid);line-height:1.65}
+.size-note strong{color:var(--ink);font-weight:600}
+
+/* Measure guide */
+.measure-card{background:var(--oxblood-deep);color:var(--cream);padding:2.4rem 2rem;border-radius:3px;position:sticky;top:6rem}
+.measure-card h3{font-family:var(--font-display);font-size:1.4rem;font-weight:500;color:var(--cream);margin-bottom:.5rem;letter-spacing:-.01em}
+.measure-card h3 em{font-style:italic;color:var(--mustard-light);font-weight:300}
+.measure-card>p{font-size:.9rem;color:rgba(244,237,224,.72);line-height:1.65;margin-bottom:1.6rem}
+.measure-figure{position:relative;height:220px;margin-bottom:1.5rem;background:rgba(244,237,224,.04);border:1px dashed rgba(230,169,52,.2);border-radius:2px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.measure-figure svg{height:180px;width:auto}
+.measure-steps{display:grid;gap:.9rem;padding-top:1.5rem;border-top:1px dashed rgba(230,169,52,.2)}
+.measure-step{display:flex;gap:.9rem;align-items:flex-start}
+.measure-step-num{font-family:var(--font-display);font-style:italic;font-size:1.3rem;color:var(--mustard);font-weight:300;line-height:1;flex-shrink:0;width:26px}
+.measure-step-txt{font-size:.88rem;color:rgba(244,237,224,.82);line-height:1.55}
+.measure-step-txt strong{color:var(--cream);font-weight:500}
+
+/* Fit tips */
+.fit-tips{padding:5rem 0;background:var(--cream-2)}
+.tips-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.3rem;margin-top:2.5rem}
+.tip-card{padding:1.8rem 1.6rem;background:var(--cream);border:1px solid var(--border);border-radius:3px;border-top:3px solid var(--mustard)}
+.tip-label{font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--mustard);font-weight:600;margin-bottom:.6rem}
+.tip-card h3{font-family:var(--font-display);font-size:1.1rem;font-weight:500;color:var(--ink);margin-bottom:.6rem;letter-spacing:-.005em}
+.tip-card p{font-size:.88rem;color:var(--text-mid);line-height:1.6}
+
+/* Help strip */
+.help-strip{padding:4rem 0;background:var(--ink-deep);color:var(--cream);text-align:center}
+.help-strip h3{font-family:var(--font-display);font-size:clamp(1.6rem,2.8vw,2.1rem);font-weight:500;color:var(--cream);line-height:1.2;margin-bottom:1rem}
+.help-strip h3 em{font-style:italic;color:var(--mustard);font-weight:300}
+.help-strip p{font-size:.95rem;color:rgba(244,237,224,.72);max-width:520px;margin:0 auto 1.8rem;line-height:1.65}
+
+@media(max-width:960px){
+  .size-layout{grid-template-columns:1fr;gap:2rem}
+  .measure-card{position:static}
+  .tips-grid{grid-template-columns:1fr}
+  .size-controls-inner{flex-direction:column;align-items:stretch}
+}
+</style>
+</head>
+<body>
+
+<nav class="site-nav solid" id="siteNav">
+  <div class="container nav-inner">
+    <a href="index.html" class="nav-logo">
+      <div class="logo-mark">U</div>
+      <div class="logo-text">Universe<em>Merch</em><span>Africa</span></div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="how-it-works_1.html">How It Works</a></li>
+      <li><a href="students_redesigned.html">For Students</a></li>
+      <li><a href="partner.html">Partner</a></li>
+      <li><a href="students_redesigned.html" class="nav-cta">Shop Now</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" id="mobileClose" aria-label="Close menu">✕</button>
+  <a href="how-it-works_1.html" class="mobile-nav-link">How It <em>Works</em></a>
+  <a href="students_redesigned.html" class="mobile-nav-link">For <em>Students</em></a>
+  <a href="partner.html" class="mobile-nav-link"><em>Partner</em></a>
+  <a href="students_redesigned.html" class="mobile-nav-link">Shop <em>Now</em></a>
+</div>
+
+<section class="page-hero-light">
+  <div class="container">
+    <div class="page-hero-inner">
+      <div class="page-hero-crumbs"><a href="index.html">Home</a><span class="sep">/</span><span>Help</span><span class="sep">/</span><span>Size Guide</span></div>
+      <h1>Get the fit <em>right the first time.</em></h1>
+      <p class="page-hero-lede">"Nothing worse than a hoodie that's almost right. A tape measure, ten minutes, and this page — we'll save you the returns trip."</p>
+      <p class="page-hero-desc">All our pieces are cut with African body shapes in mind — roomier through the chest and shoulders, standard through the length. Pick your product below, grab a tape, and let's get this right.</p>
+    </div>
+  </div>
+</section>
+
+<section class="size-controls">
+  <div class="container">
+    <div class="size-controls-inner">
+      <div class="product-tabs">
+        <button class="prod-tab active" data-panel="tees">T-Shirts</button>
+        <button class="prod-tab" data-panel="hoodies">Hoodies</button>
+        <button class="prod-tab" data-panel="varsity">Varsity Jackets</button>
+        <button class="prod-tab" data-panel="caps">Caps &amp; Beanies</button>
+      </div>
+      <div class="unit-toggle">
+        <button class="unit-btn active" data-unit="cm">Centimetres</button>
+        <button class="unit-btn" data-unit="in">Inches</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEES -->
+<section class="size-panel active" id="panel-tees">
+  <div class="container">
+    <div style="margin-bottom:2rem">
+      <span class="section-label">Unisex fit · regular</span>
+      <h2 style="font-family:var(--font-display);font-size:clamp(1.6rem,2.8vw,2.2rem);font-weight:500;color:var(--ink);line-height:1.15;letter-spacing:-.005em">Classic <em style="font-style:italic;color:var(--oxblood);font-weight:300">T-Shirts</em></h2>
+    </div>
+    <div class="size-layout">
+      <div>
+        <div class="size-table-wrap">
+          <table class="size-table" data-type="tee">
+            <thead><tr><th>Size</th><th>Chest</th><th>Length</th><th>Shoulder</th><th>Sleeve</th></tr></thead>
+            <tbody>
+              <tr><td>XS</td><td data-cm="94" data-in="37">94 cm</td><td data-cm="66" data-in="26">66 cm</td><td data-cm="42" data-in="16.5">42 cm</td><td data-cm="20" data-in="7.9">20 cm</td></tr>
+              <tr><td>S</td><td data-cm="99" data-in="39">99 cm</td><td data-cm="68" data-in="26.8">68 cm</td><td data-cm="44" data-in="17.3">44 cm</td><td data-cm="21" data-in="8.3">21 cm</td></tr>
+              <tr><td>M</td><td data-cm="104" data-in="41">104 cm</td><td data-cm="71" data-in="28">71 cm</td><td data-cm="46" data-in="18.1">46 cm</td><td data-cm="22" data-in="8.7">22 cm</td></tr>
+              <tr><td>L</td><td data-cm="110" data-in="43.3">110 cm</td><td data-cm="73" data-in="28.7">73 cm</td><td data-cm="48" data-in="18.9">48 cm</td><td data-cm="23" data-in="9.1">23 cm</td></tr>
+              <tr><td>XL</td><td data-cm="116" data-in="45.7">116 cm</td><td data-cm="75" data-in="29.5">75 cm</td><td data-cm="50" data-in="19.7">50 cm</td><td data-cm="24" data-in="9.4">24 cm</td></tr>
+              <tr><td>XXL</td><td data-cm="122" data-in="48">122 cm</td><td data-cm="77" data-in="30.3">77 cm</td><td data-cm="52" data-in="20.5">52 cm</td><td data-cm="25" data-in="9.8">25 cm</td></tr>
+              <tr><td>3XL</td><td data-cm="128" data-in="50.4">128 cm</td><td data-cm="79" data-in="31.1">79 cm</td><td data-cm="54" data-in="21.3">54 cm</td><td data-cm="26" data-in="10.2">26 cm</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="size-note"><strong>Fabric note:</strong> 220 gsm combed cotton. Pre-shrunk — expect around 2% shrinkage after first wash. If you're between sizes and like a slimmer fit, size down. If you want oversized, size up one.</div>
+      </div>
+      <div class="measure-card">
+        <div class="channel-label" style="color:var(--mustard);font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;font-weight:600;margin-bottom:.8rem">How to measure</div>
+        <h3>The <em>tee method.</em></h3>
+        <p>Grab a tee you already like. Lay it flat on a table. Measure from seam to seam — don't stretch the fabric.</p>
+        <div class="measure-figure">
+          <svg viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#e6a934" stroke-width="1.3">
+            <path d="M60 30 L40 50 L50 65 L70 55 L70 130 L130 130 L130 55 L150 65 L160 50 L140 30 L115 35 Q100 45 85 35 Z" stroke-linejoin="round"/>
+            <line x1="70" y1="62" x2="130" y2="62" stroke-dasharray="3 3" stroke="#f0c76b"/>
+            <text x="100" y="58" font-family="Jost" font-size="8" fill="#f0c76b" text-anchor="middle">CHEST</text>
+            <line x1="60" y1="135" x2="140" y2="135" stroke-dasharray="3 3" stroke="#f0c76b"/>
+            <text x="100" y="148" font-family="Jost" font-size="8" fill="#f0c76b" text-anchor="middle">LENGTH</text>
+          </svg>
+        </div>
+        <div class="measure-steps">
+          <div class="measure-step"><div class="measure-step-num">01</div><div class="measure-step-txt"><strong>Chest</strong> — 2.5 cm below the armpit, pit to pit across the front.</div></div>
+          <div class="measure-step"><div class="measure-step-num">02</div><div class="measure-step-txt"><strong>Length</strong> — top of shoulder (at the neck seam) down to the hem.</div></div>
+          <div class="measure-step"><div class="measure-step-num">03</div><div class="measure-step-txt"><strong>Shoulder</strong> — seam to seam across the top of the back.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOODIES -->
+<section class="size-panel" id="panel-hoodies">
+  <div class="container">
+    <div style="margin-bottom:2rem">
+      <span class="section-label">Unisex fit · regular</span>
+      <h2 style="font-family:var(--font-display);font-size:clamp(1.6rem,2.8vw,2.2rem);font-weight:500;color:var(--ink);line-height:1.15;letter-spacing:-.005em">Heavyweight <em style="font-style:italic;color:var(--oxblood);font-weight:300">Hoodies</em></h2>
+    </div>
+    <div class="size-layout">
+      <div>
+        <div class="size-table-wrap">
+          <table class="size-table" data-type="hoodie">
+            <thead><tr><th>Size</th><th>Chest</th><th>Length</th><th>Shoulder</th><th>Sleeve</th></tr></thead>
+            <tbody>
+              <tr><td>XS</td><td data-cm="100" data-in="39.4">100 cm</td><td data-cm="66" data-in="26">66 cm</td><td data-cm="48" data-in="18.9">48 cm</td><td data-cm="62" data-in="24.4">62 cm</td></tr>
+              <tr><td>S</td><td data-cm="106" data-in="41.7">106 cm</td><td data-cm="68" data-in="26.8">68 cm</td><td data-cm="50" data-in="19.7">50 cm</td><td data-cm="63" data-in="24.8">63 cm</td></tr>
+              <tr><td>M</td><td data-cm="112" data-in="44.1">112 cm</td><td data-cm="70" data-in="27.6">70 cm</td><td data-cm="52" data-in="20.5">52 cm</td><td data-cm="64" data-in="25.2">64 cm</td></tr>
+              <tr><td>L</td><td data-cm="118" data-in="46.5">118 cm</td><td data-cm="72" data-in="28.3">72 cm</td><td data-cm="54" data-in="21.3">54 cm</td><td data-cm="65" data-in="25.6">65 cm</td></tr>
+              <tr><td>XL</td><td data-cm="124" data-in="48.8">124 cm</td><td data-cm="74" data-in="29.1">74 cm</td><td data-cm="56" data-in="22">56 cm</td><td data-cm="66" data-in="26">66 cm</td></tr>
+              <tr><td>XXL</td><td data-cm="132" data-in="52">132 cm</td><td data-cm="76" data-in="29.9">76 cm</td><td data-cm="58" data-in="22.8">58 cm</td><td data-cm="67" data-in="26.4">67 cm</td></tr>
+              <tr><td>3XL</td><td data-cm="140" data-in="55.1">140 cm</td><td data-cm="78" data-in="30.7">78 cm</td><td data-cm="60" data-in="23.6">60 cm</td><td data-cm="68" data-in="26.8">68 cm</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="size-note"><strong>Fabric note:</strong> 400 gsm brushed fleece inside, cotton-rich blend. Cut a little roomier than our tees. If you layer over a thick tee, stay true to size. For a streetwear oversized fit, size up.</div>
+      </div>
+      <div class="measure-card">
+        <div class="channel-label" style="color:var(--mustard);font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;font-weight:600;margin-bottom:.8rem">How to measure</div>
+        <h3>The <em>hoodie method.</em></h3>
+        <p>Same flat-lay method as a tee, but pay closer attention to sleeve length — hoodies run longer.</p>
+        <div class="measure-figure">
+          <svg viewBox="0 0 200 170" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#e6a934" stroke-width="1.3">
+            <path d="M70 35 Q100 20 130 35 L155 55 L145 140 L135 130 L135 150 L65 150 L65 130 L55 140 L45 55 Z" stroke-linejoin="round"/>
+            <path d="M80 35 Q100 10 120 35" stroke="#f0c76b"/>
+            <line x1="65" y1="75" x2="135" y2="75" stroke-dasharray="3 3" stroke="#f0c76b"/>
+            <text x="100" y="70" font-family="Jost" font-size="8" fill="#f0c76b" text-anchor="middle">CHEST</text>
+            <line x1="155" y1="55" x2="145" y2="140" stroke-dasharray="3 3" stroke="#f0c76b"/>
+            <text x="175" y="100" font-family="Jost" font-size="8" fill="#f0c76b" text-anchor="middle" transform="rotate(78 175 100)">SLEEVE</text>
+          </svg>
+        </div>
+        <div class="measure-steps">
+          <div class="measure-step"><div class="measure-step-num">01</div><div class="measure-step-txt"><strong>Chest</strong> — pit to pit across the front, flat.</div></div>
+          <div class="measure-step"><div class="measure-step-num">02</div><div class="measure-step-txt"><strong>Length</strong> — neck seam at the back down to the hem ribbing.</div></div>
+          <div class="measure-step"><div class="measure-step-num">03</div><div class="measure-step-txt"><strong>Sleeve</strong> — shoulder seam to the end of the cuff, following the curve.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VARSITY -->
+<section class="size-panel" id="panel-varsity">
+  <div class="container">
+    <div style="margin-bottom:2rem">
+      <span class="section-label">Unisex fit · structured</span>
+      <h2 style="font-family:var(--font-display);font-size:clamp(1.6rem,2.8vw,2.2rem);font-weight:500;color:var(--ink);line-height:1.15;letter-spacing:-.005em">Classic <em style="font-style:italic;color:var(--oxblood);font-weight:300">Varsity Jackets</em></h2>
+    </div>
+    <div class="size-layout">
+      <div>
+        <div class="size-table-wrap">
+          <table class="size-table" data-type="varsity">
+            <thead><tr><th>Size</th><th>Chest</th><th>Length</th><th>Shoulder</th><th>Sleeve</th></tr></thead>
+            <tbody>
+              <tr><td>S</td><td data-cm="108" data-in="42.5">108 cm</td><td data-cm="69" data-in="27.2">69 cm</td><td data-cm="50" data-in="19.7">50 cm</td><td data-cm="64" data-in="25.2">64 cm</td></tr>
+              <tr><td>M</td><td data-cm="114" data-in="44.9">114 cm</td><td data-cm="71" data-in="28">71 cm</td><td data-cm="52" data-in="20.5">52 cm</td><td data-cm="65" data-in="25.6">65 cm</td></tr>
+              <tr><td>L</td><td data-cm="120" data-in="47.2">120 cm</td><td data-cm="73" data-in="28.7">73 cm</td><td data-cm="54" data-in="21.3">54 cm</td><td data-cm="66" data-in="26">66 cm</td></tr>
+              <tr><td>XL</td><td data-cm="126" data-in="49.6">126 cm</td><td data-cm="75" data-in="29.5">75 cm</td><td data-cm="56" data-in="22">56 cm</td><td data-cm="67" data-in="26.4">67 cm</td></tr>
+              <tr><td>XXL</td><td data-cm="134" data-in="52.8">134 cm</td><td data-cm="77" data-in="30.3">77 cm</td><td data-cm="58" data-in="22.8">58 cm</td><td data-cm="68" data-in="26.8">68 cm</td></tr>
+              <tr><td>3XL</td><td data-cm="142" data-in="55.9">142 cm</td><td data-cm="79" data-in="31.1">79 cm</td><td data-cm="60" data-in="23.6">60 cm</td><td data-cm="69" data-in="27.2">69 cm</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="size-note"><strong>Fabric note:</strong> Melton wool body (520 gsm) with genuine leather sleeves. Structured fit — does not stretch. We recommend true-to-size for a classic drape, or size up if you want to layer a heavy hoodie underneath.</div>
+      </div>
+      <div class="measure-card">
+        <div class="channel-label" style="color:var(--mustard);font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;font-weight:600;margin-bottom:.8rem">How to measure</div>
+        <h3>The <em>varsity method.</em></h3>
+        <p>Varsity jackets are structured, so measure your body directly — not a garment. Stand relaxed, arms down.</p>
+        <div class="measure-figure">
+          <svg viewBox="0 0 200 170" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#e6a934" stroke-width="1.3">
+            <circle cx="100" cy="30" r="14" stroke="#f0c76b"/>
+            <path d="M70 50 L55 70 L50 140 M130 50 L145 70 L150 140 M70 50 Q100 45 130 50 L130 150 L70 150 Z" stroke-linejoin="round"/>
+            <ellipse cx="100" cy="82" rx="50" ry="8" stroke-dasharray="3 3" stroke="#f0c76b"/>
+            <text x="100" y="100" font-family="Jost" font-size="8" fill="#f0c76b" text-anchor="middle">CHEST (AROUND)</text>
+          </svg>
+        </div>
+        <div class="measure-steps">
+          <div class="measure-step"><div class="measure-step-num">01</div><div class="measure-step-txt"><strong>Chest</strong> — wrap the tape around the fullest part, keep it level.</div></div>
+          <div class="measure-step"><div class="measure-step-num">02</div><div class="measure-step-txt"><strong>Shoulder</strong> — bony point to bony point, across the back.</div></div>
+          <div class="measure-step"><div class="measure-step-num">03</div><div class="measure-step-txt"><strong>Sleeve</strong> — shoulder bone → elbow → wrist, arm slightly bent.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CAPS -->
+<section class="size-panel" id="panel-caps">
+  <div class="container">
+    <div style="margin-bottom:2rem">
+      <span class="section-label">Headwear · adjustable &amp; fitted</span>
+      <h2 style="font-family:var(--font-display);font-size:clamp(1.6rem,2.8vw,2.2rem);font-weight:500;color:var(--ink);line-height:1.15;letter-spacing:-.005em">Caps <em style="font-style:italic;color:var(--oxblood);font-weight:300">&amp; Beanies</em></h2>
+    </div>
+    <div class="size-layout">
+      <div>
+        <div class="size-table-wrap">
+          <table class="size-table" data-type="cap">
+            <thead><tr><th>Size</th><th>Circumference</th><th>Fit style</th><th>Best for</th></tr></thead>
+            <tbody>
+              <tr><td>Adj.</td><td data-cm="54-62" data-in="21.3-24.4">54 – 62 cm</td><td>Snapback, 6-panel</td><td>Most head shapes — our default</td></tr>
+              <tr><td>S/M</td><td data-cm="55-57" data-in="21.7-22.4">55 – 57 cm</td><td>Fitted, closed-back</td><td>Smaller frames</td></tr>
+              <tr><td>L/XL</td><td data-cm="58-61" data-in="22.8-24">58 – 61 cm</td><td>Fitted, closed-back</td><td>Larger frames</td></tr>
+              <tr><td>One size</td><td data-cm="55-60" data-in="21.7-23.6">55 – 60 cm</td><td>Beanies, knit</td><td>Stretches to fit — no adjustment</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="size-note"><strong>How to find your cap size:</strong> wrap a soft measuring tape around your head, about 1 cm above your ears and across your mid-forehead. Keep it level. If you're between sizes, round up.</div>
+      </div>
+      <div class="measure-card">
+        <div class="channel-label" style="color:var(--mustard);font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;font-weight:600;margin-bottom:.8rem">Quick reference</div>
+        <h3>No tape? <em>No wahala.</em></h3>
+        <p>Use a piece of string. Wrap, mark, then measure the string against a ruler.</p>
+        <div class="measure-figure">
+          <svg viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#e6a934" stroke-width="1.3">
+            <ellipse cx="100" cy="80" rx="38" ry="48" stroke-linejoin="round"/>
+            <ellipse cx="100" cy="60" rx="44" ry="10" stroke-dasharray="3 3" stroke="#f0c76b"/>
+            <text x="100" y="35" font-family="Jost" font-size="8" fill="#f0c76b" text-anchor="middle">1 CM ABOVE EARS</text>
+            <line x1="75" y1="115" x2="125" y2="115" stroke="#f0c76b"/>
+            <text x="100" y="135" font-family="Jost" font-size="8" fill="#f0c76b" text-anchor="middle">KEEP LEVEL</text>
+          </svg>
+        </div>
+        <div class="measure-steps">
+          <div class="measure-step"><div class="measure-step-num">01</div><div class="measure-step-txt"><strong>Above ears</strong> — about 1 cm / half an inch above the ear tops.</div></div>
+          <div class="measure-step"><div class="measure-step-num">02</div><div class="measure-step-txt"><strong>Across forehead</strong> — over the widest part, not too tight.</div></div>
+          <div class="measure-step"><div class="measure-step-num">03</div><div class="measure-step-txt"><strong>Round up</strong> — if you're between sizes, the bigger one will feel better all day.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="fit-tips">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:1rem">
+      <span class="section-label center">Before you order</span>
+      <h2 style="font-family:var(--font-display);font-size:clamp(1.8rem,3vw,2.3rem);font-weight:500;color:var(--ink);line-height:1.15;letter-spacing:-.005em">Three things we <em style="font-style:italic;color:var(--oxblood);font-weight:300">always tell people.</em></h2>
+    </div>
+    <div class="tips-grid">
+      <div class="tip-card">
+        <div class="tip-label">01 · Between sizes?</div>
+        <h3>Size down for a fitted look</h3>
+        <p>If you're on the fence, our pieces are cut roomy. Going down one size gives you the "just right" fit. Going up gives you oversized/streetwear.</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-label">02 · Shrinkage</div>
+        <h3>Cold wash, tumble low</h3>
+        <p>We pre-shrink everything, but you can expect 1–3% shrinkage after first wash. Cold wash + low tumble keeps the fit honest for years.</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-label">03 · Still not sure?</div>
+        <h3>Order two, return one</h3>
+        <p>Order both sizes with free returns on one. Whichever fits wins. No guilt, no restocking fees — just don't remove the tags.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="help-strip">
+  <div class="container">
+    <div class="ornament" style="justify-content:center"><span class="ornament-line"></span><span class="ornament-text">Still stuck?</span><span class="ornament-line right"></span></div>
+    <h3>We're one <em>message away.</em></h3>
+    <p>Snap a picture of a piece you already own that fits — we'll match it to our sizing in under an hour on WhatsApp.</p>
+    <a href="contact.html" class="btn-outline">Talk to us →</a>
+  </div>
+</section>
+
+<footer><div class="container">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-logo"><div class="footer-logo-mark">U</div><div class="footer-logo-text">Universe<em>Merch</em></div></div>
+      <p class="footer-tagline">"Proper campus merch, officially licensed —<br/>designed, printed, and shipped from Lagos."</p>
+    </div>
+    <div class="footer-col"><h4>Shop</h4><ul class="footer-links"><li><a href="universities.html">Universities</a></li><li><a href="high-schools.html">High Schools</a></li><li><a href="new-drops.html">New Drops</a></li><li><a href="gift-cards.html">Gift Cards</a></li></ul></div>
+    <div class="footer-col"><h4>Company</h4><ul class="footer-links"><li><a href="our-story.html">Our Story</a></li><li><a href="partners.html">Partners</a></li><li><a href="careers.html">Careers</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+    <div class="footer-col"><h4>Help</h4><ul class="footer-links"><li><a href="size-guide.html">Size Guide</a></li><li><a href="shipping-returns.html">Shipping &amp; Returns</a></li><li><a href="privacy-policy.html">Privacy Policy</a></li><li><a href="terms-of-service.html">Terms of Service</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><p>© 2026 Universe Merch Africa. All rights reserved.</p><p class="italic">"Made with pride in Lagos ✦"</p></div>
+</div></footer>
+
+<script>
+const nav=document.getElementById('siteNav');
+window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>40)});
+const hamburger=document.getElementById('hamburger'),mobileMenu=document.getElementById('mobileMenu'),mobileClose=document.getElementById('mobileClose');
+function openMenu(){mobileMenu.classList.add('open');hamburger.classList.add('open');document.body.style.overflow='hidden'}
+function closeMenu(){mobileMenu.classList.remove('open');hamburger.classList.remove('open');document.body.style.overflow=''}
+hamburger.addEventListener('click',openMenu);mobileClose.addEventListener('click',closeMenu);
+document.querySelectorAll('.mobile-nav-link').forEach(l=>l.addEventListener('click',closeMenu));
+const ro=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')})},{threshold:.12});
+document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el=>ro.observe(el));
+
+// Product tabs
+document.querySelectorAll('.prod-tab').forEach(tab=>{
+  tab.addEventListener('click',()=>{
+    document.querySelectorAll('.prod-tab').forEach(t=>t.classList.remove('active'));
+    document.querySelectorAll('.size-panel').forEach(p=>p.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('panel-'+tab.dataset.panel).classList.add('active');
+  });
+});
+
+// Unit toggle
+let unit='cm';
+document.querySelectorAll('.unit-btn').forEach(b=>{
+  b.addEventListener('click',()=>{
+    document.querySelectorAll('.unit-btn').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');
+    unit=b.dataset.unit;
+    document.querySelectorAll('.size-table td[data-cm]').forEach(td=>{
+      const val=td.dataset[unit];
+      td.textContent=val+' '+unit;
+    });
+  });
+});
+</script>
+</body>
+</html>

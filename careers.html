@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Careers — Universe Merch Africa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,900;1,9..144,300;1,9..144,400;1,9..144,600&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="universe-merch.css"/>
+<style>
+/* Careers */
+.careers-values{padding:6rem 0;background:var(--cream)}
+.values-row{display:grid;grid-template-columns:1fr 1.2fr;gap:4rem;align-items:start}
+.values-copy h2{font-family:var(--font-display);font-size:clamp(2rem,3.6vw,2.8rem);font-weight:500;line-height:1.15;color:var(--ink);margin-bottom:1.3rem;letter-spacing:-.01em}
+.values-copy h2 em{font-style:italic;color:var(--oxblood);font-weight:300}
+.values-copy p{font-size:1rem;color:var(--text-mid);line-height:1.8;margin-bottom:1.2rem}
+.values-list{display:grid;gap:1.2rem}
+.value-item{padding:1.4rem 1.6rem;background:var(--cream-2);border-left:3px solid var(--mustard);border-radius:2px;transition:transform .25s}
+.value-item:hover{transform:translateX(4px)}
+.value-item h3{font-family:var(--font-display);font-size:1.15rem;font-weight:500;color:var(--ink);margin-bottom:.4rem;letter-spacing:-.005em}
+.value-item h3 em{font-style:italic;color:var(--oxblood);font-weight:400}
+.value-item p{font-size:.92rem;color:var(--text-mid);line-height:1.6;margin:0}
+
+/* Open roles */
+.roles{padding:6rem 0;background:var(--cream-2)}
+.roles-filter{display:flex;gap:.6rem;justify-content:center;flex-wrap:wrap;margin:2.2rem 0 3rem}
+.role-chip{padding:.55rem 1.3rem;font-family:var(--font-body);font-size:.72rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;background:var(--cream);color:var(--ink);border:1px solid var(--border);border-radius:999px;cursor:pointer;transition:all var(--transition)}
+.role-chip.active,.role-chip:hover{background:var(--ink);color:var(--cream);border-color:var(--ink)}
+.roles-list{display:grid;gap:1rem}
+.role-card{display:grid;grid-template-columns:1.4fr 1fr 1fr auto;gap:1.5rem;align-items:center;padding:1.6rem 1.8rem;background:var(--cream);border:1px solid var(--border);border-radius:2px;transition:all var(--transition);cursor:pointer;text-decoration:none;color:inherit}
+.role-card:hover{border-color:var(--mustard);transform:translateY(-2px);box-shadow:0 10px 24px rgba(23,20,15,.08)}
+.role-title{font-family:var(--font-display);font-size:1.2rem;font-weight:500;color:var(--ink);line-height:1.2;letter-spacing:-.005em}
+.role-dept{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--oxblood);font-weight:600}
+.role-meta{font-size:.85rem;color:var(--text-mid)}
+.role-arrow{font-family:var(--font-display);font-size:1.6rem;color:var(--mustard);font-weight:300;line-height:1;transition:transform var(--transition)}
+.role-card:hover .role-arrow{transform:translateX(4px)}
+
+/* Benefits */
+.benefits{padding:6rem 0;background:var(--ink-deep);color:var(--cream)}
+.benefits-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem}
+.benefit-card{padding:2.2rem 1.8rem;border:1px solid rgba(230,169,52,.15);border-radius:2px;background:rgba(230,169,52,.025);transition:all .3s}
+.benefit-card:hover{border-color:rgba(230,169,52,.4);background:rgba(230,169,52,.05);transform:translateY(-3px)}
+.benefit-icon{font-family:var(--font-display);font-size:1.8rem;color:var(--mustard);margin-bottom:1rem;font-style:italic;font-weight:300;line-height:1}
+.benefit-card h3{font-family:var(--font-display);font-size:1.2rem;font-weight:500;color:var(--cream);margin-bottom:.7rem;letter-spacing:-.005em}
+.benefit-card p{font-size:.92rem;color:rgba(244,237,224,.72);line-height:1.65}
+
+/* Life at UM */
+.life{padding:6rem 0;background:var(--cream)}
+.life-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:3rem}
+.life-tile{aspect-ratio:1;border-radius:3px;overflow:hidden;position:relative;display:flex;align-items:flex-end;padding:1.2rem;color:var(--cream);font-family:var(--font-display);font-style:italic;font-size:.95rem;font-weight:500;line-height:1.3}
+.life-tile::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(12,10,7,.75) 0%,rgba(12,10,7,.2) 50%,transparent 100%);pointer-events:none}
+.life-tile span{position:relative;z-index:2}
+.life-t1{background:var(--oxblood)}
+.life-t2{background:var(--olive)}
+.life-t3{background:var(--ink)}
+.life-t4{background:var(--oxblood-2)}
+.life-t5{background:var(--mustard);color:var(--ink)}
+.life-t5::after{background:linear-gradient(to top,rgba(23,20,15,.25) 0%,transparent 60%)}
+.life-t6{background:#1a3a3f}
+.life-t7{background:#4a2518}
+.life-t8{background:var(--olive);opacity:.85}
+
+/* Culture quote */
+.culture{padding:5rem 0;background:var(--cream-2);text-align:center}
+.culture-inner{max-width:780px;margin:0 auto}
+.culture blockquote{font-family:var(--font-display);font-style:italic;font-size:clamp(1.4rem,2.6vw,1.9rem);font-weight:300;color:var(--ink);line-height:1.45;margin-bottom:1.8rem;position:relative}
+.culture blockquote::before{content:'"';font-size:5rem;color:var(--oxblood);opacity:.22;position:absolute;top:-2rem;left:-.5rem;font-weight:600;line-height:1}
+.culture cite{display:block;font-family:var(--font-body);font-style:normal;font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--text-light);font-weight:500}
+.culture cite strong{color:var(--oxblood);font-weight:600}
+
+@media(max-width:960px){
+  .values-row{grid-template-columns:1fr;gap:2.5rem}
+  .role-card{grid-template-columns:1fr auto;gap:.8rem}
+  .role-dept,.role-meta{grid-column:1/-1}
+  .benefits-grid{grid-template-columns:repeat(2,1fr)}
+  .life-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:520px){
+  .benefits-grid{grid-template-columns:1fr}
+  .life-grid{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+
+<nav class="site-nav solid" id="siteNav">
+  <div class="container nav-inner">
+    <a href="index.html" class="nav-logo">
+      <div class="logo-mark">U</div>
+      <div class="logo-text">Universe<em>Merch</em><span>Africa</span></div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="how-it-works_1.html">How It Works</a></li>
+      <li><a href="students_redesigned.html">For Students</a></li>
+      <li><a href="partner.html">Partner</a></li>
+      <li><a href="students_redesigned.html" class="nav-cta">Shop Now</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" id="mobileClose" aria-label="Close menu">✕</button>
+  <a href="how-it-works_1.html" class="mobile-nav-link">How It <em>Works</em></a>
+  <a href="students_redesigned.html" class="mobile-nav-link">For <em>Students</em></a>
+  <a href="partner.html" class="mobile-nav-link"><em>Partner</em></a>
+  <a href="students_redesigned.html" class="mobile-nav-link">Shop <em>Now</em></a>
+</div>
+
+<section class="page-hero">
+  <div class="container">
+    <div class="page-hero-inner">
+      <div class="page-hero-crumbs"><a href="index.html">Home</a><span class="sep">/</span><span>Company</span><span class="sep">/</span><span>Careers</span></div>
+      <h1>Build the culture <em>you wish you'd had in uni.</em></h1>
+      <p class="page-hero-lede">"We're not hiring for a job. We're hiring for a chapter — the one you'll want to tell stories about later."</p>
+      <p class="page-hero-desc">We're a team of 34 spread across our Ikeja HQ and remote across Lagos, Abuja, Accra, and Nairobi. Designers, printers, merchandisers, engineers, and people who just really, really love a good hoodie. If that sounds right, keep reading.</p>
+    </div>
+  </div>
+</section>
+
+<section class="careers-values">
+  <div class="container">
+    <div class="values-row">
+      <div class="values-copy reveal">
+        <span class="section-label">How we work</span>
+        <h2>Six things <em>we actually mean.</em></h2>
+        <p>Every company has values. Most are posters. Ours are operating principles — the ones we lean on when a decision is hard, a drop is late, or a partnership gets messy.</p>
+        <p>If these resonate, you'll probably enjoy working here. If they make you roll your eyes, you probably won't — and that's fine too.</p>
+      </div>
+      <div class="values-list reveal delay-2">
+        <div class="value-item"><h3>Craft <em>over churn</em></h3><p>We'd rather drop one excellent hoodie a month than ten mediocre ones a week.</p></div>
+        <div class="value-item"><h3>Show the <em>receipts</em></h3><p>Transparency with partners, with customers, with each other. If you can't explain the decision in a pager message, it's not the right decision.</p></div>
+        <div class="value-item"><h3>Respect the <em>crest</em></h3><p>We treat every licensed mark like it's our family's name. Because to someone, it is.</p></div>
+        <div class="value-item"><h3>Lagos <em>first, Africa next</em></h3><p>We build for the continent, not for export. Our defaults are Naira, WAT, tropical weight fabric.</p></div>
+        <div class="value-item"><h3>Ship <em>the small wins</em></h3><p>Small improvements, shipped weekly, compound faster than big launches shipped quarterly.</p></div>
+        <div class="value-item"><h3>Play <em>the long alumni game</em></h3><p>We want customers for 40 years, not 40 days. That shapes every decision we make.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="roles">
+  <div class="container">
+    <div class="section-head" style="text-align:center;margin-bottom:.5rem">
+      <span class="section-label center">Open roles</span>
+      <h2 style="font-family:var(--font-display);font-size:clamp(2rem,4vw,3rem);font-weight:500;color:var(--ink);line-height:1.1;margin-bottom:.8rem">We're <em style="font-style:italic;color:var(--oxblood);font-weight:300">hiring.</em></h2>
+      <p style="font-size:1rem;color:var(--text-mid);max-width:560px;margin:0 auto;line-height:1.7">6 open positions across design, engineering, operations, and partnerships.</p>
+    </div>
+    <div class="roles-filter">
+      <button class="role-chip active" data-filter="all">All Roles</button>
+      <button class="role-chip" data-filter="design">Design</button>
+      <button class="role-chip" data-filter="engineering">Engineering</button>
+      <button class="role-chip" data-filter="operations">Operations</button>
+      <button class="role-chip" data-filter="partnerships">Partnerships</button>
+    </div>
+    <div class="roles-list" id="rolesList">
+      <a href="#" class="role-card" data-dept="design">
+        <div>
+          <div class="role-dept">Design</div>
+          <div class="role-title">Senior Apparel Designer</div>
+        </div>
+        <div class="role-meta">Ikeja, Lagos · On-site</div>
+        <div class="role-meta">Full-time</div>
+        <div class="role-arrow">→</div>
+      </a>
+      <a href="#" class="role-card" data-dept="design">
+        <div>
+          <div class="role-dept">Design</div>
+          <div class="role-title">Graphic Designer (Campus Drops)</div>
+        </div>
+        <div class="role-meta">Lagos · Hybrid</div>
+        <div class="role-meta">Full-time</div>
+        <div class="role-arrow">→</div>
+      </a>
+      <a href="#" class="role-card" data-dept="engineering">
+        <div>
+          <div class="role-dept">Engineering</div>
+          <div class="role-title">Full-Stack Engineer (Commerce)</div>
+        </div>
+        <div class="role-meta">Remote · Africa</div>
+        <div class="role-meta">Full-time</div>
+        <div class="role-arrow">→</div>
+      </a>
+      <a href="#" class="role-card" data-dept="operations">
+        <div>
+          <div class="role-dept">Operations</div>
+          <div class="role-title">Production Floor Lead</div>
+        </div>
+        <div class="role-meta">Ikeja, Lagos · On-site</div>
+        <div class="role-meta">Full-time</div>
+        <div class="role-arrow">→</div>
+      </a>
+      <a href="#" class="role-card" data-dept="operations">
+        <div>
+          <div class="role-dept">Operations</div>
+          <div class="role-title">Customer Experience Associate</div>
+        </div>
+        <div class="role-meta">Lagos · Hybrid</div>
+        <div class="role-meta">Full-time</div>
+        <div class="role-arrow">→</div>
+      </a>
+      <a href="#" class="role-card" data-dept="partnerships">
+        <div>
+          <div class="role-dept">Partnerships</div>
+          <div class="role-title">University Partnerships Manager (East Africa)</div>
+        </div>
+        <div class="role-meta">Nairobi · Hybrid</div>
+        <div class="role-meta">Full-time</div>
+        <div class="role-arrow">→</div>
+      </a>
+    </div>
+    <div style="text-align:center;margin-top:3rem">
+      <p style="font-size:.95rem;color:var(--text-mid);line-height:1.7">Don't see your role? We're always interested in meeting good people.<br/>Send a note to <a href="mailto:careers@universemerch.africa" style="color:var(--oxblood);font-weight:500">careers@universemerch.africa</a>.</p>
+    </div>
+  </div>
+</section>
+
+<section class="benefits">
+  <div class="container">
+    <div class="section-head" style="text-align:center;margin-bottom:1rem">
+      <div class="ornament" style="justify-content:center"><span class="ornament-line"></span><span class="ornament-text">The deal</span><span class="ornament-line right"></span></div>
+      <h2 style="font-family:var(--font-display);font-size:clamp(2rem,4vw,3rem);font-weight:500;color:var(--cream);line-height:1.1;margin-bottom:.8rem">What we <em style="font-style:italic;color:var(--mustard);font-weight:300">offer.</em></h2>
+    </div>
+    <div class="benefits-grid">
+      <div class="benefit-card reveal delay-1">
+        <div class="benefit-icon">01</div>
+        <h3>Above-market pay</h3>
+        <p>Benchmarked quarterly against Lagos tech &amp; design salaries. Transparent bands, no haggling games.</p>
+      </div>
+      <div class="benefit-card reveal delay-2">
+        <div class="benefit-icon">02</div>
+        <h3>Equity from day one</h3>
+        <p>Every full-time hire gets stock options. We want you to own a piece of what you build.</p>
+      </div>
+      <div class="benefit-card reveal delay-3">
+        <div class="benefit-icon">03</div>
+        <h3>Full health cover</h3>
+        <p>Private HMO for you and your immediate family, dental included. No waiting period.</p>
+      </div>
+      <div class="benefit-card reveal delay-4">
+        <div class="benefit-icon">04</div>
+        <h3>Real time off</h3>
+        <p>25 days paid leave + public holidays. We actually enforce it — your manager will nag you if you don't take it.</p>
+      </div>
+      <div class="benefit-card reveal delay-5">
+        <div class="benefit-icon">05</div>
+        <h3>Learning budget</h3>
+        <p>₦400k/year for courses, conferences, or books. No pre-approval required under ₦150k.</p>
+      </div>
+      <div class="benefit-card reveal delay-6">
+        <div class="benefit-icon">06</div>
+        <h3>All the merch</h3>
+        <p>Every drop, on us. Plus a ₦50k annual merch stipend for friends and family. It's the least we can do.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="life">
+  <div class="container">
+    <div class="section-head" style="text-align:center;margin-bottom:1rem">
+      <span class="section-label center">Life at UM</span>
+      <h2 style="font-family:var(--font-display);font-size:clamp(2rem,4vw,3rem);font-weight:500;color:var(--ink);line-height:1.1;margin-bottom:.8rem">A week <em style="font-style:italic;color:var(--oxblood);font-weight:300">in our shoes.</em></h2>
+    </div>
+    <div class="life-grid">
+      <div class="life-tile life-t1 reveal delay-1"><span>Monday design reviews, with real critique</span></div>
+      <div class="life-tile life-t2 reveal delay-2"><span>The print floor at 7am, before it gets loud</span></div>
+      <div class="life-tile life-t3 reveal delay-3"><span>Thursday drop prep, with jollof</span></div>
+      <div class="life-tile life-t4 reveal delay-4"><span>Campus visits — Ife, Nsukka, Zaria</span></div>
+      <div class="life-tile life-t5 reveal delay-1"><span>Team lunch, every Wednesday, on the house</span></div>
+      <div class="life-tile life-t6 reveal delay-2"><span>Quarterly off-site in Obudu or Cape Coast</span></div>
+      <div class="life-tile life-t7 reveal delay-3"><span>Fabric sampling days, with everyone's opinion</span></div>
+      <div class="life-tile life-t8 reveal delay-4"><span>Friday afternoon retros, properly short</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="culture">
+  <div class="container">
+    <div class="culture-inner reveal">
+      <span class="section-label center">From our team</span>
+      <blockquote>I've worked at two banks and a startup before this. Nothing prepared me for how much people here care about tiny things — the weight of a hoodie, the kerning on a crest, the exact shade of oxblood. You feel like you're part of something that actually matters to people.</blockquote>
+      <cite><strong>— Folashade A.</strong> · Brand Designer, joined 2024</cite>
+    </div>
+  </div>
+</section>
+
+<footer><div class="container">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-logo"><div class="footer-logo-mark">U</div><div class="footer-logo-text">Universe<em>Merch</em></div></div>
+      <p class="footer-tagline">"Proper campus merch, officially licensed —<br/>designed, printed, and shipped from Lagos."</p>
+    </div>
+    <div class="footer-col"><h4>Shop</h4><ul class="footer-links"><li><a href="universities.html">Universities</a></li><li><a href="high-schools.html">High Schools</a></li><li><a href="new-drops.html">New Drops</a></li><li><a href="gift-cards.html">Gift Cards</a></li></ul></div>
+    <div class="footer-col"><h4>Company</h4><ul class="footer-links"><li><a href="our-story.html">Our Story</a></li><li><a href="partners.html">Partners</a></li><li><a href="careers.html">Careers</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+    <div class="footer-col"><h4>Help</h4><ul class="footer-links"><li><a href="size-guide.html">Size Guide</a></li><li><a href="shipping-returns.html">Shipping &amp; Returns</a></li><li><a href="privacy-policy.html">Privacy Policy</a></li><li><a href="terms-of-service.html">Terms of Service</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><p>© 2026 Universe Merch Africa. All rights reserved.</p><p class="italic">"Made with pride in Lagos ✦"</p></div>
+</div></footer>
+
+<script>
+const nav=document.getElementById('siteNav');
+window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>40)});
+const hamburger=document.getElementById('hamburger'),mobileMenu=document.getElementById('mobileMenu'),mobileClose=document.getElementById('mobileClose');
+function openMenu(){mobileMenu.classList.add('open');hamburger.classList.add('open');document.body.style.overflow='hidden'}
+function closeMenu(){mobileMenu.classList.remove('open');hamburger.classList.remove('open');document.body.style.overflow=''}
+hamburger.addEventListener('click',openMenu);mobileClose.addEventListener('click',closeMenu);
+document.querySelectorAll('.mobile-nav-link').forEach(l=>l.addEventListener('click',closeMenu));
+const ro=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')})},{threshold:.12});
+document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el=>ro.observe(el));
+
+// Roles filter
+document.querySelectorAll('.role-chip').forEach(chip=>{
+  chip.addEventListener('click',()=>{
+    document.querySelectorAll('.role-chip').forEach(c=>c.classList.remove('active'));
+    chip.classList.add('active');
+    const f=chip.dataset.filter;
+    document.querySelectorAll('.role-card').forEach(card=>{
+      card.style.display=(f==='all'||card.dataset.dept===f)?'grid':'none';
+    });
+  });
+});
+</script>
+</body>
+</html>

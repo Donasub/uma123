@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Product Details — Universe Merch Africa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,900;1,9..144,300;1,9..144,400;1,9..144,600&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="universe-merch.css" />
+  <style>
+    /* PRODUCT DETAIL PAGE STYLES */
+    .product-detail-page {
+      background: var(--cream);
+      min-height: 100vh;
+      padding: 2rem;
+    }
+
+    /* HEADER */
+    .detail-header {
+      background: var(--white);
+      padding: 1.5rem 0;
+      margin-bottom: 2rem;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    .detail-header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+    }
+
+    .detail-breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+      color: var(--text-light);
+    }
+
+    .detail-breadcrumb a {
+      color: var(--oxblood);
+      cursor: pointer;
+      text-decoration: none;
+      transition: color var(--transition);
+    }
+
+    .detail-breadcrumb a:hover {
+      color: var(--mustard);
+    }
+
+    .detail-header-actions {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    .detail-cart-icon {
+      cursor: pointer;
+      font-size: 1.2rem;
+      position: relative;
+      transition: transform var(--transition);
+    }
+
+    .detail-cart-icon:hover {
+      transform: scale(1.1);
+    }
+
+    .detail-cart-count {
+      position: absolute;
+      top: -8px;
+      right: -10px;
+      background: var(--mustard);
+      color: var(--ink);
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-size: 0.7rem;
+      font-weight: 700;
+    }
+
+    /* MAIN CONTENT */
+    .detail-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      background: var(--white);
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(23, 20, 15, 0.08);
+    }
+
+    /* IMAGE SECTION */
+    .detail-image-section {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .detail-main-image {
+      width: 100%;
+      aspect-ratio: 1;
+      background: linear-gradient(135deg, var(--cream) 0%, rgba(91, 26, 26, 0.05) 100%);
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      font-size: 5rem;
+      overflow: hidden;
+    }
+
+    .detail-thumbnails {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.8rem;
+    }
+
+    .detail-thumbnail {
+      aspect-ratio: 1;
+      background: var(--cream);
+      border-radius: 6px;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: all var(--transition);
+      display: grid;
+      place-items: center;
+      font-size: 2rem;
+    }
+
+    .detail-thumbnail:hover,
+    .detail-thumbnail.active {
+      border-color: var(--mustard);
+      background: rgba(230, 169, 52, 0.1);
+    }
+
+    /* INFO SECTION */
+    .detail-info-section {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .detail-title {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      font-weight: 600;
+      color: var(--ink);
+      line-height: 1.2;
+      margin: 0;
+    }
+
+    .detail-category {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-light);
+    }
+
+    .detail-rating {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .detail-rating-stars {
+      font-size: 1rem;
+    }
+
+    .detail-rating-text {
+      font-size: 0.9rem;
+      color: var(--text-mid);
+    }
+
+    .detail-price {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--mustard);
+    }
+
+    .detail-description {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: var(--text-mid);
+      padding: 1.5rem;
+      background: var(--cream);
+      border-radius: 8px;
+      border-left: 3px solid var(--mustard);
+    }
+
+    /* VARIANTS SECTION */
+    .detail-variants {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .variant-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .variant-label {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .variant-options {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+    }
+
+    .variant-option {
+      padding: 0.7rem 1.2rem;
+      border: 2px solid var(--border);
+      background: transparent;
+      border-radius: 6px;
+      cursor: pointer;
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: all var(--transition);
+    }
+
+    .variant-option:hover {
+      border-color: var(--mustard);
+    }
+
+    .variant-option.active {
+      background: var(--mustard);
+      border-color: var(--mustard);
+      color: var(--ink);
+    }
+
+    .variant-option:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    /* QUANTITY & ADD TO CART */
+    .detail-quantity {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background: var(--cream);
+      padding: 1rem;
+      border-radius: 8px;
+      width: fit-content;
+    }
+
+    .quantity-label {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .quantity-control {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .qty-btn {
+      width: 32px;
+      height: 32px;
+      border: 1px solid var(--border);
+      background: var(--white);
+      border-radius: 4px;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      transition: all var(--transition);
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .qty-btn:hover:not(:disabled) {
+      background: var(--mustard);
+      border-color: var(--mustard);
+    }
+
+    .qty-display {
+      width: 50px;
+      text-align: center;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    /* ACTION BUTTONS */
+    .detail-actions {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .btn-add-to-cart {
+      flex: 1;
+      padding: 1rem 2rem;
+      background: var(--mustard);
+      color: var(--ink);
+      border: 2px solid var(--mustard);
+      border-radius: 8px;
+      font-family: var(--font-body);
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all var(--transition);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+    }
+
+    .btn-add-to-cart:hover:not(:disabled) {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 28px rgba(230, 169, 52, 0.3);
+    }
+
+    .btn-add-to-cart:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .btn-wishlist {
+      padding: 1rem;
+      background: transparent;
+      border: 2px solid var(--border);
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1.3rem;
+      transition: all var(--transition);
+    }
+
+    .btn-wishlist:hover {
+      border-color: var(--mustard);
+      background: rgba(230, 169, 52, 0.1);
+    }
+
+    /* SHIPPING & RETURNS */
+    .detail-info {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      padding: 1.5rem;
+      background: var(--cream);
+      border-radius: 8px;
+    }
+
+    .info-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      text-align: center;
+    }
+
+    .info-icon {
+      font-size: 1.8rem;
+    }
+
+    .info-title {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--ink);
+    }
+
+    .info-text {
+      font-size: 0.8rem;
+      color: var(--text-light);
+    }
+
+    /* LOADING STATE */
+    .loading {
+      text-align: center;
+      padding: 3rem;
+      color: var(--text-light);
+    }
+
+    .loading-spinner {
+      width: 32px;
+      height: 32px;
+      border: 3px solid rgba(91, 26, 26, 0.2);
+      border-top-color: var(--oxblood);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin: 0 auto 1rem;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 968px) {
+      .detail-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .detail-title {
+        font-size: 1.8rem;
+      }
+
+      .detail-info {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .product-detail-page {
+        padding: 1rem;
+      }
+
+      .detail-grid {
+        padding: 1.5rem;
+      }
+
+      .detail-title {
+        font-size: 1.4rem;
+      }
+
+      .detail-price {
+        font-size: 1.6rem;
+      }
+
+      .detail-actions {
+        flex-direction: column;
+      }
+
+      .detail-info {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="product-detail-page">
+    
+    <!-- HEADER -->
+    <div class="detail-header">
+      <div class="detail-header-content">
+        <div class="detail-breadcrumb">
+          <a onclick="goHome()">Home</a>
+          <span>/</span>
+          <a onclick="goToSchools()">Schools</a>
+          <span>/</span>
+          <a id="schoolLink">School</a>
+          <span>/</span>
+          <span id="productNameBread">Product</span>
+        </div>
+        <div class="detail-header-actions">
+          <div class="detail-cart-icon" onclick="goCart()">
+            🛒
+            <span class="detail-cart-count" id="cartCount" style="display: none;"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="detail-container" id="detailContainer">
+      <div style="grid-column: 1 / -1; text-align: center;">
+        <div class="loading">
+          <div class="loading-spinner"></div>
+          <p>Loading product details...</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- INCLUDE UMA CLIENT -->
+  <script src="universe-merch-backend/public/uma-client.js"></script>
+  <script>
+    UMA.init({ apiUrl: 'http://localhost:4000/api' });
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const productId = urlParams.get('product_id');
+    const schoolId = urlParams.get('school_id');
+
+    let product = null;
+    let selectedSize = null;
+    let selectedColor = null;
+    let quantity = 1;
+
+    // DOM Elements
+    const detailContainer = document.getElementById('detailContainer');
+    const cartCount = document.getElementById('cartCount');
+    const productNameBread = document.getElementById('productNameBread');
+    const schoolLink = document.getElementById('schoolLink');
+
+    // Load product details
+    async function loadProduct() {
+      if (!productId) {
+        detailContainer.innerHTML = '<div class="loading"><p>Product not found</p></div>';
+        return;
+      }
+
+      try {
+        // Fetch product (would need new endpoint, using mock for now)
+        const products = await UMA.marketplace.getProducts({});
+        product = products.find(p => p.id === productId);
+
+        if (!product) {
+          detailContainer.innerHTML = '<div class="loading"><p>Product not found</p></div>';
+          return;
+        }
+
+        // Get variants
+        const sizes = [...new Set(product.variants.map(v => v.size))];
+        const colors = [...new Set(product.variants.map(v => v.color))];
+
+        selectedSize = sizes[0];
+        selectedColor = colors[0];
+
+        // Update breadcrumbs
+        productNameBread.textContent = product.name;
+        if (schoolId) {
+          schoolLink.href = `#`;
+          schoolLink.onclick = () => window.location.href = `school-storefront.html?school_id=${schoolId}`;
+          const schools = await UMA.marketplace.getSchools();
+          const school = schools.find(s => s.id === schoolId);
+          schoolLink.textContent = school?.name || 'School';
+        }
+
+        // Render product detail
+        renderDetail(product, sizes, colors);
+        updateCartCount();
+
+      } catch (error) {
+        console.error('Error loading product:', error);
+        detailContainer.innerHTML = '<div class="loading"><p>Error loading product</p></div>';
+      }
+    }
+
+    // Render product detail
+    function renderDetail(product, sizes, colors) {
+      detailContainer.innerHTML = `
+        <div class="detail-grid">
+          <!-- IMAGE SECTION -->
+          <div class="detail-image-section">
+            <div class="detail-main-image" id="mainImage">📦</div>
+            <div class="detail-thumbnails">
+              <div class="detail-thumbnail active" onclick="changeImage(0)">📦</div>
+              <div class="detail-thumbnail" onclick="changeImage(1)">🎨</div>
+              <div class="detail-thumbnail" onclick="changeImage(2)">✨</div>
+              <div class="detail-thumbnail" onclick="changeImage(3)">⭐</div>
+            </div>
+          </div>
+
+          <!-- INFO SECTION -->
+          <div class="detail-info-section">
+            <div>
+              <p class="detail-category">${product.category || 'Apparel'}</p>
+              <h1 class="detail-title">${product.name}</h1>
+            </div>
+
+            <div class="detail-rating">
+              <span class="detail-rating-stars">★★★★★</span>
+              <span class="detail-rating-text">(142 reviews)</span>
+            </div>
+
+            <div class="detail-price">₦${product.base_price.toLocaleString()}</div>
+
+            <div class="detail-description">
+              ${product.description || 'Premium quality merchandise featuring official school branding and exclusive designs. Perfect for alumni, students, and supporters.'}
+            </div>
+
+            <!-- VARIANTS -->
+            <div class="detail-variants">
+              <!-- SIZE SELECTOR -->
+              <div class="variant-group">
+                <label class="variant-label">Size</label>
+                <div class="variant-options">
+                  ${sizes.map(size => `
+                    <button 
+                      class="variant-option ${size === selectedSize ? 'active' : ''}"
+                      onclick="selectSize('${size}')"
+                    >
+                      ${size}
+                    </button>
+                  `).join('')}
+                </div>
+              </div>
+
+              <!-- COLOR SELECTOR -->
+              <div class="variant-group">
+                <label class="variant-label">Color</label>
+                <div class="variant-options">
+                  ${colors.map(color => `
+                    <button 
+                      class="variant-option ${color === selectedColor ? 'active' : ''}"
+                      onclick="selectColor('${color}')"
+                      style="border-color: ${getColorHex(color)}; ${color === selectedColor ? `background: ${getColorHex(color)}; color: white;` : ''}"
+                    >
+                      ${color}
+                    </button>
+                  `).join('')}
+                </div>
+              </div>
+            </div>
+
+            <!-- QUANTITY -->
+            <div class="detail-quantity">
+              <span class="quantity-label">Quantity:</span>
+              <div class="quantity-control">
+                <button class="qty-btn" onclick="decreaseQty()">−</button>
+                <div class="qty-display" id="qtyDisplay">${quantity}</div>
+                <button class="qty-btn" onclick="increaseQty()">+</button>
+              </div>
+            </div>
+
+            <!-- ACTIONS -->
+            <div class="detail-actions">
+              <button class="btn-add-to-cart" onclick="addToCart()">Add to Cart</button>
+              <button class="btn-wishlist" title="Add to wishlist">❤️</button>
+            </div>
+
+            <!-- INFO -->
+            <div class="detail-info">
+              <div class="info-item">
+                <div class="info-icon">🚚</div>
+                <div class="info-title">Free Shipping</div>
+                <div class="info-text">On orders over ₦10,000</div>
+              </div>
+              <div class="info-item">
+                <div class="info-icon">🔄</div>
+                <div class="info-title">30-Day Returns</div>
+                <div class="info-text">No questions asked</div>
+              </div>
+              <div class="info-item">
+                <div class="info-icon">🛡️</div>
+                <div class="info-title">Secure Payment</div>
+                <div class="info-text">100% protected</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    // Helper functions
+    function getColorHex(color) {
+      const colorMap = {
+        'black': '#000000',
+        'white': '#FFFFFF',
+        'navy': '#001f3f',
+        'red': '#FF4136',
+        'blue': '#0074D9',
+        'green': '#2ECC40',
+        'yellow': '#FFDC00',
+        'gray': '#AAAAAA',
+        'oxblood': '#5b1a1a',
+        'cream': '#f4ede0',
+        'mustard': '#e6a934'
+      };
+      return colorMap[color.toLowerCase()] || '#cccccc';
+    }
+
+    function changeImage(index) {
+      document.querySelectorAll('.detail-thumbnail').forEach((t, i) => {
+        t.classList.toggle('active', i === index);
+      });
+    }
+
+    function selectSize(size) {
+      selectedSize = size;
+      document.querySelectorAll('.variant-option').forEach(btn => {
+        if (btn.textContent.trim() === size) {
+          btn.classList.add('active');
+        } else if (btn.parentElement.className.includes('variant-options')) {
+          const isSizeSection = btn.parentElement.parentElement.textContent.includes('Size');
+          if (isSizeSection) btn.classList.remove('active');
+        }
+      });
+    }
+
+    function selectColor(color) {
+      selectedColor = color;
+      document.querySelectorAll('.variant-option').forEach(btn => {
+        if (btn.textContent.trim() === color) {
+          btn.classList.add('active');
+        } else if (btn.parentElement.className.includes('variant-options')) {
+          const isColorSection = btn.parentElement.parentElement.textContent.includes('Color');
+          if (isColorSection) btn.classList.remove('active');
+        }
+      });
+    }
+
+    function increaseQty() {
+      quantity++;
+      document.getElementById('qtyDisplay').textContent = quantity;
+    }
+
+    function decreaseQty() {
+      if (quantity > 1) {
+        quantity--;
+        document.getElementById('qtyDisplay').textContent = quantity;
+      }
+    }
+
+    function addToCart() {
+      if (!product || !selectedSize || !selectedColor) {
+        alert('Please select size and color');
+        return;
+      }
+
+      const cart = JSON.parse(localStorage.getItem('UMA_CART') || '{}');
+      const key = `${productId}_${selectedSize}_${selectedColor}`;
+
+      if (cart[key]) {
+        cart[key].quantity += quantity;
+      } else {
+        cart[key] = {
+          product_id: productId,
+          name: product.name,
+          price: product.base_price,
+          quantity: quantity,
+          size: selectedSize,
+          color: selectedColor,
+          school_id: schoolId
+        };
+      }
+
+      localStorage.setItem('UMA_CART', JSON.stringify(cart));
+      updateCartCount();
+      
+      alert(`Added ${quantity} item(s) to cart!`);
+      quantity = 1;
+      document.getElementById('qtyDisplay').textContent = '1';
+    }
+
+    function updateCartCount() {
+      const cart = JSON.parse(localStorage.getItem('UMA_CART') || '{}');
+      const count = Object.keys(cart).length;
+      if (count > 0) {
+        cartCount.textContent = count;
+        cartCount.style.display = 'grid';
+      } else {
+        cartCount.style.display = 'none';
+      }
+    }
+
+    // Navigation
+    function goHome() {
+      window.location.href = 'index.html';
+    }
+
+    function goToSchools() {
+      window.location.href = 'schools-browse.html';
+    }
+
+    function goCart() {
+      window.location.href = 'cart.html';
+    }
+
+    // Load on init
+    loadProduct();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,1352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Account — Universe Merch Africa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,900;1,9..144,300;1,9..144,400;1,9..144,600&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="universe-merch.css" />
+  <style>
+    /* ACCOUNT PAGE STYLES */
+    .account-page {
+      background: var(--cream);
+      min-height: 100vh;
+      padding: 2rem;
+    }
+
+    .account-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 2rem;
+    }
+
+    /* SIDEBAR */
+    .account-sidebar {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 4px 16px rgba(23, 20, 15, 0.08);
+      height: fit-content;
+      position: sticky;
+      top: 2rem;
+    }
+
+    .account-user {
+      text-align: center;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 2rem;
+    }
+
+    .account-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: var(--oxblood);
+      color: var(--cream);
+      display: grid;
+      place-items: center;
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 600;
+      margin: 0 auto 1rem;
+      border: 3px solid var(--mustard);
+    }
+
+    .account-name {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 0.3rem;
+    }
+
+    .account-email {
+      font-size: 0.9rem;
+      color: var(--text-mid);
+    }
+
+    .account-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.8rem 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all var(--transition);
+      color: var(--text-mid);
+    }
+
+    .nav-item:hover,
+    .nav-item.active {
+      background: var(--cream);
+      color: var(--mustard);
+    }
+
+    .nav-item.active {
+      background: rgba(230, 169, 52, 0.1);
+      font-weight: 600;
+    }
+
+    .nav-icon {
+      font-size: 1.1rem;
+      width: 20px;
+      text-align: center;
+    }
+
+    .nav-text {
+      font-size: 0.95rem;
+    }
+
+    .logout-btn {
+      margin-top: 2rem;
+      padding: 0.8rem 1rem;
+      background: transparent;
+      border: 1px solid var(--red);
+      border-radius: 8px;
+      color: var(--red);
+      cursor: pointer;
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: all var(--transition);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .logout-btn:hover {
+      background: var(--red);
+      color: var(--white);
+    }
+
+    /* MAIN CONTENT */
+    .account-main {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .account-section {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 4px 16px rgba(23, 20, 15, 0.08);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin: 0;
+    }
+
+    .section-subtitle {
+      font-size: 0.9rem;
+      color: var(--text-mid);
+      margin: 0.5rem 0 0;
+    }
+
+    .section-actions {
+      display: flex;
+      gap: 1rem;
+    }
+
+    /* PROFILE SECTION */
+    .profile-form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .form-group.full-width {
+      grid-column: 1 / -1;
+    }
+
+    .form-label {
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+
+    .form-input,
+    .form-select {
+      padding: 1rem 1.2rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      color: var(--ink);
+      background: var(--white);
+      transition: all var(--transition);
+      outline: none;
+    }
+
+    .form-input:focus,
+    .form-select:focus {
+      border-color: var(--mustard);
+      box-shadow: 0 0 0 4px rgba(230, 169, 52, 0.12);
+    }
+
+    .form-input::placeholder {
+      color: var(--text-light);
+    }
+
+    .form-select {
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%235b1a1a' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+      padding-right: 3rem;
+    }
+
+    .btn-save {
+      padding: 0.8rem 2rem;
+      background: var(--mustard);
+      color: var(--ink);
+      border: 2px solid var(--mustard);
+      border-radius: 8px;
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all var(--transition);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .btn-save:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(230, 169, 52, 0.3);
+    }
+
+    .btn-save:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    /* ORDERS SECTION */
+    .orders-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .order-item {
+      display: grid;
+      grid-template-columns: 80px 1fr 120px 100px;
+      gap: 1rem;
+      padding: 1.5rem;
+      background: var(--cream);
+      border-radius: 8px;
+      align-items: center;
+      transition: all var(--transition);
+      cursor: pointer;
+    }
+
+    .order-item:hover {
+      background: rgba(230, 169, 52, 0.05);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(23, 20, 15, 0.1);
+    }
+
+    .order-image {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, var(--cream) 0%, rgba(91, 26, 26, 0.05) 100%);
+      border-radius: 6px;
+      display: grid;
+      place-items: center;
+      font-size: 2rem;
+    }
+
+    .order-details {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .order-number {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .order-date {
+      font-size: 0.85rem;
+      color: var(--text-mid);
+    }
+
+    .order-items-count {
+      font-size: 0.8rem;
+      color: var(--text-light);
+    }
+
+    .order-status {
+      padding: 0.4rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      text-align: center;
+    }
+
+    .order-status.confirmed {
+      background: rgba(26, 87, 39, 0.1);
+      color: #1a5727;
+    }
+
+    .order-status.processing {
+      background: rgba(230, 169, 52, 0.1);
+      color: var(--mustard);
+    }
+
+    .order-status.shipped {
+      background: rgba(0, 123, 255, 0.1);
+      color: #007bff;
+    }
+
+    .order-status.delivered {
+      background: rgba(26, 87, 39, 0.1);
+      color: #1a5727;
+    }
+
+    .order-status.cancelled {
+      background: rgba(200, 52, 43, 0.1);
+      color: var(--red);
+    }
+
+    .order-total {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--mustard);
+      text-align: right;
+    }
+
+    /* PASSWORD SECTION */
+    .password-form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .password-form .form-group {
+      grid-column: span 1;
+    }
+
+    .password-form .form-group.full-width {
+      grid-column: 1 / -1;
+    }
+
+    /* ADDRESSES SECTION */
+    .addresses-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .address-card {
+      padding: 1.5rem;
+      background: var(--cream);
+      border-radius: 8px;
+      border: 2px solid transparent;
+      transition: all var(--transition);
+      cursor: pointer;
+    }
+
+    .address-card:hover {
+      border-color: var(--mustard);
+      background: var(--white);
+    }
+
+    .address-card.default {
+      border-color: var(--mustard);
+      background: rgba(230, 169, 52, 0.05);
+    }
+
+    .address-type {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-light);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.5rem;
+    }
+
+    .address-name {
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 0.5rem;
+    }
+
+    .address-text {
+      font-size: 0.9rem;
+      color: var(--text-mid);
+      line-height: 1.4;
+      margin-bottom: 1rem;
+    }
+
+    .address-actions {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .address-btn {
+      padding: 0.4rem 0.8rem;
+      border: 1px solid var(--border);
+      background: transparent;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+
+    .address-btn:hover {
+      background: var(--mustard);
+      border-color: var(--mustard);
+      color: var(--ink);
+    }
+
+    .address-btn.primary {
+      background: var(--mustard);
+      border-color: var(--mustard);
+      color: var(--ink);
+    }
+
+    .btn-add-address {
+      padding: 1rem;
+      background: transparent;
+      border: 2px dashed var(--border);
+      border-radius: 8px;
+      color: var(--text-mid);
+      cursor: pointer;
+      transition: all var(--transition);
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .btn-add-address:hover {
+      border-color: var(--mustard);
+      background: rgba(230, 169, 52, 0.05);
+      color: var(--mustard);
+    }
+
+    /* LOADING & EMPTY STATES */
+    .loading {
+      text-align: center;
+      padding: 3rem;
+      color: var(--text-light);
+    }
+
+    .loading-spinner {
+      width: 32px;
+      height: 32px;
+      border: 3px solid rgba(91, 26, 26, 0.2);
+      border-top-color: var(--oxblood);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin: 0 auto 1rem;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 3rem;
+      color: var(--text-light);
+    }
+
+    .empty-state-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    /* MODAL */
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(23, 20, 15, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s;
+    }
+
+    .modal.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-content {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 2rem;
+      max-width: 500px;
+      width: 90%;
+      max-height: 90vh;
+      overflow-y: auto;
+      transform: scale(0.9);
+      transition: transform 0.3s;
+    }
+
+    .modal.show .modal-content {
+      transform: scale(1);
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .modal-title {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin: 0;
+    }
+
+    .modal-close {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--text-mid);
+      padding: 0.5rem;
+      border-radius: 50%;
+      transition: all var(--transition);
+    }
+
+    .modal-close:hover {
+      background: var(--cream);
+      color: var(--ink);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .account-container {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .account-sidebar {
+        position: static;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .account-page {
+        padding: 1rem;
+      }
+
+      .account-section {
+        padding: 1.5rem;
+      }
+
+      .profile-form,
+      .password-form {
+        grid-template-columns: 1fr;
+      }
+
+      .order-item {
+        grid-template-columns: 60px 1fr;
+        gap: 0.8rem;
+      }
+
+      .order-status,
+      .order-total {
+        grid-column: span 2;
+        text-align: left;
+        margin-top: 0.5rem;
+      }
+
+      .addresses-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+
+      .account-sidebar {
+        padding: 1.5rem;
+      }
+
+      .account-user {
+        padding-bottom: 1.5rem;
+        margin-bottom: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="account-page">
+    <div class="account-container">
+      
+      <!-- SIDEBAR -->
+      <div class="account-sidebar">
+        <div class="account-user">
+          <div class="account-avatar" id="userAvatar">U</div>
+          <div class="account-name" id="userName">Loading...</div>
+          <div class="account-email" id="userEmail">Loading...</div>
+        </div>
+
+        <nav class="account-nav">
+          <div class="nav-item active" onclick="showSection('profile', event)">
+            <span class="nav-icon">👤</span>
+            <span class="nav-text">Profile</span>
+          </div>
+          <div class="nav-item" onclick="showSection('orders', event)">
+            <span class="nav-icon">📦</span>
+            <span class="nav-text">Order History</span>
+          </div>
+          <div class="nav-item" onclick="showSection('addresses', event)">
+            <span class="nav-icon">📍</span>
+            <span class="nav-text">Addresses</span>
+          </div>
+          <div class="nav-item" onclick="showSection('password', event)">
+            <span class="nav-icon">🔒</span>
+            <span class="nav-text">Password</span>
+          </div>
+        </nav>
+
+        <button class="logout-btn" onclick="logout()">Logout</button>
+      </div>
+
+      <!-- MAIN CONTENT -->
+      <div class="account-main">
+        
+        <!-- PROFILE SECTION -->
+        <div class="account-section" id="profileSection">
+          <div class="section-header">
+            <div>
+              <h2 class="section-title">Profile Information</h2>
+              <p class="section-subtitle">Update your personal details</p>
+            </div>
+            <div class="section-actions">
+              <button class="btn-save" onclick="saveProfile()">Save Changes</button>
+            </div>
+          </div>
+
+          <form class="profile-form" id="profileForm">
+            <div class="form-group">
+              <label class="form-label" for="firstName">First Name</label>
+              <input type="text" id="firstName" class="form-input" placeholder="John" />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="lastName">Last Name</label>
+              <input type="text" id="lastName" class="form-input" placeholder="Doe" />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="email">Email Address</label>
+              <input type="email" id="email" class="form-input" placeholder="john.doe@example.com" />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="phone">Phone Number</label>
+              <input type="tel" id="phone" class="form-input" placeholder="+2348012345678" />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="school">School</label>
+              <select id="school" class="form-select">
+                <option value="">Select your school</option>
+              </select>
+            </div>
+          </form>
+        </div>
+
+        <!-- ORDERS SECTION -->
+        <div class="account-section" id="ordersSection" style="display: none;">
+          <div class="section-header">
+            <div>
+              <h2 class="section-title">Order History</h2>
+              <p class="section-subtitle">Track your orders and view past purchases</p>
+            </div>
+          </div>
+
+          <div class="orders-list" id="ordersList">
+            <div class="loading">
+              <div class="loading-spinner"></div>
+              <p>Loading orders...</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ADDRESSES SECTION -->
+        <div class="account-section" id="addressesSection" style="display: none;">
+          <div class="section-header">
+            <div>
+              <h2 class="section-title">Delivery Addresses</h2>
+              <p class="section-subtitle">Manage your delivery addresses</p>
+            </div>
+            <div class="section-actions">
+              <button class="btn-add-address" onclick="showAddressModal()">
+                + Add New Address
+              </button>
+            </div>
+          </div>
+
+          <div class="addresses-grid" id="addressesGrid">
+            <div class="loading">
+              <div class="loading-spinner"></div>
+              <p>Loading addresses...</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- PASSWORD SECTION -->
+        <div class="account-section" id="passwordSection" style="display: none;">
+          <div class="section-header">
+            <div>
+              <h2 class="section-title">Change Password</h2>
+              <p class="section-subtitle">Update your account password</p>
+            </div>
+            <div class="section-actions">
+              <button class="btn-save" onclick="changePassword()">Update Password</button>
+            </div>
+          </div>
+
+          <form class="password-form" id="passwordForm">
+            <div class="form-group">
+              <label class="form-label" for="currentPassword">Current Password</label>
+              <input type="password" id="currentPassword" class="form-input" placeholder="••••••••" />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="newPassword">New Password</label>
+              <input type="password" id="newPassword" class="form-input" placeholder="••••••••" />
+            </div>
+
+            <div class="form-group full-width">
+              <label class="form-label" for="confirmPassword">Confirm New Password</label>
+              <input type="password" id="confirmPassword" class="form-input" placeholder="••••••••" />
+            </div>
+          </form>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ADDRESS MODAL -->
+  <div class="modal" id="addressModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="addressModalTitle">Add New Address</h3>
+        <button class="modal-close" onclick="closeAddressModal()">&times;</button>
+      </div>
+
+      <form class="profile-form" id="addressForm">
+        <div class="form-group">
+          <label class="form-label" for="addressType">Address Type</label>
+          <select id="addressType" class="form-select">
+            <option value="home">Home</option>
+            <option value="work">Work</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="addressLabel">Label (Optional)</label>
+          <input type="text" id="addressLabel" class="form-input" placeholder="e.g. My Apartment" />
+        </div>
+
+        <div class="form-group full-width">
+          <label class="form-label" for="modalAddress">Street Address</label>
+          <input type="text" id="modalAddress" class="form-input" placeholder="123 Main Street" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="modalCity">City</label>
+          <input type="text" id="modalCity" class="form-input" placeholder="Lagos" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="modalState">State</label>
+          <select id="modalState" class="form-select">
+            <option value="">Select State</option>
+            <option value="lagos">Lagos</option>
+            <option value="abuja">Abuja (FCT)</option>
+            <option value="ogun">Ogun</option>
+            <option value="oyo">Oyo</option>
+            <option value="rivers">Rivers</option>
+            <option value="kano">Kano</option>
+            <option value="kaduna">Kaduna</option>
+            <option value="delta">Delta</option>
+            <option value="edo">Edo</option>
+            <option value="anambra">Anambra</option>
+            <option value="enugu">Enugu</option>
+            <option value="abia">Abia</option>
+            <option value="akwa-ibom">Akwa Ibom</option>
+            <option value="bauchi">Bauchi</option>
+            <option value="bayelsa">Bayelsa</option>
+            <option value="benue">Benue</option>
+            <option value="borno">Borno</option>
+            <option value="cross-river">Cross River</option>
+            <option value="ebonyi">Ebonyi</option>
+            <option value="ekiti">Ekiti</option>
+            <option value="gombe">Gombe</option>
+            <option value="imo">Imo</option>
+            <option value="jigawa">Jigawa</option>
+            <option value="kebbi">Kebbi</option>
+            <option value="kogi">Kogi</option>
+            <option value="kwara">Kwara</option>
+            <option value="nasarawa">Nasarawa</option>
+            <option value="niger">Niger</option>
+            <option value="ondo">Ondo</option>
+            <option value="osun">Osun</option>
+            <option value="plateau">Plateau</option>
+            <option value="sokoto">Sokoto</option>
+            <option value="taraba">Taraba</option>
+            <option value="yobe">Yobe</option>
+            <option value="zamfara">Zamfara</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="modalPostalCode">Postal Code</label>
+          <input type="text" id="modalPostalCode" class="form-input" placeholder="100001" />
+        </div>
+
+        <div class="form-group full-width">
+          <label class="form-label" for="modalPhone">Phone Number</label>
+          <input type="tel" id="modalPhone" class="form-input" placeholder="+2348012345678" />
+        </div>
+
+        <div class="form-group full-width" style="margin-top: 1rem;">
+          <button type="submit" class="btn-save" style="width: 100%;" onclick="saveAddress(event)">Save Address</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- INCLUDE UMA CLIENT -->
+  <script src="universe-merch-backend/public/uma-client.js"></script>
+  <script>
+    UMA.init({ apiUrl: 'http://localhost:4000/api' });
+
+    let currentUser = null;
+    let currentSection = 'profile';
+    let currentAddresses = [];
+    let editingAddressId = null;
+
+    async function loadSchools() {
+      try {
+        const schools = await UMA.schools.list();
+        const schoolSelect = document.getElementById('school');
+        schoolSelect.innerHTML = '<option value="">Select your school</option>';
+
+        const universities = schools.filter(school => school.type === 'university');
+        const highSchools = schools.filter(school => school.type === 'high_school');
+
+        if (universities.length) {
+          const uniGroup = document.createElement('optgroup');
+          uniGroup.label = 'Universities';
+          universities.forEach(school => {
+            const option = document.createElement('option');
+            option.value = school.id;
+            option.textContent = `${school.name} (${school.code})`;
+            uniGroup.appendChild(option);
+          });
+          schoolSelect.appendChild(uniGroup);
+        }
+
+        if (highSchools.length) {
+          const highGroup = document.createElement('optgroup');
+          highGroup.label = 'High Schools';
+          highSchools.forEach(school => {
+            const option = document.createElement('option');
+            option.value = school.id;
+            option.textContent = `${school.name} (${school.code})`;
+            highGroup.appendChild(option);
+          });
+          schoolSelect.appendChild(highGroup);
+        }
+      } catch (error) {
+        console.warn('Unable to load school list:', error);
+      }
+    }
+
+    // Check authentication
+    async function checkAuth() {
+      const token = localStorage.getItem('UMA_TOKEN');
+      if (!token) {
+        window.location.href = 'login.html';
+        return;
+      }
+
+      await loadSchools();
+      await loadUserProfile();
+    }
+
+    // Load user profile
+    async function loadUserProfile() {
+      try {
+        const user = await UMA.auth.getMe();
+        currentUser = user;
+
+        // Update UI
+        document.getElementById('userAvatar').textContent = user.first_name.charAt(0);
+        document.getElementById('userName').textContent = `${user.first_name} ${user.last_name}`;
+        document.getElementById('userEmail').textContent = user.email;
+
+        // Populate form
+        document.getElementById('firstName').value = user.first_name || '';
+        document.getElementById('lastName').value = user.last_name || '';
+        document.getElementById('email').value = user.email || '';
+        document.getElementById('phone').value = user.phone || '';
+        document.getElementById('school').value = user.school_id || '';
+      } catch (error) {
+        console.error('Error loading user profile:', error);
+        localStorage.removeItem('UMA_TOKEN');
+        window.location.href = 'login.html';
+      }
+    }
+
+    // Show section
+    function showSection(sectionName, event) {
+      // Hide all sections
+      document.querySelectorAll('.account-section').forEach(section => {
+        section.style.display = 'none';
+      });
+
+      // Remove active class from nav items
+      document.querySelectorAll('.nav-item').forEach(item => {
+        item.classList.remove('active');
+      });
+
+      // Show selected section
+      document.getElementById(sectionName + 'Section').style.display = 'block';
+
+      // Add active class to nav item
+      if (event && event.currentTarget) {
+        event.currentTarget.classList.add('active');
+      }
+
+      currentSection = sectionName;
+
+      // Load section data
+      if (sectionName === 'orders') {
+        loadOrders();
+      } else if (sectionName === 'addresses') {
+        loadAddresses();
+      }
+    }
+
+    // Load addresses
+    async function loadAddresses() {
+      const addressesGrid = document.getElementById('addressesGrid');
+
+      try {
+        const addresses = await UMA.addresses.list();
+        currentAddresses = addresses;
+        
+        if (addresses.length === 0) {
+          addressesGrid.innerHTML = '<div class="empty-state"><div class="empty-state-icon">📍</div><p>No addresses saved yet</p></div>';
+          return;
+        }
+
+        addressesGrid.innerHTML = addresses.map(addr => `
+          <div class="address-card ${addr.is_default ? 'default' : ''}">
+            <div class="address-type">${addr.type} ${addr.is_default ? '(Default)' : ''}</div>
+            <div class="address-name">${addr.label || addr.type}</div>
+            <div class="address-text">
+              ${addr.address}<br>
+              ${addr.city}, ${addr.state}${addr.postal_code ? ` ${addr.postal_code}` : ''}<br>
+              ${addr.phone || ''}
+            </div>
+            <div class="address-actions">
+              <button class="address-btn" onclick="editAddress('${addr.id}')">Edit</button>
+              ${!addr.is_default ? '<button class="address-btn primary" onclick="setDefaultAddress(\'' + addr.id + '\')">Set Default</button>' : ''}
+              <button class="address-btn" onclick="deleteAddress('${addr.id}')">Delete</button>
+            </div>
+          </div>
+        `).join('');
+
+      } catch (error) {
+        console.error('Error loading addresses:', error);
+        currentAddresses = [];
+        // Fallback to mock data for testing
+        const mockAddresses = [
+          {
+            id: 'addr001',
+            type: 'home',
+            label: 'My Home',
+            address: '123 Main Street, Lagos',
+            city: 'Lagos',
+            state: 'Lagos',
+            phone: '+2348012345678',
+            is_default: true
+          }
+        ];
+
+        addressesGrid.innerHTML = mockAddresses.map(addr => `
+          <div class="address-card ${addr.is_default ? 'default' : ''}">
+            <div class="address-type">${addr.type} ${addr.is_default ? '(Default)' : ''}</div>
+            <div class="address-name">${addr.label}</div>
+            <div class="address-text">
+              ${addr.address}<br>
+              ${addr.city}, ${addr.state}<br>
+              ${addr.phone}
+            </div>
+            <div class="address-actions">
+              <button class="address-btn" onclick="editAddress('${addr.id}')">Edit</button>
+              ${!addr.is_default ? '<button class="address-btn primary" onclick="setDefaultAddress(\'' + addr.id + '\')">Set Default</button>' : ''}
+              <button class="address-btn" onclick="deleteAddress('${addr.id}')">Delete</button>
+            </div>
+          </div>
+        `).join('');
+      }
+    }
+
+    // Save profile
+    async function saveProfile() {
+      const formData = {
+        first_name: document.getElementById('firstName').value.trim(),
+        last_name: document.getElementById('lastName').value.trim(),
+        phone: document.getElementById('phone').value.trim(),
+        school_id: document.getElementById('school').value || null
+      };
+
+      // Validation
+      if (!formData.first_name || !formData.last_name) {
+        alert('Please fill in your first and last name');
+        return;
+      }
+
+      try {
+        const updatedUser = await UMA.auth.updateProfile(formData);
+        alert('Profile updated successfully!');
+        loadUserProfile(); // Refresh the display
+      } catch (error) {
+        console.error('Error updating profile:', error);
+        alert('Error updating profile. Please try again.');
+      }
+    }
+
+    // Load orders
+    async function loadOrders() {
+      const ordersList = document.getElementById('ordersList');
+
+      try {
+        const orders = await UMA.orders.list();
+        
+        if (orders.length === 0) {
+          ordersList.innerHTML = '<div class="empty-state"><div class="empty-state-icon">📦</div><p>No orders found</p></div>';
+          return;
+        }
+
+        ordersList.innerHTML = orders.map(order => {
+          const statusClass = order.order_status || 'pending';
+          const statusText = statusClass.charAt(0).toUpperCase() + statusClass.slice(1);
+          
+          return `
+            <div class="order-item" onclick="viewOrder('${order.order_number}')">
+              <div class="order-image">📦</div>
+              <div class="order-details">
+                <div class="order-number">${order.order_number}</div>
+                <div class="order-date">${new Date(order.created_at).toLocaleDateString()}</div>
+                <div class="order-items-count">Order details</div>
+              </div>
+              <div class="order-status ${statusClass}">${statusText}</div>
+              <div class="order-total">₦${order.total_amount.toLocaleString()}</div>
+            </div>
+          `;
+        }).join('');
+
+      } catch (error) {
+        console.error('Error loading orders:', error);
+        // Fallback to mock data for testing
+        const mockOrders = [
+          {
+            order_number: 'UMA-001',
+            order_status: 'delivered',
+            total_amount: 25000,
+            created_at: '2024-01-15'
+          },
+          {
+            order_number: 'UMA-002',
+            order_status: 'shipped',
+            total_amount: 15000,
+            created_at: '2024-01-10'
+          }
+        ];
+
+        ordersList.innerHTML = mockOrders.map(order => `
+          <div class="order-item" onclick="viewOrder('${order.order_number}')">
+            <div class="order-image">📦</div>
+            <div class="order-details">
+              <div class="order-number">${order.order_number}</div>
+              <div class="order-date">${new Date(order.created_at).toLocaleDateString()}</div>
+              <div class="order-items-count">Order details</div>
+            </div>
+            <div class="order-status ${order.order_status}">${order.order_status}</div>
+            <div class="order-total">₦${order.total_amount.toLocaleString()}</div>
+          </div>
+        `).join('');
+      }
+    }
+
+    // View order
+    function viewOrder(orderId) {
+      window.location.href = `order-tracking.html?order_id=${orderId}`;
+    }
+
+    // Load addresses
+    async function loadAddresses() {
+      const addressesGrid = document.getElementById('addressesGrid');
+
+      try {
+        const addresses = await UMA.addresses.list();
+        
+        if (addresses.length === 0) {
+          addressesGrid.innerHTML = '<div class="empty-state"><div class="empty-state-icon">📍</div><p>No addresses saved yet</p></div>';
+          return;
+        }
+
+        addressesGrid.innerHTML = addresses.map(addr => `
+          <div class="address-card ${addr.is_default ? 'default' : ''}">
+            <div class="address-type">${addr.type} ${addr.is_default ? '(Default)' : ''}</div>
+            <div class="address-name">${addr.label || addr.type}</div>
+            <div class="address-text">
+              ${addr.address}<br>
+              ${addr.city}, ${addr.state}${addr.postal_code ? ` ${addr.postal_code}` : ''}<br>
+              ${addr.phone || ''}
+            </div>
+            <div class="address-actions">
+              <button class="address-btn" onclick="editAddress('${addr.id}')">Edit</button>
+              ${!addr.is_default ? '<button class="address-btn primary" onclick="setDefaultAddress(\'' + addr.id + '\')">Set Default</button>' : ''}
+              <button class="address-btn" onclick="deleteAddress('${addr.id}')">Delete</button>
+            </div>
+          </div>
+        `).join('');
+
+      } catch (error) {
+        console.error('Error loading addresses:', error);
+        // Fallback to mock data for testing
+        const mockAddresses = [
+          {
+            id: 'addr001',
+            type: 'home',
+            label: 'My Home',
+            address: '123 Main Street, Lagos',
+            city: 'Lagos',
+            state: 'Lagos',
+            phone: '+2348012345678',
+            is_default: true
+          }
+        ];
+
+        addressesGrid.innerHTML = mockAddresses.map(addr => `
+          <div class="address-card ${addr.is_default ? 'default' : ''}">
+            <div class="address-type">${addr.type} ${addr.is_default ? '(Default)' : ''}</div>
+            <div class="address-name">${addr.label}</div>
+            <div class="address-text">
+              ${addr.address}<br>
+              ${addr.city}, ${addr.state}<br>
+              ${addr.phone}
+            </div>
+            <div class="address-actions">
+              <button class="address-btn" onclick="editAddress('${addr.id}')">Edit</button>
+              ${!addr.is_default ? '<button class="address-btn primary" onclick="setDefaultAddress(\'' + addr.id + '\')">Set Default</button>' : ''}
+              <button class="address-btn" onclick="deleteAddress('${addr.id}')">Delete</button>
+            </div>
+          </div>
+        `).join('');
+      }
+    }
+
+    // Address modal functions
+    function showAddressModal(addressId = null) {
+      const modal = document.getElementById('addressModal');
+      const form = document.getElementById('addressForm');
+      editingAddressId = addressId;
+
+      if (addressId) {
+        document.getElementById('addressModalTitle').textContent = 'Edit Address';
+        const address = currentAddresses.find(item => item.id === addressId);
+        if (address) {
+          document.getElementById('addressType').value = address.type;
+          document.getElementById('addressLabel').value = address.label || '';
+          document.getElementById('modalAddress').value = address.address || '';
+          document.getElementById('modalCity').value = address.city || '';
+          document.getElementById('modalState').value = address.state || '';
+          document.getElementById('modalPostalCode').value = address.postal_code || '';
+          document.getElementById('modalPhone').value = address.phone || '';
+        }
+      } else {
+        document.getElementById('addressModalTitle').textContent = 'Add New Address';
+        editingAddressId = null;
+        form.reset();
+      }
+
+      modal.classList.add('show');
+    }
+
+    function closeAddressModal() {
+      document.getElementById('addressModal').classList.remove('show');
+    }
+
+    function saveAddress(event) {
+      event.preventDefault();
+      
+      const formData = {
+        type: document.getElementById('addressType').value,
+        label: document.getElementById('addressLabel').value.trim() || null,
+        address: document.getElementById('modalAddress').value.trim(),
+        city: document.getElementById('modalCity').value.trim(),
+        state: document.getElementById('modalState').value.trim(),
+        postal_code: document.getElementById('modalPostalCode').value.trim() || null,
+        phone: document.getElementById('modalPhone').value.trim() || null,
+        is_default: false
+      };
+
+      // Validation
+      if (!formData.type || !formData.address || !formData.city || !formData.state) {
+        alert('Please fill in all required address fields');
+        return;
+      }
+
+      if (editingAddressId) {
+        UMA.addresses.update(editingAddressId, formData)
+          .then(() => {
+            alert('Address updated successfully!');
+            closeAddressModal();
+            loadAddresses();
+          })
+          .catch(error => {
+            console.error('Error updating address:', error);
+            alert('Error updating address. Please try again.');
+          });
+      } else {
+        UMA.addresses.create(formData)
+          .then(() => {
+            alert('Address added successfully!');
+            closeAddressModal();
+            loadAddresses();
+          })
+          .catch(error => {
+            console.error('Error saving address:', error);
+            alert('Error saving address. Please try again.');
+          });
+      }
+    }
+
+    function editAddress(addressId) {
+      showAddressModal(addressId);
+    }
+
+    function deleteAddress(addressId) {
+      if (confirm('Delete this address?')) {
+        UMA.addresses.delete(addressId)
+          .then(() => {
+            alert('Address deleted successfully');
+            loadAddresses();
+          })
+          .catch(error => {
+            console.error('Error deleting address:', error);
+            alert('Error deleting address. Please try again.');
+          });
+      }
+    }
+
+    function setDefaultAddress(addressId) {
+      UMA.addresses.update(addressId, { is_default: true })
+        .then(() => {
+          alert('Default address updated');
+          loadAddresses();
+        })
+        .catch(error => {
+          console.error('Error setting default address:', error);
+          alert('Error updating default address. Please try again.');
+        });
+    }
+
+    // Change password
+    async function changePassword() {
+      const currentPassword = document.getElementById('currentPassword').value;
+      const newPassword = document.getElementById('newPassword').value;
+      const confirmPassword = document.getElementById('confirmPassword').value;
+
+      if (!currentPassword || !newPassword || !confirmPassword) {
+        alert('Please fill in all password fields');
+        return;
+      }
+
+      if (newPassword !== confirmPassword) {
+        alert('New passwords do not match');
+        return;
+      }
+
+      if (newPassword.length < 6) {
+        alert('Password must be at least 6 characters');
+        return;
+      }
+
+      try {
+        await UMA.auth.changePassword(currentPassword, newPassword);
+        alert('Password updated successfully!');
+        document.getElementById('passwordForm').reset();
+      } catch (error) {
+        console.error('Error changing password:', error);
+        alert(error.message || 'Error updating password. Please try again.');
+      }
+    }
+
+    // Logout
+    function logout() {
+      localStorage.removeItem('UMA_TOKEN');
+      localStorage.removeItem('UMA_USER');
