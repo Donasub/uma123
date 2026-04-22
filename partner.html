@@ -1,0 +1,1556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Partner With Us — Universe Merch Africa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,900;1,9..144,300;1,9..144,400;1,9..144,600&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ═══════════════════════════════════════════
+       DESIGN TOKENS
+    ═══════════════════════════════════════════ */
+    :root {
+      --ink:          #17140f;
+      --ink-deep:     #0c0a07;
+      --oxblood:      #5b1a1a;
+      --oxblood-2:    #3d0f0f;
+      --oxblood-deep: #2a0a0a;
+      --mustard:      #e6a934;
+      --mustard-light:#f0c76b;
+      --mustard-pale: #f5e1b3;
+      --cream:        #f4ede0;
+      --cream-2:      #ebe0cb;
+      --white:        #ffffff;
+      --text-dark:    #17140f;
+      --text-mid:     #4a4238;
+      --text-light:   #8b8372;
+      --border:       rgba(230,169,52,0.25);
+      --shadow-sm:    0 2px 12px rgba(23,20,15,0.08);
+      --shadow-md:    0 8px 32px rgba(23,20,15,0.14);
+      --shadow-lg:    0 20px 60px rgba(23,20,15,0.22);
+      --transition:   0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      --font-display: 'Fraunces', Georgia, serif;
+      --font-body:    'Jost', 'Helvetica Neue', sans-serif;
+      --olive:        #3a4a1f;
+    }
+
+    /* ═══════════════════════════════════════════
+       RESET & BASE
+    ═══════════════════════════════════════════ */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: var(--font-body);
+      background: var(--cream);
+      color: var(--text-dark);
+      overflow-x: hidden;
+      line-height: 1.7;
+    }
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+    .container { width: min(1200px, 92vw); margin-inline: auto; }
+
+    /* SCROLL REVEAL */
+    .reveal        { opacity: 0; transform: translateY(32px); transition: opacity .8s ease, transform .8s ease; }
+    .reveal.visible{ opacity: 1; transform: translateY(0); }
+    .reveal-left   { opacity: 0; transform: translateX(-32px); transition: opacity .8s ease, transform .8s ease; }
+    .reveal-left.visible  { opacity: 1; transform: translateX(0); }
+    .reveal-right  { opacity: 0; transform: translateX(32px); transition: opacity .8s ease, transform .8s ease; }
+    .reveal-right.visible { opacity: 1; transform: translateX(0); }
+    .delay-1 { transition-delay: .1s; }
+    .delay-2 { transition-delay: .2s; }
+    .delay-3 { transition-delay: .35s; }
+    .delay-4 { transition-delay: .5s; }
+
+    /* ORNAMENTS */
+    .ornament { display: flex; align-items: center; gap: 14px; margin-bottom: 1.2rem; }
+    .ornament-line { height: 1px; width: 40px; background: linear-gradient(90deg, transparent, var(--mustard)); }
+    .ornament-line.right { background: linear-gradient(90deg, var(--mustard), transparent); }
+    .ornament-text {
+      font-family: var(--font-body);
+      font-size: 0.7rem; font-weight: 600;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--mustard);
+    }
+    .section-label {
+      display: inline-flex; align-items: center; gap: 12px;
+      font-family: var(--font-body);
+      font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 0.24em; text-transform: uppercase;
+      color: var(--mustard); margin-bottom: 1rem;
+    }
+    .section-label::before { content: ''; width: 28px; height: 1px; background: var(--mustard); }
+
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ═══════════════════════════════════════════
+       NAVIGATION
+    ═══════════════════════════════════════════ */
+    nav.site-nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      transition: background var(--transition), box-shadow var(--transition), padding var(--transition);
+      padding: 1.6rem 0;
+    }
+    nav.site-nav.scrolled {
+      background: rgba(244,237,224,0.96);
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      box-shadow: 0 1px 0 var(--border), var(--shadow-sm);
+      padding: 1rem 0;
+    }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { display: flex; align-items: center; gap: 12px; }
+    .logo-mark {
+      width: 38px; height: 38px; flex-shrink: 0; border-radius: 50%;
+      background: var(--oxblood); color: var(--cream);
+      display: grid; place-items: center;
+      font-family: var(--font-display); font-weight: 900; font-size: 1.1rem;
+      border: 1.5px solid rgba(244,237,224,0.4);
+      transition: border-color var(--transition);
+    }
+    nav.site-nav.scrolled .logo-mark { border-color: var(--ink); }
+    .logo-text {
+      font-family: var(--font-display); font-size: 1.3rem; font-weight: 600;
+      color: var(--cream); letter-spacing: 0.01em; line-height: 1;
+      transition: color var(--transition);
+    }
+    nav.site-nav.scrolled .logo-text { color: var(--ink); }
+    .logo-text em { font-style: italic; color: var(--mustard); font-weight: 400; }
+    .logo-text span {
+      display: block; font-size: 0.55rem;
+      font-family: var(--font-body); letter-spacing: 0.28em; text-transform: uppercase;
+      color: var(--mustard); font-weight: 500; margin-top: 4px;
+    }
+    .nav-links { display: flex; align-items: center; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.75rem; font-weight: 500;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--cream); transition: color var(--transition); position: relative;
+    }
+    nav.site-nav.scrolled .nav-links a { color: var(--ink); }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -4px; left: 0; right: 0;
+      height: 1px; background: var(--mustard);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform var(--transition);
+    }
+    .nav-links a:hover { color: var(--mustard); }
+    .nav-links a:hover::after { transform: scaleX(1); }
+    .nav-links a.active { color: var(--mustard); }
+    .nav-links a.active::after { transform: scaleX(1); }
+    .nav-cta {
+      background: var(--mustard); color: var(--ink) !important;
+      padding: 0.65rem 1.5rem; border-radius: 2px;
+      transition: all var(--transition) !important;
+      letter-spacing: 0.16em !important;
+    }
+    .nav-cta::after { display: none !important; }
+    .nav-cta:hover {
+      background: var(--cream) !important; color: var(--oxblood) !important;
+      transform: translateY(-1px);
+    }
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: pointer; padding: 4px; background: none; border: none;
+    }
+    .hamburger span {
+      display: block; width: 24px; height: 2px;
+      background: var(--cream); transition: all 0.3s; transform-origin: center;
+    }
+    nav.site-nav.scrolled .hamburger span { background: var(--ink); }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .mobile-menu {
+      display: none; position: fixed; inset: 0;
+      background: var(--oxblood-deep); z-index: 999;
+      flex-direction: column; align-items: center; justify-content: center;
+      gap: 2rem; opacity: 0; transition: opacity 0.35s;
+    }
+    .mobile-menu.open { display: flex; opacity: 1; }
+    .mobile-menu a {
+      font-family: var(--font-display); font-size: 2.2rem; font-weight: 500;
+      color: var(--cream); letter-spacing: 0.01em;
+    }
+    .mobile-menu a em { font-style: italic; color: var(--mustard); font-weight: 400; }
+    .mobile-menu a:hover { color: var(--mustard); }
+    .mobile-close {
+      position: absolute; top: 1.5rem; right: 1.5rem;
+      font-size: 1.5rem; cursor: pointer;
+      color: var(--cream); background: none; border: none;
+    }
+
+    /* ═══════════════════════════════════════════
+       HERO
+    ═══════════════════════════════════════════ */
+    .hero {
+      min-height: 100vh;
+      background: var(--ink-deep);
+      position: relative;
+      display: flex; align-items: center; overflow: hidden;
+    }
+    .hero-rays { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+    .ray {
+      position: absolute; top: -10%;
+      width: 2px; height: 130%;
+      background: linear-gradient(180deg, transparent 0%, rgba(230,169,52,0.12) 40%, rgba(230,169,52,0.06) 70%, transparent 100%);
+      transform-origin: top center;
+      animation: rayPulse 8s ease-in-out infinite;
+    }
+    .ray:nth-child(1) { left: 8%; transform: rotate(-16deg); animation-delay: 0s; }
+    .ray:nth-child(2) { left: 20%; transform: rotate(-9deg); animation-delay: 1.2s; width: 3px; }
+    .ray:nth-child(3) { left: 36%; transform: rotate(-3deg); animation-delay: 2.4s; }
+    .ray:nth-child(4) { left: 52%; transform: rotate(1deg); animation-delay: 0.6s; width: 4px; }
+    .ray:nth-child(5) { left: 66%; transform: rotate(7deg); animation-delay: 1.8s; }
+    .ray:nth-child(6) { left: 80%; transform: rotate(12deg); animation-delay: 3s; width: 3px; }
+    .ray:nth-child(7) { left: 92%; transform: rotate(16deg); animation-delay: 2.2s; }
+    @keyframes rayPulse { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+      opacity: 0.5; mix-blend-mode: overlay;
+    }
+    .hero::after {
+      content: ''; position: absolute;
+      top: -10%; left: 50%; transform: translateX(-50%);
+      width: 80vw; height: 70vh;
+      background: radial-gradient(ellipse at center, rgba(230,169,52,0.14) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative; z-index: 2;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 5rem; align-items: center;
+      padding: 8rem 0 5rem;
+    }
+    .hero-eyebrow {
+      display: flex; align-items: center; gap: 12px; margin-bottom: 1.8rem;
+      opacity: 0; animation: fadeSlideUp .8s .2s ease forwards;
+    }
+    .hero-eyebrow-line { width: 32px; height: 1px; background: var(--mustard); }
+    .hero-eyebrow-text {
+      font-size: 0.68rem; letter-spacing: 0.26em;
+      text-transform: uppercase; color: var(--mustard); font-weight: 600;
+    }
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.8rem, 5.2vw, 4.6rem);
+      font-weight: 500; line-height: 1.05;
+      color: var(--cream); margin-bottom: 1.4rem;
+      opacity: 0; animation: fadeSlideUp .9s .4s ease forwards;
+      letter-spacing: -0.015em;
+    }
+    .hero h1 em { font-style: italic; color: var(--mustard-light); font-weight: 300; }
+    .hero-quote {
+      font-family: var(--font-display);
+      font-style: italic; font-size: 1.08rem;
+      color: rgba(244,237,224,0.55);
+      margin-bottom: 2rem;
+      opacity: 0; animation: fadeSlideUp .9s .6s ease forwards;
+      border-left: 2px solid var(--mustard);
+      padding-left: 1.2rem; line-height: 1.55; max-width: 440px;
+    }
+    .hero-desc {
+      font-size: 1rem; color: rgba(244,237,224,0.72);
+      margin-bottom: 2.5rem; max-width: 460px; line-height: 1.75;
+      opacity: 0; animation: fadeSlideUp .9s .75s ease forwards;
+    }
+    .hero-actions {
+      display: flex; gap: 1rem; flex-wrap: wrap;
+      opacity: 0; animation: fadeSlideUp .9s .9s ease forwards;
+    }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--mustard); color: var(--ink);
+      padding: 0.95rem 2.1rem;
+      font-family: var(--font-body);
+      font-size: 0.76rem; font-weight: 600;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      border-radius: 2px; border: 2px solid var(--mustard);
+      cursor: pointer; position: relative; overflow: hidden;
+      transition: transform .2s, box-shadow var(--transition), background var(--transition);
+    }
+    .btn-primary::before {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 60%);
+      opacity: 0; transition: opacity var(--transition);
+    }
+    .btn-primary:hover::before { opacity: 1; }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(230,169,52,0.35); }
+    .btn-outline {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: transparent; color: var(--cream);
+      padding: 0.95rem 2.1rem;
+      font-family: var(--font-body);
+      font-size: 0.76rem; font-weight: 500;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      border-radius: 2px; border: 1px solid rgba(244,237,224,0.35);
+      cursor: pointer;
+      transition: border-color var(--transition), color var(--transition);
+    }
+    .btn-outline:hover { border-color: var(--mustard); color: var(--mustard); }
+
+    /* Hero stats card */
+    .hero-card {
+      background: var(--cream); color: var(--ink);
+      border-radius: 14px; padding: 2.8rem;
+      box-shadow: var(--shadow-lg);
+      opacity: 0; animation: fadeSlideUp 1s .5s ease forwards;
+      position: relative; overflow: hidden;
+    }
+    .hero-card::before {
+      content: ''; position: absolute; top: -40px; right: -40px;
+      width: 180px; height: 180px; border-radius: 50%;
+      border: 50px solid rgba(230,169,52,0.08);
+      pointer-events: none;
+    }
+    .hero-card-label {
+      font-size: 0.65rem; letter-spacing: 0.24em; text-transform: uppercase;
+      color: var(--mustard); font-weight: 600; margin-bottom: 2rem;
+      display: inline-flex; align-items: center; gap: 10px;
+    }
+    .hero-card-label::before { content: ''; width: 22px; height: 1px; background: var(--mustard); }
+    .stat-row {
+      display: flex; justify-content: space-between; align-items: baseline;
+      padding: 1.1rem 0; border-bottom: 1px solid var(--border);
+    }
+    .stat-row:last-child { border-bottom: none; padding-bottom: 0; }
+    .stat-row:first-of-type { padding-top: 0; }
+    .stat-k {
+      font-family: var(--font-display);
+      font-size: 2rem; font-weight: 600; color: var(--ink);
+    }
+    .stat-k em { font-style: italic; color: var(--oxblood); font-weight: 400; font-size: 1.2rem; }
+    .stat-v {
+      font-size: 0.72rem; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--text-mid);
+      text-align: right; line-height: 1.4;
+    }
+
+    /* Scroll indicator */
+    .hero-scroll {
+      position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      color: rgba(244,237,224,0.45);
+      font-size: 0.6rem; letter-spacing: 0.22em; text-transform: uppercase;
+      animation: scrollPulse 2.5s ease-in-out infinite; z-index: 10;
+    }
+    .scroll-line {
+      width: 1px; height: 40px;
+      background: linear-gradient(180deg, rgba(230,169,52,0.6), transparent);
+    }
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.4; transform: translateX(-50%) translateY(0); }
+      50%      { opacity: 0.95; transform: translateX(-50%) translateY(4px); }
+    }
+
+    /* ═══════════════════════════════════════════
+       MARQUEE STRIP
+    ═══════════════════════════════════════════ */
+    .strip {
+      background: var(--mustard);
+      padding: 1.4rem 0; overflow: hidden;
+      border-top: 1px solid var(--ink);
+      border-bottom: 1px solid var(--ink);
+    }
+    .strip-inner {
+      display: flex; gap: 4rem;
+      animation: stripScroll 32s linear infinite;
+      white-space: nowrap; width: max-content;
+    }
+    .strip-item {
+      display: flex; align-items: center; gap: 1rem;
+      font-family: var(--font-display);
+      font-size: 1.05rem; font-style: italic; font-weight: 500;
+      color: var(--ink);
+    }
+    .strip-dot {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: var(--oxblood); flex-shrink: 0;
+    }
+    @keyframes stripScroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    /* ═══════════════════════════════════════════
+       WHY PARTNER (benefits grid)
+    ═══════════════════════════════════════════ */
+    .benefits {
+      padding: 7rem 0; background: var(--cream);
+      position: relative; overflow: hidden;
+    }
+    .benefits::before {
+      content: ''; position: absolute; top: -80px; right: -80px;
+      width: 320px; height: 320px; border-radius: 50%;
+      border: 60px solid rgba(230,169,52,0.06);
+    }
+    .benefits::after {
+      content: ''; position: absolute; bottom: -60px; left: -60px;
+      width: 240px; height: 240px; border-radius: 50%;
+      border: 50px solid rgba(91,26,26,0.04);
+    }
+    .benefits-head {
+      text-align: center; max-width: 700px; margin: 0 auto 4.5rem;
+      position: relative; z-index: 2;
+    }
+    .benefits-head .section-label { justify-content: center; }
+    .benefits-head h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 4vw, 3.4rem);
+      font-weight: 500; line-height: 1.1;
+      color: var(--ink); margin-bottom: 1.2rem;
+      letter-spacing: -0.01em;
+    }
+    .benefits-head h2 em { font-style: italic; color: var(--oxblood); font-weight: 300; }
+    .benefits-head p {
+      font-size: 1.02rem; color: var(--text-mid);
+      line-height: 1.7; max-width: 540px; margin: 0 auto;
+    }
+    .benefits-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;
+      position: relative; z-index: 2;
+    }
+    .benefit {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: 10px; padding: 2.5rem;
+      position: relative; overflow: hidden;
+      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+    }
+    .benefit:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--mustard);
+    }
+    .benefit-icon {
+      width: 50px; height: 50px; border-radius: 50%;
+      background: var(--mustard); color: var(--ink);
+      display: grid; place-items: center;
+      font-family: var(--font-display); font-weight: 900; font-size: 1.3rem;
+      margin-bottom: 1.3rem;
+    }
+    .benefit h4 {
+      font-family: var(--font-display);
+      font-size: 1.35rem; font-weight: 600;
+      color: var(--ink); line-height: 1.2;
+      margin-bottom: 0.7rem; letter-spacing: -0.005em;
+    }
+    .benefit p { font-size: 0.92rem; color: var(--text-mid); line-height: 1.65; }
+
+    /* ═══════════════════════════════════════════
+       HOW IT WORKS (process for partners)
+    ═══════════════════════════════════════════ */
+    .process {
+      padding: 7rem 0;
+      background: var(--ink); color: var(--cream);
+      position: relative; overflow: hidden;
+    }
+    .process::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at top right, rgba(230,169,52,0.12) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .process::after {
+      content: ''; position: absolute; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      opacity: 0.5; mix-blend-mode: overlay; pointer-events: none;
+    }
+    .process-head {
+      text-align: center; max-width: 700px;
+      margin: 0 auto 4.5rem; position: relative; z-index: 2;
+    }
+    .process-head .section-label { justify-content: center; }
+    .process-head h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 4vw, 3.4rem);
+      font-weight: 500; line-height: 1.1;
+      color: var(--cream); margin-bottom: 1.2rem;
+    }
+    .process-head h2 em { font-style: italic; color: var(--mustard); font-weight: 300; }
+    .process-head p {
+      font-size: 1.02rem; color: rgba(244,237,224,0.7);
+      line-height: 1.7; max-width: 540px; margin: 0 auto;
+    }
+    .timeline {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem;
+      position: relative; z-index: 2;
+    }
+    .timeline::before {
+      content: ''; position: absolute;
+      top: 42px; left: 10%; right: 10%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--mustard), var(--mustard), transparent);
+      z-index: 0;
+    }
+    .tl-step {
+      text-align: center; position: relative; z-index: 2;
+    }
+    .tl-num {
+      width: 50px; height: 50px; border-radius: 50%;
+      background: var(--mustard); color: var(--ink);
+      display: grid; place-items: center; margin: 0 auto 1.5rem;
+      font-family: var(--font-display); font-weight: 900; font-size: 1.1rem;
+      border: 3px solid var(--ink-deep);
+      box-shadow: 0 0 0 4px rgba(230,169,52,0.2);
+    }
+    .tl-step h4 {
+      font-family: var(--font-display);
+      font-size: 1.25rem; font-weight: 600;
+      color: var(--cream); line-height: 1.2;
+      margin-bottom: 0.6rem;
+    }
+    .tl-step h4 em { font-style: italic; color: var(--mustard); font-weight: 400; }
+    .tl-step p {
+      font-size: 0.9rem; color: rgba(244,237,224,0.65);
+      line-height: 1.65; max-width: 240px; margin: 0 auto;
+    }
+    .tl-tag {
+      display: inline-block; margin-top: 1rem;
+      font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--mustard); font-weight: 600;
+      padding: 5px 12px; border: 1px solid rgba(230,169,52,0.3);
+      border-radius: 20px;
+    }
+
+    /* ═══════════════════════════════════════════
+       SOCIAL PROOF (testimonials)
+    ═══════════════════════════════════════════ */
+    .proof {
+      padding: 7rem 0; background: var(--cream-2);
+      position: relative; overflow: hidden;
+    }
+    .proof::before {
+      content: ''; position: absolute; top: 20%; right: -120px;
+      width: 360px; height: 360px; border-radius: 50%;
+      border: 70px solid rgba(91,26,26,0.04);
+    }
+    .proof-head {
+      text-align: center; max-width: 700px;
+      margin: 0 auto 4rem; position: relative; z-index: 2;
+    }
+    .proof-head .section-label { justify-content: center; }
+    .proof-head h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 4vw, 3.4rem);
+      font-weight: 500; line-height: 1.1;
+      color: var(--ink); margin-bottom: 1.2rem;
+    }
+    .proof-head h2 em { font-style: italic; color: var(--oxblood); font-weight: 300; }
+    .proof-head p { font-size: 1.02rem; color: var(--text-mid); line-height: 1.7; }
+    .proof-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;
+      position: relative; z-index: 2;
+    }
+    .testimonial {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: 10px; padding: 2.2rem;
+      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+    }
+    .testimonial:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--mustard);
+    }
+    .testimonial-stars {
+      color: var(--mustard); font-size: 0.9rem; letter-spacing: 2px; margin-bottom: 1.2rem;
+    }
+    .testimonial blockquote {
+      font-family: var(--font-display); font-style: italic;
+      font-size: 1.05rem; color: var(--ink); line-height: 1.55;
+      margin-bottom: 1.5rem;
+    }
+    .testimonial-author {
+      display: flex; align-items: center; gap: 12px;
+      padding-top: 1.2rem; border-top: 1px solid var(--border);
+    }
+    .author-avatar {
+      width: 42px; height: 42px; border-radius: 50%;
+      display: grid; place-items: center;
+      font-family: var(--font-display); font-weight: 900; font-size: 0.9rem;
+      color: var(--cream); border: 1.5px solid rgba(244,237,224,0.4);
+      flex-shrink: 0;
+    }
+    .author-info strong {
+      display: block; font-family: var(--font-display);
+      font-size: 0.95rem; font-weight: 600; color: var(--ink);
+    }
+    .author-info span {
+      font-size: 0.72rem; color: var(--text-light);
+      letter-spacing: 0.08em;
+    }
+
+    /* ═══════════════════════════════════════════
+       REVENUE MODEL (oxblood section)
+    ═══════════════════════════════════════════ */
+    .revenue {
+      padding: 7rem 0;
+      background: linear-gradient(135deg, var(--oxblood) 0%, var(--oxblood-2) 100%);
+      color: var(--cream); position: relative; overflow: hidden;
+    }
+    .revenue::before {
+      content: ''; position: absolute; top: -100px; right: -100px;
+      width: 400px; height: 400px; border-radius: 50%;
+      border: 2px solid var(--mustard); opacity: 0.2;
+    }
+    .revenue::after {
+      content: ''; position: absolute; bottom: -60px; left: -60px;
+      width: 220px; height: 220px; border-radius: 50%;
+      border: 2px solid rgba(244,237,224,0.15);
+    }
+    .revenue-inner {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 5rem; align-items: center;
+      position: relative; z-index: 2;
+    }
+    .revenue-copy .section-label { color: var(--mustard); }
+    .revenue-copy .section-label::before { background: var(--mustard); }
+    .revenue-copy h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 4vw, 3.4rem);
+      font-weight: 500; line-height: 1.1;
+      color: var(--cream); margin-bottom: 1.2rem;
+    }
+    .revenue-copy h2 em { font-style: italic; color: var(--mustard); font-weight: 300; }
+    .revenue-copy > p {
+      font-size: 1.02rem; color: rgba(244,237,224,0.8);
+      line-height: 1.75; margin-bottom: 2rem; max-width: 480px;
+    }
+    .revenue-list {
+      list-style: none; padding: 0; margin: 0;
+      display: flex; flex-direction: column; gap: 1rem;
+    }
+    .revenue-list li {
+      display: flex; align-items: flex-start; gap: 14px;
+      font-size: 0.97rem; line-height: 1.55;
+      color: rgba(244,237,224,0.88);
+    }
+    .revenue-list li::before {
+      content: '✦'; flex-shrink: 0;
+      width: 24px; height: 24px; border-radius: 50%;
+      background: var(--mustard); color: var(--ink);
+      display: grid; place-items: center;
+      font-weight: 700; font-size: 0.8rem;
+    }
+    .revenue-card {
+      background: var(--cream); color: var(--ink);
+      border-radius: 14px; padding: 2.5rem;
+      box-shadow: var(--shadow-lg);
+    }
+    .revenue-card-label {
+      font-size: 0.65rem; letter-spacing: 0.24em; text-transform: uppercase;
+      color: var(--mustard); font-weight: 600; margin-bottom: 1.6rem;
+      display: inline-flex; align-items: center; gap: 10px;
+    }
+    .revenue-card-label::before { content: ''; width: 22px; height: 1px; background: var(--mustard); }
+    .rev-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1rem 0; border-bottom: 1px solid var(--border);
+    }
+    .rev-row:last-child { border-bottom: none; padding-bottom: 0; }
+    .rev-row:first-of-type { padding-top: 0; }
+    .rev-left { display: flex; align-items: center; gap: 14px; }
+    .rev-icon {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--cream-2); color: var(--mustard);
+      display: grid; place-items: center;
+      font-size: 1rem; font-weight: 700;
+    }
+    .rev-label {
+      font-size: 0.88rem; color: var(--text-mid); font-weight: 500;
+    }
+    .rev-value {
+      font-family: var(--font-display);
+      font-size: 1.4rem; font-weight: 700; color: var(--ink);
+    }
+    .rev-value em { font-style: italic; color: var(--oxblood); font-weight: 400; font-size: 0.9rem; }
+
+    /* ═══════════════════════════════════════════
+       APPLICATION FORM
+    ═══════════════════════════════════════════ */
+    .apply {
+      padding: 7rem 0; background: var(--cream);
+      position: relative; overflow: hidden;
+    }
+    .apply::before {
+      content: ''; position: absolute; top: 10%; left: -100px;
+      width: 300px; height: 300px; border-radius: 50%;
+      border: 50px solid rgba(230,169,52,0.05);
+    }
+    .apply-inner {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 5rem; align-items: start;
+      position: relative; z-index: 2;
+    }
+    .apply-copy h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 4vw, 3.4rem);
+      font-weight: 500; line-height: 1.1;
+      color: var(--ink); margin-bottom: 1.2rem;
+    }
+    .apply-copy h2 em { font-style: italic; color: var(--oxblood); font-weight: 300; }
+    .apply-copy > p {
+      font-size: 1.02rem; color: var(--text-mid);
+      line-height: 1.75; margin-bottom: 2.5rem; max-width: 460px;
+    }
+    .apply-checklist {
+      list-style: none; padding: 0; margin: 0;
+      display: flex; flex-direction: column; gap: 1.2rem;
+    }
+    .apply-checklist li {
+      display: flex; align-items: flex-start; gap: 14px;
+      font-size: 0.95rem; line-height: 1.5; color: var(--text-mid);
+    }
+    .apply-checklist li::before {
+      content: '✓'; flex-shrink: 0;
+      width: 26px; height: 26px; border-radius: 50%;
+      background: var(--olive); color: var(--cream);
+      display: grid; place-items: center;
+      font-weight: 700; font-size: 0.8rem;
+    }
+    .apply-form {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: 14px; padding: 2.5rem;
+      box-shadow: var(--shadow-md);
+    }
+    .apply-form-label {
+      font-size: 0.65rem; letter-spacing: 0.24em; text-transform: uppercase;
+      color: var(--mustard); font-weight: 600; margin-bottom: 2rem;
+      display: inline-flex; align-items: center; gap: 10px;
+    }
+    .apply-form-label::before { content: ''; width: 22px; height: 1px; background: var(--mustard); }
+    .field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 1.2rem; }
+    .field label {
+      font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.18em;
+      font-weight: 600; color: var(--text-light);
+    }
+    .field input, .field select, .field textarea {
+      border: none; border-bottom: 1px solid var(--border); background: transparent;
+      padding: 12px 0; font-family: var(--font-body); font-size: 0.95rem;
+      outline: none; transition: border-color var(--transition); resize: vertical;
+      color: var(--ink); width: 100%;
+    }
+    .field input:focus, .field select:focus, .field textarea:focus {
+      border-bottom-width: 2px; border-bottom-color: var(--mustard);
+    }
+    .field input::placeholder, .field textarea::placeholder { color: var(--text-light); }
+    .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .submit-btn {
+      width: 100%; margin-top: 0.5rem;
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      background: var(--mustard); color: var(--ink);
+      padding: 1rem 2rem; border-radius: 2px;
+      font-family: var(--font-body);
+      font-size: 0.76rem; font-weight: 600;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      border: 2px solid var(--mustard);
+      cursor: pointer;
+      transition: transform .2s, box-shadow var(--transition);
+    }
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(230,169,52,0.35);
+    }
+
+    /* ═══════════════════════════════════════════
+       FAQ
+    ═══════════════════════════════════════════ */
+    .faq {
+      padding: 7rem 0; background: var(--cream-2);
+      position: relative; overflow: hidden;
+    }
+    .faq::before {
+      content: ''; position: absolute; top: 10%; left: -100px;
+      width: 300px; height: 300px; border-radius: 50%;
+      border: 50px solid rgba(230,169,52,0.05);
+    }
+    .faq-head {
+      text-align: center; max-width: 680px;
+      margin: 0 auto 4rem; position: relative; z-index: 2;
+    }
+    .faq-head .section-label { justify-content: center; }
+    .faq-head h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 4vw, 3.4rem);
+      font-weight: 500; line-height: 1.1;
+      color: var(--ink); margin-bottom: 1rem;
+    }
+    .faq-head h2 em { font-style: italic; color: var(--oxblood); font-weight: 300; }
+    .faq-head p { font-size: 1rem; color: var(--text-mid); }
+    .faq-list { max-width: 820px; margin: 0 auto; position: relative; z-index: 2; }
+    .faq-item {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: 8px; margin-bottom: 0.9rem; overflow: hidden;
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+    .faq-item:hover { border-color: var(--mustard); }
+    .faq-item.open { border-color: var(--mustard); box-shadow: var(--shadow-sm); }
+    .faq-q {
+      width: 100%; background: transparent; border: none;
+      padding: 1.4rem 1.8rem; text-align: left;
+      display: flex; justify-content: space-between; align-items: center; gap: 1.2rem;
+      font-family: var(--font-display); font-weight: 600;
+      font-size: 1.08rem; line-height: 1.3; color: var(--ink); cursor: pointer;
+    }
+    .faq-toggle {
+      width: 30px; height: 30px; border-radius: 50%;
+      border: 1px solid var(--mustard); background: transparent; color: var(--mustard);
+      flex-shrink: 0; display: grid; place-items: center;
+      font-family: var(--font-display); font-weight: 400; font-size: 1.1rem;
+      transition: all var(--transition);
+    }
+    .faq-item.open .faq-toggle {
+      background: var(--mustard); color: var(--ink); transform: rotate(45deg);
+    }
+    .faq-a {
+      max-height: 0; overflow: hidden;
+      transition: max-height .4s ease, padding .4s ease;
+      padding: 0 1.8rem;
+      font-size: 0.95rem; color: var(--text-mid); line-height: 1.75;
+    }
+    .faq-item.open .faq-a { max-height: 320px; padding: 0 1.8rem 1.6rem; }
+
+    /* ═══════════════════════════════════════════
+       FINAL CTA
+    ═══════════════════════════════════════════ */
+    .final-cta {
+      padding: 7rem 0; background: var(--oxblood-deep);
+      color: var(--cream); position: relative; overflow: hidden;
+      text-align: center;
+    }
+    .final-cta::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at center, rgba(230,169,52,0.15) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .final-cta::after {
+      content: ''; position: absolute; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n2'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n2)' opacity='0.03'/%3E%3C/svg%3E");
+      opacity: 0.5; mix-blend-mode: overlay; pointer-events: none;
+    }
+    .final-cta .ornament { justify-content: center; margin-bottom: 1.5rem; position: relative; z-index: 2; }
+    .final-cta h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      font-weight: 500; line-height: 1.05;
+      color: var(--cream); margin-bottom: 1.4rem;
+      position: relative; z-index: 2;
+    }
+    .final-cta h2 em { font-style: italic; color: var(--mustard); font-weight: 300; }
+    .final-cta p {
+      font-size: 1.05rem; color: rgba(244,237,224,0.7);
+      max-width: 560px; margin: 0 auto 2.5rem; line-height: 1.7;
+      position: relative; z-index: 2;
+    }
+    .final-cta-btn {
+      display: inline-flex; align-items: center; gap: 12px;
+      background: var(--mustard); color: var(--ink);
+      padding: 1.1rem 2.6rem; border-radius: 2px;
+      font-family: var(--font-body);
+      font-size: 0.78rem; font-weight: 600;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      border: 2px solid var(--mustard);
+      position: relative; z-index: 2;
+      transition: transform .2s, box-shadow var(--transition);
+    }
+    .final-cta-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(230,169,52,0.4);
+    }
+
+    /* ═══════════════════════════════════════════
+       FOOTER
+    ═══════════════════════════════════════════ */
+    footer {
+      background: var(--ink); color: var(--cream);
+      padding: 4rem 0 2rem; position: relative;
+    }
+    footer::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--mustard), transparent);
+    }
+    .footer-inner {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem; margin-bottom: 3rem;
+    }
+    .footer-brand .footer-logo {
+      display: flex; align-items: center; gap: 12px; margin-bottom: 1rem;
+    }
+    .footer-logo-mark {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: var(--oxblood); color: var(--cream);
+      display: grid; place-items: center;
+      font-family: var(--font-display); font-weight: 900; font-size: 1rem;
+      border: 1.5px solid var(--mustard);
+    }
+    .footer-logo-text {
+      font-family: var(--font-display); font-size: 1.3rem; font-weight: 600;
+    }
+    .footer-logo-text em { font-style: italic; color: var(--mustard); font-weight: 400; }
+    .footer-tagline {
+      font-family: var(--font-display); font-style: italic;
+      font-size: 0.95rem; color: rgba(244,237,224,0.6);
+      line-height: 1.6; max-width: 340px;
+    }
+    .footer-col h4 {
+      font-family: var(--font-body); font-size: 0.7rem; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--mustard); font-weight: 600; margin-bottom: 1.2rem;
+    }
+    .footer-links { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.7rem; }
+    .footer-links a {
+      font-size: 0.88rem; color: rgba(244,237,224,0.7); transition: color var(--transition);
+    }
+    .footer-links a:hover { color: var(--mustard); }
+    .footer-bottom {
+      padding-top: 2rem;
+      border-top: 1px solid rgba(230,169,52,0.15);
+      display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+      font-size: 0.8rem; color: rgba(244,237,224,0.5);
+    }
+    .footer-bottom .italic { font-family: var(--font-display); font-style: italic; }
+
+    /* ═══════════════════════════════════════════
+       RESPONSIVE
+    ═══════════════════════════════════════════ */
+    @media (max-width: 960px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .hero-inner { grid-template-columns: 1fr; gap: 3rem; padding: 7rem 0 4rem; }
+      .hero-card { order: -1; }
+      .hero-scroll { display: none; }
+      .benefits { padding: 5rem 0; }
+      .benefits-grid { grid-template-columns: 1fr; gap: 1.2rem; }
+      .process { padding: 5rem 0; }
+      .timeline { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+      .timeline::before { display: none; }
+      .proof { padding: 5rem 0; }
+      .proof-grid { grid-template-columns: 1fr; gap: 1.2rem; }
+      .revenue { padding: 5rem 0; }
+      .revenue-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .apply { padding: 5rem 0; }
+      .apply-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .faq { padding: 5rem 0; }
+      .faq-q { font-size: 1rem; padding: 1.2rem 1.4rem; }
+      .faq-item.open .faq-a { padding: 0 1.4rem 1.4rem; max-height: 400px; }
+      .final-cta { padding: 5rem 0; }
+      .footer-inner { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+      .footer-brand { grid-column: 1 / -1; }
+    }
+    @media (max-width: 520px) {
+      .hero h1 { font-size: 2.4rem; }
+      .hero-actions { flex-direction: column; width: 100%; }
+      .btn-primary, .btn-outline { width: 100%; justify-content: center; }
+      .timeline { grid-template-columns: 1fr; }
+      .row2 { grid-template-columns: 1fr; }
+      .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .footer-bottom { flex-direction: column; text-align: left; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav class="site-nav" id="siteNav">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo">
+        <div class="logo-mark">U</div>
+        <div class="logo-text">
+          Universe<em>Merch</em>
+          <span>Africa</span>
+        </div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="how-it-works_1.html">How It Works</a></li>
+        <li><a href="students_redesigned.html">For Students</a></li>
+        <li><a href="#" class="active">Partner</a></li>
+        <li><a href="students_redesigned.html" class="nav-cta">Shop Now</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="mobile-close" id="mobileClose" aria-label="Close menu">✕</button>
+    <a href="how-it-works_1.html" class="mobile-nav-link">How It <em>Works</em></a>
+    <a href="students_redesigned.html" class="mobile-nav-link">For <em>Students</em></a>
+    <a href="#" class="mobile-nav-link"><em>Partner</em></a>
+    <a href="students_redesigned.html" class="mobile-nav-link">Shop <em>Now</em></a>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-rays">
+      <div class="ray"></div><div class="ray"></div><div class="ray"></div>
+      <div class="ray"></div><div class="ray"></div><div class="ray"></div><div class="ray"></div>
+    </div>
+
+    <div class="container">
+      <div class="hero-inner">
+        <div class="hero-content">
+          <div class="hero-eyebrow">
+            <div class="hero-eyebrow-line"></div>
+            <span class="hero-eyebrow-text">Schools: Partner With Us</span>
+          </div>
+
+          <h1>Your campus.<br/><em>Your storefront.</em></h1>
+
+          <p class="hero-quote">
+            "Tired of third parties printing knockoff merch with your crest? Take control — get a dedicated store, full brand approval, and royalties on every sale."
+          </p>
+
+          <p class="hero-desc">
+            Universe Merch Africa builds and runs officially licensed merch storefronts for Nigeria's top schools.
+            We handle design, stock, fulfillment, and delivery. You keep full creative control and earn on every unit sold.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#apply" class="btn-primary">
+              Apply to Partner
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M5 12h14M13 5l7 7-7 7"/>
+              </svg>
+            </a>
+            <a href="#benefits" class="btn-outline">See the Benefits</a>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <div class="hero-card-label">Partner Snapshot</div>
+          <div class="stat-row">
+            <span class="stat-k">15<em>%</em></span>
+            <span class="stat-v">Royalty per sale<br/>on every item</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-k">₦0</span>
+            <span class="stat-v">Setup cost<br/>(we invest the stock)</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-k">30<em> days</em></span>
+            <span class="stat-v">From signing to<br/>storefront live</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-k">100<em>%</em></span>
+            <span class="stat-v">Design approval<br/>stays with the school</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-scroll">
+      <span>Explore</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- MARQUEE STRIP -->
+  <div class="strip" aria-hidden="true">
+    <div class="strip-inner">
+      <span class="strip-item"><span class="strip-dot"></span>Zero Upfront Cost</span>
+      <span class="strip-item"><span class="strip-dot"></span>15% Royalty Per Sale</span>
+      <span class="strip-item"><span class="strip-dot"></span>Full Brand Control</span>
+      <span class="strip-item"><span class="strip-dot"></span>Monthly Reporting</span>
+      <span class="strip-item"><span class="strip-dot"></span>40+ Partner Schools</span>
+      <span class="strip-item"><span class="strip-dot"></span>Hands-Off Operations</span>
+      <span class="strip-item"><span class="strip-dot"></span>Zero Upfront Cost</span>
+      <span class="strip-item"><span class="strip-dot"></span>15% Royalty Per Sale</span>
+      <span class="strip-item"><span class="strip-dot"></span>Full Brand Control</span>
+      <span class="strip-item"><span class="strip-dot"></span>Monthly Reporting</span>
+      <span class="strip-item"><span class="strip-dot"></span>40+ Partner Schools</span>
+      <span class="strip-item"><span class="strip-dot"></span>Hands-Off Operations</span>
+    </div>
+  </div>
+
+  <!-- WHY PARTNER -->
+  <section class="benefits" id="benefits">
+    <div class="container">
+      <div class="benefits-head reveal">
+        <div class="section-label">Why Partner With Us</div>
+        <h2>Everything you gain.<br/><em>Nothing you risk.</em></h2>
+        <p>We invest the capital, manage the inventory, and handle every shipment. You earn revenue and protect your brand — with zero setup cost.</p>
+      </div>
+
+      <div class="benefits-grid">
+        <div class="benefit reveal delay-1">
+          <div class="benefit-icon">✦</div>
+          <h4>Branded Storefront</h4>
+          <p>Your school gets a dedicated storefront with your crest, colors, and typography. Students browse a curated shop that feels authentically yours.</p>
+        </div>
+        <div class="benefit reveal delay-2">
+          <div class="benefit-icon">₦</div>
+          <h4>Revenue Share</h4>
+          <p>Earn a 15% royalty on every item sold — paid monthly by bank transfer. No upfront investment, no inventory risk. Pure upside for the school.</p>
+        </div>
+        <div class="benefit reveal delay-3">
+          <div class="benefit-icon">◈</div>
+          <h4>Full Creative Control</h4>
+          <p>Every design is submitted for your approval before it goes live. You control what bears your crest — we never publish without sign-off.</p>
+        </div>
+        <div class="benefit reveal delay-1">
+          <div class="benefit-icon">☰</div>
+          <h4>Monthly Reports</h4>
+          <p>Transparent sales dashboards with item-level breakdowns, revenue earned, campus pickup volumes, and inventory forecasts — delivered every first of the month.</p>
+        </div>
+        <div class="benefit reveal delay-2">
+          <div class="benefit-icon">↻</div>
+          <h4>Hands-Off Operations</h4>
+          <p>We design, manufacture, warehouse, and ship every order. Your team doesn't touch a parcel. All you do is approve designs and collect royalties.</p>
+        </div>
+        <div class="benefit reveal delay-3">
+          <div class="benefit-icon">✓</div>
+          <h4>Anti-Counterfeit Shield</h4>
+          <p>A licensed storefront gives students a legitimate alternative to knockoff merch. Protect your brand identity while generating revenue for campus programs.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS (process for partners) -->
+  <section class="process">
+    <div class="container">
+      <div class="process-head reveal">
+        <div class="section-label">The Partnership Journey</div>
+        <h2>From inquiry to<br/><em>live storefront.</em></h2>
+        <p>Four steps between reaching out and having a fully operational merch store branded to your school. Most partnerships go live in under 30 days.</p>
+      </div>
+
+      <div class="timeline">
+        <div class="tl-step reveal delay-1">
+          <div class="tl-num">01</div>
+          <h4>Initial <em>Inquiry</em></h4>
+          <p>Fill out our partner form or email us. We'll schedule a 30-minute call with your admin team within 48 hours.</p>
+          <span class="tl-tag">Day 1–3</span>
+        </div>
+        <div class="tl-step reveal delay-2">
+          <div class="tl-num">02</div>
+          <h4>Brand <em>Onboarding</em></h4>
+          <p>Share your crest, official colors, and any brand guidelines. We draft the first product line and submit mockups for approval.</p>
+          <span class="tl-tag">Day 4–14</span>
+        </div>
+        <div class="tl-step reveal delay-3">
+          <div class="tl-num">03</div>
+          <h4>Design <em>Approval</em></h4>
+          <p>Review every product design. Request changes, swap colorways, or add items. Nothing goes live without your written sign-off.</p>
+          <span class="tl-tag">Day 15–21</span>
+        </div>
+        <div class="tl-step reveal delay-4">
+          <div class="tl-num">04</div>
+          <h4>Storefront <em>Live</em></h4>
+          <p>Your branded store goes public. Students start ordering. Royalties begin accruing from the first sale. We handle the rest.</p>
+          <span class="tl-tag">Day 22–30</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="proof">
+    <div class="container">
+      <div class="proof-head reveal">
+        <div class="section-label">Partner Voices</div>
+        <h2>What schools are <em>saying.</em></h2>
+        <p>Hear from administrators at partner institutions who made the switch from unofficial merch to a licensed storefront.</p>
+      </div>
+
+      <div class="proof-grid">
+        <div class="testimonial reveal delay-1">
+          <div class="testimonial-stars">★★★★★</div>
+          <blockquote>"We used to lose brand equity to hawkers outside our gate printing our logo on cheap fabric. Now we control what bears our crest — and earn from it."</blockquote>
+          <div class="testimonial-author">
+            <div class="author-avatar" style="background:#5b1a1a">UL</div>
+            <div class="author-info">
+              <strong>Dr. Adeyemi Ogunleye</strong>
+              <span>Dean of Student Affairs · UNILAG</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial reveal delay-2">
+          <div class="testimonial-stars">★★★★★</div>
+          <blockquote>"The monthly reports alone were worth the partnership. We finally have visibility into what students actually want — and the royalty cheques are a bonus."</blockquote>
+          <div class="testimonial-author">
+            <div class="author-avatar" style="background:#17140f">CU</div>
+            <div class="author-info">
+              <strong>Mrs. Folake Adebayo</strong>
+              <span>Brand Manager · Covenant University</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial reveal delay-3">
+          <div class="testimonial-stars">★★★★★</div>
+          <blockquote>"Our students were already buying merch — just not from us. Universe Merch gave them a legitimate, quality option and us a new revenue stream."</blockquote>
+          <div class="testimonial-author">
+            <div class="author-avatar" style="background:#1f3a2b">UI</div>
+            <div class="author-info">
+              <strong>Prof. Chukwuemeka Nweze</strong>
+              <span>Registrar · University of Ibadan</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REVENUE MODEL -->
+  <section class="revenue">
+    <div class="container">
+      <div class="revenue-inner">
+        <div class="revenue-copy reveal-left">
+          <div class="section-label">The Revenue Model</div>
+          <h2>How your school<br/><em>earns.</em></h2>
+          <p>A straightforward revenue share that puts money back into campus programs — sports, scholarships, facilities. No upfront cost, no risk, just upside.</p>
+
+          <ul class="revenue-list">
+            <li>15% royalty on every item sold through your storefront.</li>
+            <li>Monthly bank transfers with full item-level breakdowns.</li>
+            <li>Quarterly review meetings to optimize product mix.</li>
+            <li>Revenue scales with student engagement — bigger campus, bigger returns.</li>
+            <li>Seasonal drops (freshers week, convocation) drive natural spikes.</li>
+          </ul>
+        </div>
+
+        <div class="revenue-card reveal-right">
+          <div class="revenue-card-label">Revenue Example · Per Term</div>
+          <div class="rev-row">
+            <div class="rev-left">
+              <div class="rev-icon">🎓</div>
+              <span class="rev-label">Enrolled students</span>
+            </div>
+            <span class="rev-value">12,000</span>
+          </div>
+          <div class="rev-row">
+            <div class="rev-left">
+              <div class="rev-icon">🛒</div>
+              <span class="rev-label">Purchase rate</span>
+            </div>
+            <span class="rev-value">8<em>%</em></span>
+          </div>
+          <div class="rev-row">
+            <div class="rev-left">
+              <div class="rev-icon">📦</div>
+              <span class="rev-label">Avg. order value</span>
+            </div>
+            <span class="rev-value">₦18,500</span>
+          </div>
+          <div class="rev-row">
+            <div class="rev-left">
+              <div class="rev-icon">📊</div>
+              <span class="rev-label">Gross sales / term</span>
+            </div>
+            <span class="rev-value">₦17.8M</span>
+          </div>
+          <div class="rev-row" style="background: var(--cream-2); margin: 0 -2.5rem -2.5rem; padding: 1.4rem 2.5rem; border-radius: 0 0 14px 14px; border-bottom: none;">
+            <div class="rev-left">
+              <div class="rev-icon" style="background: var(--mustard); color: var(--ink);">₦</div>
+              <span class="rev-label" style="font-weight: 700; color: var(--ink);">Your royalty / term</span>
+            </div>
+            <span class="rev-value" style="font-size: 1.8rem; color: var(--oxblood);">₦2.67M</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- APPLICATION FORM -->
+  <section class="apply" id="apply">
+    <div class="container">
+      <div class="apply-inner">
+        <div class="apply-copy reveal-left">
+          <div class="section-label">Get Started</div>
+          <h2>Apply to become<br/><em>a partner.</em></h2>
+          <p>Fill out the form and our partnerships team will reach out within 48 hours to schedule an introductory call. No commitment, no pressure — just a conversation.</p>
+
+          <ul class="apply-checklist">
+            <li>Works for universities, high schools, and boarding schools.</li>
+            <li>No minimum student enrollment required.</li>
+            <li>We handle everything from design to delivery.</li>
+            <li>Full creative veto — nothing goes live without your approval.</li>
+            <li>Partnership agreement can be paused or terminated any time.</li>
+            <li>First product line live in under 30 days.</li>
+          </ul>
+        </div>
+
+        <div class="apply-form reveal-right">
+          <div class="apply-form-label">Partnership Inquiry</div>
+          <form onsubmit="handlePartnerSubmit(event)">
+            <div class="row2">
+              <div class="field">
+                <label>Your Name</label>
+                <input type="text" name="name" required placeholder="Full name" />
+              </div>
+              <div class="field">
+                <label>Your Role</label>
+                <input type="text" name="role" required placeholder="e.g. Dean, Registrar, Brand Manager" />
+              </div>
+            </div>
+            <div class="field">
+              <label>School Name</label>
+              <input type="text" name="school" required placeholder="Official institution name" />
+            </div>
+            <div class="row2">
+              <div class="field">
+                <label>School Type</label>
+                <select name="type" required>
+                  <option value="">Select…</option>
+                  <option>University</option>
+                  <option>High School</option>
+                  <option>Boarding School</option>
+                  <option>Other</option>
+                </select>
+              </div>
+              <div class="field">
+                <label>Approx. Student Enrollment</label>
+                <input type="text" name="enrollment" placeholder="e.g. 8,000" />
+              </div>
+            </div>
+            <div class="row2">
+              <div class="field">
+                <label>Email</label>
+                <input type="email" name="email" required placeholder="you@school.edu.ng" />
+              </div>
+              <div class="field">
+                <label>Phone</label>
+                <input type="tel" name="phone" placeholder="+234 …" />
+              </div>
+            </div>
+            <div class="field">
+              <label>Tell us anything else (optional)</label>
+              <textarea name="message" rows="3" placeholder="Existing merch situation, timeline, questions…"></textarea>
+            </div>
+            <button type="submit" class="submit-btn" id="partnerSubmitBtn">
+              Submit Inquiry
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M5 12h14M13 5l7 7-7 7"/>
+              </svg>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq">
+    <div class="container">
+      <div class="faq-head reveal">
+        <div class="section-label">Partner FAQ</div>
+        <h2>Questions, <em>answered.</em></h2>
+        <p>Common questions from school administrators considering a partnership.</p>
+      </div>
+
+      <div class="faq-list reveal">
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            Does the school pay anything upfront?
+            <span class="faq-toggle">+</span>
+          </button>
+          <div class="faq-a">No — zero. We invest in the initial inventory, design, photography, and storefront setup. The school earns a 15% royalty on every sale with no capital at risk. Our model is designed so that the school's only commitment is approving designs.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            Who approves the designs?
+            <span class="faq-toggle">+</span>
+          </button>
+          <div class="faq-a">You do. Every product design — from the colorway of a hoodie to the embroidery placement on a cap — is submitted to your designated contact for written approval. Nothing goes live until you say so. You can also request changes or reject designs entirely.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            How long does it take to go live?
+            <span class="faq-toggle">+</span>
+          </button>
+          <div class="faq-a">Typically 21–30 days from signing the partnership agreement. The biggest variable is the design approval cycle — some schools approve in a day, others need committee sign-off. Once designs are approved, production takes 7–10 days and your store is live immediately after.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            What if we want to stop the partnership?
+            <span class="faq-toggle">+</span>
+          </button>
+          <div class="faq-a">Either party can pause or terminate with 30 days' written notice. If you terminate, we remove your storefront and all branded products from the platform within 14 days. Any outstanding royalties are paid out in full within 30 days of termination.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            Can we request specific products?
+            <span class="faq-toggle">+</span>
+          </button>
+          <div class="faq-a">Absolutely. While we have a standard product line (hoodies, tees, caps, jackets, accessories), partner schools can request custom items — like graduation stoles, department-specific gear, or event merch for freshers week. Custom requests are evaluated case-by-case and typically added within 2 weeks.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            How are royalties calculated and paid?
+            <span class="faq-toggle">+</span>
+          </button>
+          <div class="faq-a">You earn 15% of the net sale price (after payment processing fees) on every item sold. Royalties are calculated monthly, reported in a detailed statement by the 5th of each month, and paid by bank transfer by the 15th. The statement includes item-level detail so your finance team can reconcile easily.</div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" onclick="toggleFaq(this)">
+            Do you handle customer service?
+            <span class="faq-toggle">+</span>
+          </button>
+          <div class="faq-a">Yes — 100%. All customer inquiries, returns, exchanges, and complaints are handled by our support team. The school is never involved in day-to-day operations. If there's a brand-related issue (someone using your crest without authorization, for example), we'll flag it to you directly.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final-cta">
+    <div class="container">
+      <div class="ornament">
+        <div class="ornament-line"></div>
+        <span class="ornament-text">Ready When You Are</span>
+        <div class="ornament-line right"></div>
+      </div>
+      <h2>Your campus, your brand,<br/><em>your revenue.</em></h2>
+      <p>Join 40+ partner schools already earning from officially licensed merch. Zero upfront cost. Full creative control. Revenue from day one.</p>
+      <a href="#apply" class="final-cta-btn">
+        Apply to Partner
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M5 12h14M13 5l7 7-7 7"/>
+        </svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <div class="footer-logo-mark">U</div>
+            <div class="footer-logo-text">Universe<em>Merch</em></div>
+          </div>
+          <p class="footer-tagline">
+            "Proper campus merch, officially licensed — <br/>designed, printed, and shipped from Lagos."
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Shop</h4>
+          <ul class="footer-links">
+            <li><a href="students_redesigned.html">Universities</a></li>
+            <li><a href="students_redesigned.html">High Schools</a></li>
+            <li><a href="students_redesigned.html">New Drops</a></li>
+            <li><a href="students_redesigned.html">Gift Cards</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul class="footer-links">
+            <li><a href="our-story.html">Our Story</a></li>
+            <li><a href="partners.html">Partners</a></li>
+            <li><a href="careers.html">Careers</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Help</h4>
+          <ul class="footer-links">
+            <li><a href="size-guide.html">Size Guide</a></li>
+            <li><a href="shipping-returns.html">Shipping & Returns</a></li>
+            <li><a href="privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="terms-of-service.html">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 Universe Merch Africa. All rights reserved.</p>
+        <p class="italic">"Made with pride in Lagos ✦"</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    /* Scroll-triggered nav */
+    const nav = document.getElementById('siteNav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    });
+
+    /* Mobile menu */
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileClose = document.getElementById('mobileClose');
+
+    function openMenu() {
+      mobileMenu.classList.add('open');
+      hamburger.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeMenu() {
+      mobileMenu.classList.remove('open');
+      hamburger.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    hamburger.addEventListener('click', openMenu);
+    mobileClose.addEventListener('click', closeMenu);
+    document.querySelectorAll('.mobile-nav-link').forEach(link => {
+      link.addEventListener('click', closeMenu);
+    });
+
+    /* Scroll reveal */
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => {
+      revealObserver.observe(el);
+    });
+
+    /* FAQ accordion */
+    function toggleFaq(btn) {
+      const item = btn.closest('.faq-item');
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!wasOpen) item.classList.add('open');
+      document.querySelectorAll('.faq-toggle').forEach(t => {
+        t.textContent = t.closest('.faq-item').classList.contains('open') ? '×' : '+';
+      });
+    }
+
+    /* Smooth scroll for anchors */
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const id = a.getAttribute('href');
+        if (id === '#' || id.length < 2) return;
+        const target = document.querySelector(id);
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    /* Partner form submission (demo) */
+    function handlePartnerSubmit(e) {
+      e.preventDefault();
+      const btn = document.getElementById('partnerSubmitBtn');
+      btn.innerHTML = `
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+          <path d="M20 6L9 17l-5-5"/>
+        </svg>
+        Inquiry Submitted — We'll Be in Touch!
+      `;
+      btn.style.background = 'var(--olive)';
+      btn.style.borderColor = 'var(--olive)';
+      btn.style.color = 'var(--cream)';
+      btn.disabled = true;
+    }
+  </script>
+</body>
+</html>
