@@ -1,6 +1,4 @@
 import pg from 'pg';
-import sqlite3 from 'sqlite3';
-import { open } from 'sqlite';
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -24,11 +22,13 @@ if (DB_TYPE === 'postgres') {
   });
 }
 
-// SQLite setup
+// SQLite setup (loaded dynamically only when needed)
 let sqliteDb = null;
 
 async function initSQLite() {
   if (DB_TYPE === 'sqlite') {
+    const sqlite3 = (await import('sqlite3')).default;
+    const { open } = await import('sqlite');
     sqliteDb = await open({
       filename: process.env.DATABASE_URL || './database.sqlite',
       driver: sqlite3.Database,
@@ -147,9 +147,4 @@ function getTableName(sql) {
   return match ? match[1] : '';
 }
 
-// Initialize database
-if (DB_TYPE === 'sqlite') {
-  initSQLite().catch(console.error);
-}
-
-export default DB_TYPE === 'postgres' ? pool : sqliteDb;
+export default DB_TYPE === 'postgres' ? pool : null;
