@@ -551,36 +551,30 @@
       }
 
       try {
-        // Get school details
-        const schools = await UMA.marketplace.getSchools();
-        school = schools.find(s => s.id === schoolId);
-        
-        if (!school) {
-          productsGrid.innerHTML = '<div class="empty-state"><p>School not found</p></div>';
-          return;
-        }
+        // GET /api/schools/:id/products  returns  { school, products }
+        const data = await UMA.schools.products(schoolId);
+        school = data.school;
+        allProducts = data.products;
 
-        // Update titles
+        // Update page titles
+        document.title = `${school.name} — Universe Merch Africa`;
         schoolNameHeader.textContent = school.name;
         schoolNameBread.textContent = school.name;
         schoolNameHero.textContent = school.name;
 
-        // Get products for school
-        const products = await UMA.marketplace.getProducts({ school_id: schoolId });
-        allProducts = products;
-        renderProducts(products);
+        renderProducts(allProducts);
         updateCartCount();
 
       } catch (error) {
         console.error('Error loading storefront:', error);
-        productsGrid.innerHTML = '<div class="empty-state"><p>Error loading products</p></div>';
+        productsGrid.innerHTML = '<div class="empty-state"><p>Error loading products. Make sure the server is running at http://localhost:4000</p></div>';
       }
     }
 
     // Render products grid
     function renderProducts(products) {
-      if (products.length === 0) {
-        productsGrid.innerHTML = '<div class="empty-state" style="grid-column: 1 / -1;"><p>No products available for this school</p></div>';
+      if (!products || products.length === 0) {
+        productsGrid.innerHTML = '<div class="empty-state" style="grid-column: 1 / -1;"><p>No products available for this school yet.</p></div>';
         productsCount.textContent = 'No products';
         return;
       }
@@ -588,24 +582,27 @@
       productsCount.textContent = `${products.length} product${products.length !== 1 ? 's' : ''}`;
 
       productsGrid.innerHTML = products.map(product => {
-        // Get available colors
-        const colors = [...new Set(product.variants.map(v => v.color))].slice(0, 3);
-        
+        const colors = [...new Set((product.variants || []).map(v => v.color))].slice(0, 4);
+        const inStock = (product.variants || []).some(v => v.stock_count > 0);
+
         return `
-          <div class="product-card">
-            <div class="product-image">📦</div>
+          <div class="product-card" onclick="goToProduct('${product.id}')" style="cursor:pointer;">
+            <div class="product-image" style="font-size:3rem;">
+              ${product.category === 'hoodies' ? '🧥' :
+                product.category === 't-shirts' ? '👕' :
+                product.category === 'caps' ? '🧢' :
+                product.category === 'jackets' ? '🥼' : '📦'}
+            </div>
             <div class="product-body">
               <p class="product-category">${product.category || 'Apparel'}</p>
               <h3 class="product-name">${product.name}</h3>
-              <div class="product-price">₦${product.base_price.toLocaleString()}</div>
+              <div class="product-price">₦${Number(product.price).toLocaleString()}</div>
               <div class="product-variants">
-                ${colors.map(color => `
-                  <div class="variant-dot" style="background: ${getColorHex(color)};" title="${color}"></div>
-                `).join('')}
+                ${colors.map(color => `<div class="variant-dot" style="background:${getColorHex(color)};" title="${color}"></div>`).join('')}
               </div>
               <div class="product-actions">
-                <button class="btn-view" onclick="goToProduct('${product.id}')">View</button>
-                <button class="btn-add" onclick="addToCart('${product.id}')">Add</button>
+                <button class="btn-view" onclick="event.stopPropagation();goToProduct('${product.id}')">View Details</button>
+                ${inStock ? '' : '<span style="font-size:0.75rem;color:var(--red);">Out of stock</span>'}
               </div>
             </div>
           </div>
@@ -649,10 +646,10 @@
 
       switch (sortValue) {
         case 'price-low':
-          sorted.sort((a, b) => a.base_price - b.base_price);
+          sorted.sort((a, b) => a.price - b.price);
           break;
         case 'price-high':
-          sorted.sort((a, b) => b.base_price - a.base_price);
+          sorted.sort((a, b) => b.price - a.price);
           break;
         case 'newest':
           sorted.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
@@ -660,35 +657,6 @@
       }
 
       renderProducts(sorted);
-    }
-
-    // Add to cart
-    function addToCart(productId) {
-      const product = allProducts.find(p => p.id === productId);
-      if (!product) return;
-
-      // Store in localStorage for now
-      const cart = JSON.parse(localStorage.getItem('UMA_CART') || '{}');
-      
-      if (cart[productId]) {
-        cart[productId].quantity += 1;
-      } else {
-        cart[productId] = {
-          product_id: productId,
-          name: product.name,
-          price: product.base_price,
-          quantity: 1,
-          school_id: schoolId,
-          size: 'M', // Default size
-          color: product.variants[0]?.color || 'black'
-        };
-      }
-
-      localStorage.setItem('UMA_CART', JSON.stringify(cart));
-      updateCartCount();
-      
-      // Show feedback
-      alert(`${product.name} added to cart!`);
     }
 
     // Update cart count

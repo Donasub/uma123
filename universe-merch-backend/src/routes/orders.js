@@ -115,8 +115,8 @@ router.post('/', authenticate, getOrCreateCart, validateSchema(checkoutSchema), 
     // Create order items
     for (const item of validatedItems) {
       await client.query(
-        `INSERT INTO order_items (order_id, product_id, variant_id, name, sku, price, quantity, image_url)
-         SELECT $1, $2, pv.id, p.name, p.sku, p.price, $3, p.image_url
+        `INSERT INTO order_items (order_id, product_id, variant_id, name, sku, size, color, price, quantity, image_url)
+         SELECT $1, $2, pv.id, p.name, p.sku, pv.size, pv.color, p.price, $3, p.image_url
          FROM product_variants pv
          JOIN products p ON pv.product_id = p.id
          WHERE pv.id = $4`,

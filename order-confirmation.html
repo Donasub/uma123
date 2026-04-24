@@ -468,15 +468,16 @@
   <script>
     UMA.init({ apiUrl: 'http://localhost:4000/api' });
 
-    const urlParams = new URLSearchParams(window.location.search);
-    const orderId = urlParams.get('order_id');
+    const urlParams     = new URLSearchParams(window.location.search);
+    // checkout.html now redirects with  ?order=UMA-2026-00001
+    const orderNumber   = urlParams.get('order') || urlParams.get('order_number');
     const paymentPending = urlParams.get('payment_pending') === 'true';
 
     const confirmationContainer = document.getElementById('confirmationContainer');
 
     // Load order confirmation
     async function loadConfirmation() {
-      if (!orderId) {
+      if (!orderNumber) {
         confirmationContainer.innerHTML = `
           <div class="confirmation-header">
             <div class="confirmation-icon">⚠️</div>
@@ -491,47 +492,17 @@
       }
 
       try {
-        // Fetch order details (would need new endpoint, using mock for now)
-        const order = await UMA.orders.getById(orderId);
+        // GET /api/orders/by-number/:orderNumber  → { order, items }
+        const data = await UMA.orders.track(orderNumber);
 
-        // Mock order data if API doesn't exist yet
-        const mockOrder = {
-          id: orderId,
-          order_number: `UMA-${orderId.slice(-8).toUpperCase()}`,
-          status: paymentPending ? 'payment_pending' : 'confirmed',
-          created_at: new Date().toISOString(),
-          total_amount: 25000,
-          shipping_cost: 2500,
-          tax_amount: 1875,
-          items: [
-            {
-              name: 'University of Lagos Hoodie',
-              size: 'L',
-              color: 'Navy Blue',
-              quantity: 1,
-              price: 15000
-            },
-            {
-              name: 'UNILAG Baseball Cap',
-              size: 'One Size',
-              color: 'Black',
-              quantity: 2,
-              price: 5000
-            }
-          ],
-          delivery_address: {
-            first_name: 'John',
-            last_name: 'Doe',
-            address: '123 Main Street',
-            city: 'Lagos',
-            state: 'Lagos',
-            phone: '+2348012345678',
-            email: 'john.doe@example.com'
-          },
-          payment_method: paymentPending ? 'bank_transfer' : 'card'
+        // Normalise for renderConfirmation
+        const orderData = {
+          ...data.order,
+          items: data.items,
+          tax_amount: data.order.vat,
         };
 
-        renderConfirmation(mockOrder);
+        renderConfirmation(orderData);
 
       } catch (error) {
         console.error('Error loading order:', error);
@@ -539,7 +510,8 @@
           <div class="confirmation-header">
             <div class="confirmation-icon">⚠️</div>
             <h1 class="confirmation-title">Error Loading Order</h1>
-            <p class="confirmation-message">There was an error loading your order details. Please try again or contact support.</p>
+            <p class="confirmation-message">There was an error loading your order details.<br>
+              Order number: <strong>${orderNumber}</strong> — please save this for reference.</p>
             <div class="confirmation-actions">
               <a href="index.html" class="btn-primary">Go Home</a>
               <button onclick="loadConfirmation()" class="btn-secondary">Try Again</button>
@@ -551,8 +523,11 @@
 
     // Render confirmation page
     function renderConfirmation(order) {
-      const subtotal = order.total_amount - order.shipping_cost - order.tax_amount;
-      const paymentStatus = order.status === 'confirmed' ? 'paid' : 'pending';
+      const subtotal      = Number(order.subtotal)      || 0;
+      const shippingCost  = Number(order.shipping_cost) || 0;
+      const vatAmount     = Number(order.vat)           || Number(order.tax_amount) || 0;
+      const totalAmount   = Number(order.total_amount)  || 0;
+      const paymentStatus = order.payment_status === 'paid' ? 'paid' : 'pending';
 
       confirmationContainer.innerHTML = `
         
@@ -605,43 +580,45 @@
               <div class="summary-column">
                 <div class="summary-row">
                   <span class="summary-label">Subtotal</span>
-                  <span class="summary-value">₦${subtotal.toLocaleString()}</span>
+                  <span class="summary-value">₦${Math.round(subtotal).toLocaleString()}</span>
                 </div>
                 <div class="summary-row">
                   <span class="summary-label">Shipping</span>
-                  <span class="summary-value">₦${order.shipping_cost.toLocaleString()}</span>
+                  <span class="summary-value">${shippingCost === 0 ? 'Free' : '₦' + shippingCost.toLocaleString()}</span>
                 </div>
                 <div class="summary-row">
-                  <span class="summary-label">Tax</span>
-                  <span class="summary-value">₦${order.tax_amount.toLocaleString()}</span>
+                  <span class="summary-label">VAT (7.5%)</span>
+                  <span class="summary-value">₦${Math.round(vatAmount).toLocaleString()}</span>
                 </div>
                 <div class="summary-row total">
                   <span class="summary-label">Total</span>
-                  <span class="summary-value">₦${order.total_amount.toLocaleString()}</span>
+                  <span class="summary-value">₦${Math.round(totalAmount).toLocaleString()}</span>
                 </div>
               </div>
 
               <div class="summary-column">
                 <div class="delivery-info">
                   <div class="delivery-address">
-                    <strong>Delivery Address:</strong><br>
-                    ${order.delivery_address.first_name} ${order.delivery_address.last_name}<br>
-                    ${order.delivery_address.address}<br>
-                    ${order.delivery_address.city}, ${order.delivery_address.state}<br>
-                    ${order.delivery_address.phone}<br>
-                    ${order.delivery_address.email}
+                    <strong>Customer:</strong><br>
+                    ${order.first_name} ${order.last_name}<br>
+                    ${order.email}<br>
+                    ${order.phone}
+                    ${order.delivery_address ? `<br><br><strong>Deliver to:</strong><br>${order.delivery_address}${order.delivery_city ? ', ' + order.delivery_city : ''}${order.delivery_state ? ', ' + order.delivery_state : ''}` : ''}
                   </div>
-                  <div class="delivery-method">
-                    <strong>Delivery Method:</strong> Standard Shipping (3-5 business days)
+                  <div class="delivery-method" style="margin-top:0.8rem;">
+                    <strong>Delivery:</strong>
+                    ${{ campus_pickup: 'Campus Pickup', doorstep: 'Doorstep Delivery', express: 'Express Delivery' }[order.delivery_method] || order.delivery_method}
                   </div>
                 </div>
 
-                <div class="payment-info">
+                <div class="payment-info" style="margin-top:1rem;">
                   <div class="payment-status ${paymentStatus}">
                     <span class="payment-status-icon">${paymentStatus === 'paid' ? '✅' : '⏳'}</span>
                     <span>Payment ${paymentStatus === 'paid' ? 'Received' : 'Pending'}</span>
                   </div>
-                  <div><strong>Method:</strong> ${order.payment_method === 'card' ? 'Credit/Debit Card' : 'Bank Transfer'}</div>
+                  <div style="margin-top:0.4rem;"><strong>Method:</strong>
+                    ${{ card: 'Credit/Debit Card', transfer: 'Bank Transfer', ussd: 'USSD' }[order.payment_method] || order.payment_method}
+                  </div>
                 </div>
               </div>
             </div>
@@ -658,7 +635,7 @@
                 <div class="step-number">1</div>
                 <div class="step-content">
                   <div class="step-title">Complete Bank Transfer</div>
-                  <div class="step-description">Transfer ₦${order.total_amount.toLocaleString()} to the account details provided. Include your order number as reference.</div>
+                  <div class="step-description">Transfer ₦${Math.round(totalAmount).toLocaleString()} to the account details provided. Include your order number <strong>${order.order_number}</strong> as reference.</div>
                 </div>
               </div>
               <div class="step">

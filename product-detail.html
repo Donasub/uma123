@@ -506,44 +506,45 @@
     // Load product details
     async function loadProduct() {
       if (!productId) {
-        detailContainer.innerHTML = '<div class="loading"><p>Product not found</p></div>';
+        detailContainer.innerHTML = '<div class="loading"><p>Product not found. Please go back and select a product.</p></div>';
         return;
       }
 
       try {
-        // Fetch product (would need new endpoint, using mock for now)
-        const products = await UMA.marketplace.getProducts({});
-        product = products.find(p => p.id === productId);
+        // GET /api/products/:id  →  { ...product, variants: [{id, size, color, stock_count}] }
+        product = await UMA.products.get(productId);
 
         if (!product) {
           detailContainer.innerHTML = '<div class="loading"><p>Product not found</p></div>';
           return;
         }
 
-        // Get variants
-        const sizes = [...new Set(product.variants.map(v => v.size))];
-        const colors = [...new Set(product.variants.map(v => v.color))];
+        // Unique sizes and colors from variants
+        const sizes  = [...new Set(product.variants.map(v => v.size).filter(Boolean))];
+        const colors = [...new Set(product.variants.map(v => v.color).filter(Boolean))];
 
-        selectedSize = sizes[0];
-        selectedColor = colors[0];
+        selectedSize  = sizes[0]  || null;
+        selectedColor = colors[0] || null;
 
-        // Update breadcrumbs
+        // Update breadcrumb school link
         productNameBread.textContent = product.name;
         if (schoolId) {
-          schoolLink.href = `#`;
+          schoolLink.href = '#';
           schoolLink.onclick = () => window.location.href = `school-storefront.html?school_id=${schoolId}`;
-          const schools = await UMA.marketplace.getSchools();
-          const school = schools.find(s => s.id === schoolId);
-          schoolLink.textContent = school?.name || 'School';
+          try {
+            const school = await UMA.schools.get(schoolId);
+            schoolLink.textContent = school?.name || 'School';
+          } catch (_) {
+            schoolLink.textContent = 'School';
+          }
         }
 
-        // Render product detail
         renderDetail(product, sizes, colors);
         updateCartCount();
 
       } catch (error) {
         console.error('Error loading product:', error);
-        detailContainer.innerHTML = '<div class="loading"><p>Error loading product</p></div>';
+        detailContainer.innerHTML = '<div class="loading"><p>Error loading product. Is the server running at http://localhost:4000?</p></div>';
       }
     }
 
@@ -574,7 +575,7 @@
               <span class="detail-rating-text">(142 reviews)</span>
             </div>
 
-            <div class="detail-price">₦${product.base_price.toLocaleString()}</div>
+            <div class="detail-price">₦${Number(product.price).toLocaleString()}</div>
 
             <div class="detail-description">
               ${product.description || 'Premium quality merchandise featuring official school branding and exclusive designs. Perfect for alumni, students, and supporters.'}
@@ -587,12 +588,11 @@
                 <label class="variant-label">Size</label>
                 <div class="variant-options">
                   ${sizes.map(size => `
-                    <button 
+                    <button
                       class="variant-option ${size === selectedSize ? 'active' : ''}"
+                      data-size="${size}"
                       onclick="selectSize('${size}')"
-                    >
-                      ${size}
-                    </button>
+                    >${size}</button>
                   `).join('')}
                 </div>
               </div>
@@ -602,13 +602,11 @@
                 <label class="variant-label">Color</label>
                 <div class="variant-options">
                   ${colors.map(color => `
-                    <button 
+                    <button
                       class="variant-option ${color === selectedColor ? 'active' : ''}"
+                      data-color="${color}"
                       onclick="selectColor('${color}')"
-                      style="border-color: ${getColorHex(color)}; ${color === selectedColor ? `background: ${getColorHex(color)}; color: white;` : ''}"
-                    >
-                      ${color}
-                    </button>
+                    >${color}</button>
                   `).join('')}
                 </div>
               </div>
@@ -679,26 +677,33 @@
 
     function selectSize(size) {
       selectedSize = size;
-      document.querySelectorAll('.variant-option').forEach(btn => {
-        if (btn.textContent.trim() === size) {
-          btn.classList.add('active');
-        } else if (btn.parentElement.className.includes('variant-options')) {
-          const isSizeSection = btn.parentElement.parentElement.textContent.includes('Size');
-          if (isSizeSection) btn.classList.remove('active');
-        }
+      document.querySelectorAll('[data-size]').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.size === size);
       });
+      updateStockInfo();
     }
 
     function selectColor(color) {
       selectedColor = color;
-      document.querySelectorAll('.variant-option').forEach(btn => {
-        if (btn.textContent.trim() === color) {
-          btn.classList.add('active');
-        } else if (btn.parentElement.className.includes('variant-options')) {
-          const isColorSection = btn.parentElement.parentElement.textContent.includes('Color');
-          if (isColorSection) btn.classList.remove('active');
-        }
+      document.querySelectorAll('[data-color]').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.color === color);
       });
+      updateStockInfo();
+    }
+
+    function updateStockInfo() {
+      if (!product || !selectedSize || !selectedColor) return;
+      const variant = product.variants.find(v => v.size === selectedSize && v.color === selectedColor);
+      const addBtn = document.querySelector('.btn-add-to-cart');
+      if (addBtn) {
+        if (!variant || variant.stock_count === 0) {
+          addBtn.disabled = true;
+          addBtn.textContent = 'Out of Stock';
+        } else {
+          addBtn.disabled = false;
+          addBtn.textContent = 'Add to Cart';
+        }
+      }
     }
 
     function increaseQty() {
@@ -714,32 +719,51 @@
     }
 
     function addToCart() {
-      if (!product || !selectedSize || !selectedColor) {
-        alert('Please select size and color');
+      if (!product) return;
+
+      // Find the matching variant for selected size + color
+      const variant = product.variants.find(v => v.size === selectedSize && v.color === selectedColor);
+
+      if (!variant) {
+        alert('Please select a valid size and colour combination.');
+        return;
+      }
+      if (variant.stock_count < quantity) {
+        alert(`Only ${variant.stock_count} left in stock.`);
         return;
       }
 
       const cart = JSON.parse(localStorage.getItem('UMA_CART') || '{}');
-      const key = `${productId}_${selectedSize}_${selectedColor}`;
+      const key = variant.id; // use variant_id as key — unique per size+colour
 
       if (cart[key]) {
         cart[key].quantity += quantity;
       } else {
         cart[key] = {
+          variant_id: variant.id,   // ← required by checkout API
           product_id: productId,
           name: product.name,
-          price: product.base_price,
+          price: Number(product.price),
           quantity: quantity,
           size: selectedSize,
           color: selectedColor,
-          school_id: schoolId
+          school_id: schoolId,
+          stock_count: variant.stock_count
         };
       }
 
       localStorage.setItem('UMA_CART', JSON.stringify(cart));
       updateCartCount();
-      
-      alert(`Added ${quantity} item(s) to cart!`);
+
+      // Visual feedback — temporarily change button text
+      const btn = document.querySelector('.btn-add-to-cart');
+      if (btn) {
+        const original = btn.textContent;
+        btn.textContent = '✓ Added!';
+        btn.style.background = 'var(--oxblood)';
+        btn.style.color = '#fff';
+        setTimeout(() => { btn.textContent = original; btn.style.background = ''; btn.style.color = ''; }, 1800);
+      }
       quantity = 1;
       document.getElementById('qtyDisplay').textContent = '1';
     }

@@ -8,15 +8,21 @@ router.get('/', async (req, res, next) => {
   try {
     const { type } = req.query;
 
-    let sql = 'SELECT id, code, name, type, city, state, region, crest_color_primary, crest_color_secondary, logo_url FROM schools';
+    let sql = `
+      SELECT s.id, s.code, s.name, s.type, s.city, s.state, s.region,
+             s.crest_color_primary, s.crest_color_secondary, s.logo_url,
+             COUNT(DISTINCT p.id) AS products_count
+      FROM schools s
+      LEFT JOIN products p ON s.id = p.school_id
+    `;
     const params = [];
 
     if (type) {
-      sql += ' WHERE type = $1';
+      sql += ' WHERE s.type = $1';
       params.push(type);
     }
 
-    sql += ' ORDER BY name ASC';
+    sql += ' GROUP BY s.id ORDER BY s.name ASC';
 
     const result = await query(sql, params);
     res.json(result.rows);
@@ -60,7 +66,10 @@ router.get('/:codeOrId/products', async (req, res, next) => {
     const { category, size, color, sort } = req.query;
 
     // Find school
-    let schoolResult = await query('SELECT id FROM schools WHERE code = $1 OR id = $1', [codeOrId]);
+    let schoolResult = await query(
+      'SELECT id, code, name, type, city, state, crest_color_primary, crest_color_secondary, logo_url, description FROM schools WHERE code = $1 OR id = $1',
+      [codeOrId]
+    );
     if (schoolResult.rows.length === 0) {
       return res.status(404).json({ error: 'School not found' });
     }

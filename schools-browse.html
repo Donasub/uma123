@@ -577,8 +577,8 @@
     async function fetchSchools() {
       try {
         schoolsGrid.innerHTML = '<div class="loading"><div class="loading-spinner"></div><span>Loading schools...</span></div>';
-        
-        const schools = await UMA.marketplace.getSchools();
+
+        const schools = await UMA.schools.list();
         allSchools = schools;
         
         renderSchools(allSchools);

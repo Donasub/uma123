@@ -626,6 +626,46 @@
           </form>
         </div>
 
+        <!-- DELIVERY METHOD -->
+        <div class="checkout-section">
+          <div class="section-header">
+            <div class="section-icon">🚚</div>
+            <h2 class="section-title">Delivery Method</h2>
+          </div>
+          <div class="payment-methods">
+            <div class="payment-method selected" onclick="selectDelivery('campus_pickup')">
+              <div class="payment-method-header">
+                <div class="payment-method-icon">🏫</div>
+                <div class="payment-method-info">
+                  <div class="payment-method-name">Campus Pickup — Free</div>
+                  <div class="payment-method-desc">Collect at your campus store within 3–5 days</div>
+                </div>
+                <div class="payment-radio"></div>
+              </div>
+            </div>
+            <div class="payment-method" onclick="selectDelivery('doorstep')">
+              <div class="payment-method-header">
+                <div class="payment-method-icon">🏠</div>
+                <div class="payment-method-info">
+                  <div class="payment-method-name">Doorstep Delivery — ₦2,500</div>
+                  <div class="payment-method-desc">Delivered to your address in 5–7 business days</div>
+                </div>
+                <div class="payment-radio"></div>
+              </div>
+            </div>
+            <div class="payment-method" onclick="selectDelivery('express')">
+              <div class="payment-method-header">
+                <div class="payment-method-icon">⚡</div>
+                <div class="payment-method-info">
+                  <div class="payment-method-name">Express Delivery — ₦5,000</div>
+                  <div class="payment-method-desc">Next business day delivery</div>
+                </div>
+                <div class="payment-radio"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- PAYMENT METHOD -->
         <div class="checkout-section">
           <div class="section-header">
@@ -638,30 +678,30 @@
               <div class="payment-method-header">
                 <div class="payment-method-icon">💳</div>
                 <div class="payment-method-info">
-                  <div class="payment-method-name">Credit/Debit Card</div>
-                  <div class="payment-method-desc">Visa, Mastercard, Verve</div>
+                  <div class="payment-method-name">Credit / Debit Card</div>
+                  <div class="payment-method-desc">Visa, Mastercard, Verve — secured by Paystack</div>
                 </div>
                 <div class="payment-radio"></div>
               </div>
             </div>
 
-            <div class="payment-method" onclick="selectPayment('bank')">
+            <div class="payment-method" onclick="selectPayment('transfer')">
               <div class="payment-method-header">
                 <div class="payment-method-icon">🏦</div>
                 <div class="payment-method-info">
                   <div class="payment-method-name">Bank Transfer</div>
-                  <div class="payment-method-desc">Direct bank transfer</div>
+                  <div class="payment-method-desc">Direct bank transfer — confirm within 24 hrs</div>
                 </div>
                 <div class="payment-radio"></div>
               </div>
             </div>
 
-            <div class="payment-method" onclick="selectPayment('wallet')">
+            <div class="payment-method" onclick="selectPayment('ussd')">
               <div class="payment-method-header">
                 <div class="payment-method-icon">📱</div>
                 <div class="payment-method-info">
-                  <div class="payment-method-name">Mobile Money</div>
-                  <div class="payment-method-desc">MTN, Airtel, Glo, 9mobile</div>
+                  <div class="payment-method-name">USSD</div>
+                  <div class="payment-method-desc">Pay via *737# or any bank USSD code</div>
                 </div>
                 <div class="payment-radio"></div>
               </div>
@@ -712,25 +752,31 @@
 
   </div>
 
+  <!-- Paystack inline JS (loads payment popup) -->
+  <script src="https://js.paystack.co/v1/inline.js"></script>
   <!-- INCLUDE UMA CLIENT -->
   <script src="universe-merch-backend/public/uma-client.js"></script>
   <script>
     UMA.init({ apiUrl: 'http://localhost:4000/api' });
 
+    // ── DOM refs ──────────────────────────────────────────────────────────────
     const placeOrderBtn = document.getElementById('placeOrderBtn');
-    const errorMessage = document.getElementById('errorMessage');
-    const summaryItems = document.getElementById('summaryItems');
+    const errorMessage  = document.getElementById('errorMessage');
+    const summaryItems  = document.getElementById('summaryItems');
 
-    let cartData = [];
-    let selectedPayment = 'card';
+    // ── State ─────────────────────────────────────────────────────────────────
+    let cartData         = [];
+    let selectedPayment  = 'card';
+    let selectedDelivery = 'campus_pickup';
 
-    // Load cart and populate summary
+    // Delivery costs that mirror the backend constants
+    const DELIVERY_COST = { campus_pickup: 0, doorstep: 2500, express: 5000 };
+    const VAT_RATE = 0.075;
+
+    // ── Load cart ─────────────────────────────────────────────────────────────
     function loadCheckout() {
       const cart = JSON.parse(localStorage.getItem('UMA_CART') || '{}');
-      cartData = Object.entries(cart).map(([key, item]) => ({
-        key,
-        ...item
-      }));
+      cartData = Object.values(cart);
 
       if (cartData.length === 0) {
         window.location.href = 'cart.html';
@@ -739,120 +785,168 @@
 
       renderOrderSummary();
       updateTotals();
-      loadUserData();
+      prefillUser();
     }
 
-    // Render order summary items
+    // ── Render cart items in sidebar ──────────────────────────────────────────
     function renderOrderSummary() {
       summaryItems.innerHTML = cartData.map(item => `
         <div class="summary-item">
           <div class="summary-item-image">📦</div>
           <div class="summary-item-details">
             <div class="summary-item-name">${item.name}</div>
-            <div class="summary-item-meta">Size: ${item.size || 'One Size'} • Color: ${item.color || 'N/A'} • Qty: ${item.quantity}</div>
+            <div class="summary-item-meta">
+              ${item.size ? `Size: ${item.size} • ` : ''}${item.color ? `Color: ${item.color} • ` : ''}Qty: ${item.quantity}
+            </div>
             <div class="summary-item-price">₦${(item.price * item.quantity).toLocaleString()}</div>
           </div>
         </div>
       `).join('');
     }
 
-    // Update totals
+    // ── Recalculate totals whenever delivery method changes ───────────────────
     function updateTotals() {
-      const subtotal = cartData.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-      const tax = subtotal * 0.075; // 7.5% tax
-      const shipping = subtotal > 10000 ? 0 : 2500;
-      const total = subtotal + tax + shipping;
+      const subtotal  = cartData.reduce((s, i) => s + i.price * i.quantity, 0);
+      const shipping  = DELIVERY_COST[selectedDelivery] ?? 0;
+      const vat       = subtotal * VAT_RATE;
+      const total     = subtotal + shipping + vat;
 
-      document.getElementById('subtotal').textContent = `₦${subtotal.toLocaleString()}`;
-      document.getElementById('tax').textContent = `₦${tax.toLocaleString()}`;
+      document.getElementById('subtotal').textContent = `₦${Math.round(subtotal).toLocaleString()}`;
+      document.getElementById('tax').textContent      = `₦${Math.round(vat).toLocaleString()}`;
       document.getElementById('shipping').textContent = shipping === 0 ? 'Free' : `₦${shipping.toLocaleString()}`;
-      document.getElementById('total').textContent = `₦${total.toLocaleString()}`;
+      document.getElementById('total').textContent    = `₦${Math.round(total).toLocaleString()}`;
     }
 
-    // Load user data if logged in
-    function loadUserData() {
-      const token = localStorage.getItem('UMA_TOKEN');
-      if (token) {
-        // Could fetch user profile data here
-        // For now, we'll just pre-fill from localStorage if available
-        const userData = JSON.parse(localStorage.getItem('UMA_USER_DATA') || '{}');
-        if (userData.first_name) document.getElementById('firstName').value = userData.first_name;
-        if (userData.last_name) document.getElementById('lastName').value = userData.last_name;
-        if (userData.email) document.getElementById('email').value = userData.email;
-        if (userData.phone) document.getElementById('phone').value = userData.phone;
+    // ── Pre-fill address if user is logged in ─────────────────────────────────
+    function prefillUser() {
+      const user = UMA.auth.getCurrentUser();
+      if (user) {
+        if (user.first_name) document.getElementById('firstName').value = user.first_name;
+        if (user.last_name)  document.getElementById('lastName').value  = user.last_name;
+        if (user.email)      document.getElementById('email').value     = user.email;
+        if (user.phone)      document.getElementById('phone').value     = user.phone;
       }
     }
 
-    // Select payment method
+    // ── Delivery / Payment selection ──────────────────────────────────────────
+    function selectDelivery(method) {
+      selectedDelivery = method;
+      // Highlight selected card (delivery methods come before payment methods)
+      const allCards = document.querySelectorAll('.payment-method');
+      // First 3 are delivery, next 3 are payment
+      allCards.forEach((card, idx) => {
+        if (idx < 3) card.classList.remove('selected');
+      });
+      event.currentTarget.classList.add('selected');
+      updateTotals();
+    }
+
     function selectPayment(method) {
       selectedPayment = method;
-      document.querySelectorAll('.payment-method').forEach(pm => pm.classList.remove('selected'));
+      const allCards = document.querySelectorAll('.payment-method');
+      allCards.forEach((card, idx) => {
+        if (idx >= 3) card.classList.remove('selected');
+      });
       event.currentTarget.classList.add('selected');
     }
 
-    // Show error
-    function showError(message) {
-      errorMessage.textContent = message;
+    // ── Error display ─────────────────────────────────────────────────────────
+    function showError(msg) {
+      errorMessage.textContent = msg;
       errorMessage.style.display = 'block';
       errorMessage.scrollIntoView({ behavior: 'smooth' });
     }
+    function hideError() { errorMessage.style.display = 'none'; }
 
-    // Hide error
-    function hideError() {
-      errorMessage.style.display = 'none';
-    }
-
-    // Place order
+    // ── Place order ───────────────────────────────────────────────────────────
     async function placeOrder() {
       hideError();
 
-      // Validate form
       const form = document.getElementById('deliveryForm');
       if (!form.checkValidity()) {
-        showError('Please fill in all required fields');
+        showError('Please fill in all required fields.');
+        form.reportValidity();
         return;
       }
 
-      // Get form data
-      const deliveryData = {
-        first_name: document.getElementById('firstName').value.trim(),
-        last_name: document.getElementById('lastName').value.trim(),
-        email: document.getElementById('email').value.trim(),
-        phone: document.getElementById('phone').value.trim(),
-        address: document.getElementById('address').value.trim(),
-        city: document.getElementById('city').value.trim(),
-        state: document.getElementById('state').value.trim(),
-        postal_code: document.getElementById('postalCode').value.trim()
+      const firstName = document.getElementById('firstName').value.trim();
+      const lastName  = document.getElementById('lastName').value.trim();
+      const email     = document.getElementById('email').value.trim();
+      const phone     = document.getElementById('phone').value.trim();
+      const address   = document.getElementById('address').value.trim();
+      const city      = document.getElementById('city').value.trim();
+      const state     = document.getElementById('state').value.trim();
+
+      // Build the payload exactly as the backend checkoutSchema expects
+      const orderPayload = {
+        first_name:       firstName,
+        last_name:        lastName,
+        email:            email,
+        phone:            phone,
+        delivery_method:  selectedDelivery,
+        delivery_address: address  || undefined,
+        delivery_city:    city     || undefined,
+        delivery_state:   state    || undefined,
+        payment_method:   selectedPayment,
+        // items must be [{variant_id, quantity}]
+        items: cartData.map(item => ({
+          variant_id: item.variant_id,
+          quantity:   item.quantity,
+        })),
       };
 
-      // Prepare order data
-      const orderItems = cartData.map(item => ({
-        product_id: item.product_id,
-        quantity: item.quantity,
-        size: item.size,
-        color: item.color,
-        price: item.price
-      }));
-
-      const orderData = {
-        items: orderItems,
-        delivery_address: deliveryData,
-        payment_method: selectedPayment
-      };
+      // Guard: every item must have a variant_id (set by product-detail.html)
+      if (orderPayload.items.some(i => !i.variant_id)) {
+        showError('Cart contains items added with an older version of the site. Please clear your cart and re-add the products.');
+        return;
+      }
 
       try {
         placeOrderBtn.disabled = true;
         placeOrderBtn.classList.add('loading');
-        placeOrderBtn.textContent = 'Processing...';
+        placeOrderBtn.textContent = 'Processing…';
 
-        // Call backend API
-        const order = await UMA.orders.create(orderData);
+        // POST /api/orders
+        const result = await UMA.orders.checkout(orderPayload);
+        const order  = result.order;
 
         // Clear cart
         localStorage.removeItem('UMA_CART');
 
-        // Redirect to confirmation
-        window.location.href = `order-confirmation.html?order_id=${order.id}`;
+        // ── Paystack payment (card) ──────────────────────────────────────────
+        if (selectedPayment === 'card' && typeof PaystackPop !== 'undefined') {
+          const subtotal = cartData.reduce((s, i) => s + i.price * i.quantity, 0);
+          const shipping = DELIVERY_COST[selectedDelivery] ?? 0;
+          const vat      = subtotal * VAT_RATE;
+          const total    = Math.round((subtotal + shipping + vat) * 100); // kobo
+
+          const handler = PaystackPop.setup({
+            // Replace with your real Paystack public key
+            key:      'pk_test_your_paystack_public_key',
+            email:    email,
+            amount:   total,
+            currency: 'NGN',
+            ref:      order.order_number,
+            metadata: { order_number: order.order_number },
+            callback(response) {
+              // Notify backend (fire-and-forget)
+              fetch(`/api/orders/${order.order_number}/payment-webhook`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ status: 'paid', payment_reference: response.reference }),
+              }).catch(() => {});
+              window.location.href = `order-confirmation.html?order=${order.order_number}`;
+            },
+            onClose() {
+              // User closed popup — still navigate to confirmation (order exists)
+              window.location.href = `order-confirmation.html?order=${order.order_number}&payment_pending=true`;
+            },
+          });
+          handler.openIframe();
+        } else {
+          // Bank transfer / USSD — go straight to confirmation
+          window.location.href = `order-confirmation.html?order=${order.order_number}&payment_pending=true`;
+        }
 
       } catch (error) {
         placeOrderBtn.disabled = false;
@@ -862,12 +956,10 @@
       }
     }
 
-    // Navigation
-    function goBack() {
-      window.location.href = 'cart.html';
-    }
+    // ── Navigation ────────────────────────────────────────────────────────────
+    function goBack() { window.location.href = 'cart.html'; }
 
-    // Initial load
+    // ── Init ──────────────────────────────────────────────────────────────────
     loadCheckout();
   </script>
 

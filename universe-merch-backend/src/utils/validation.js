@@ -39,7 +39,7 @@ export const schoolProductsFilterSchema = z.object({
 
 // Cart schemas
 export const addToCartSchema = z.object({
-  variant_id: z.string().uuid('Invalid variant ID'),
+  variant_id: z.string().min(1, 'Variant ID required'),
   quantity: z.number().int().min(1, 'Quantity must be at least 1'),
 });
 
@@ -61,7 +61,7 @@ export const checkoutSchema = z.object({
   payment_method: z.enum(['card', 'transfer', 'ussd']),
   items: z.array(
     z.object({
-      variant_id: z.string().uuid('Invalid variant ID'),
+      variant_id: z.string().min(1, 'Variant ID required'),
       quantity: z.number().int().min(1, 'Quantity must be at least 1'),
     })
   ),

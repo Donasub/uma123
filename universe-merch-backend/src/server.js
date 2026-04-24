@@ -3,10 +3,17 @@ import cors from 'cors';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
 import dotenv from 'dotenv';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import { query } from './utils/db.js';
 import { authenticate } from './middleware/auth.js';
 import { errorHandler } from './middleware/errors.js';
 import { verifyEmailConfig } from './services/email.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+// Project root is two levels up from src/  →  universe-merch-backend/../
+const PROJECT_ROOT = path.resolve(__dirname, '..', '..');
 
 // Routes
 import authRouter from './routes/auth.js';
@@ -23,16 +30,22 @@ const PORT = process.env.PORT || 4000;
 const NODE_ENV = process.env.NODE_ENV || 'development';
 
 // Middleware
-app.use(helmet());
+app.use(helmet({
+  contentSecurityPolicy: false, // our HTML uses inline scripts & Google Fonts
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // CORS
-const allowedOrigins = (process.env.CORS_ORIGIN || 'http://localhost:3000').split(',');
+const corsOrigin = process.env.CORS_ORIGIN || 'http://localhost:4000';
 app.use(cors({
-  origin: allowedOrigins,
+  origin: corsOrigin === '*' ? true : corsOrigin.split(',').map(s => s.trim()),
   credentials: true,
 }));
+
+// Serve the frontend (all HTML/CSS/JS) from the project root
+// API routes registered below take priority over static files
+app.use(express.static(PROJECT_ROOT, { index: 'index.html' }));
 
 // Rate limiting
 const generalLimiter = rateLimit({

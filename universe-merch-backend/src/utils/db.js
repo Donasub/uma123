@@ -46,6 +46,15 @@ function toSqlitePlaceholders(sql) {
   return sql.replace(/\$\d+/g, '?');
 }
 
+// Strip PostgreSQL-only clauses that SQLite doesn't support
+function sanitizeForSQLite(sql) {
+  // Remove row-level locking (FOR UPDATE, FOR SHARE, etc.)
+  sql = sql.replace(/\s+FOR\s+(UPDATE|SHARE|NO\s+KEY\s+UPDATE|KEY\s+SHARE)(\s+OF\s+\w+)?(\s+NOWAIT|\s+SKIP\s+LOCKED)?\s*/gi, ' ');
+  // Remove ILIKE → LIKE (SQLite LIKE is already case-insensitive for ASCII)
+  sql = sql.replace(/\bILIKE\b/gi, 'LIKE');
+  return sql;
+}
+
 // Query function that works with both databases
 export const query = async (text, params = []) => {
   if (DB_TYPE === 'postgres') {
@@ -56,6 +65,7 @@ export const query = async (text, params = []) => {
     }
 
     let sql = text;
+    sql = sanitizeForSQLite(sql);
     sql = sql.replace(/SERIAL PRIMARY KEY/gi, 'INTEGER PRIMARY KEY AUTOINCREMENT');
     sql = sql.replace(/uuid_generate_v4\(\)/gi, 'lower(hex(randomblob(4))) || \'-\' || lower(hex(randomblob(2))) || \'-4\' || substr(lower(hex(randomblob(2))),2) || \'-\' || substr(\'89ab\',abs(random()) % 4 + 1, 1) || substr(lower(hex(randomblob(2))),2) || \'-\' || lower(hex(randomblob(6)))');
     sql = sql.replace(/CURRENT_TIMESTAMP/gi, 'datetime(\'now\')');
@@ -111,7 +121,7 @@ export const getClient = async () => {
     }
     return {
       query: async (text, params = []) => {
-        const sql = text.trim().toUpperCase();
+        const sql = sanitizeForSQLite(text).trim().toUpperCase();
         if (sql === 'BEGIN') {
           await sqliteDb.exec('BEGIN TRANSACTION');
           return { rows: [] };
