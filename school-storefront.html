@@ -529,6 +529,14 @@
   <script>
     UMA.init({ apiUrl: '/api' });
 
+    // Auth guard
+    (function() {
+      const token = localStorage.getItem('UMA_TOKEN');
+      if (!token) {
+        window.location.href = 'signup.html?redirect=' + encodeURIComponent(window.location.pathname + window.location.search);
+      }
+    })();
+
     const urlParams = new URLSearchParams(window.location.search);
     const schoolId = urlParams.get('school_id');
     

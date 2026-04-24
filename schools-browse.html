@@ -559,9 +559,17 @@
   <script src="universe-merch-backend/public/uma-client.js"></script>
   <script>
     // Initialize UMA client
-    UMA.init({ 
+    UMA.init({
       apiUrl: '/api'
     });
+
+    // Auth guard — must be logged in to browse
+    (function() {
+      const token = localStorage.getItem('UMA_TOKEN');
+      if (!token) {
+        window.location.href = 'signup.html?redirect=' + encodeURIComponent(window.location.pathname + window.location.search);
+      }
+    })();
 
     // DOM Elements
     const searchInput = document.getElementById('searchInput');

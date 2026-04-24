@@ -513,6 +513,14 @@
   <script>
     UMA.init({ apiUrl: '/api' });
 
+    // Auth guard
+    (function() {
+      const token = localStorage.getItem('UMA_TOKEN');
+      if (!token) {
+        window.location.href = 'signup.html?redirect=' + encodeURIComponent(window.location.pathname + window.location.search);
+      }
+    })();
+
     const cartItemsContainer = document.getElementById('cartItems');
     const itemsCount = document.getElementById('itemsCount');
     const checkoutBtn = document.getElementById('checkoutBtn');

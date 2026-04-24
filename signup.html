@@ -550,9 +550,21 @@
   <script src="universe-merch-backend/public/uma-client.js"></script>
   <script>
     // Initialize UMA client
-    UMA.init({ 
+    UMA.init({
       apiUrl: '/api'
     });
+
+    // If already logged in, redirect immediately
+    (function() {
+      const token = localStorage.getItem('UMA_TOKEN');
+      if (token) {
+        const params = new URLSearchParams(window.location.search);
+        window.location.href = params.get('redirect') || 'schools-browse.html';
+      }
+    })();
+
+    // Get redirect destination
+    const redirectTo = new URLSearchParams(window.location.search).get('redirect') || 'schools-browse.html';
 
     // DOM Elements
     const signupForm = document.getElementById('signupForm');
@@ -714,7 +726,7 @@
 
         // Redirect to dashboard/home after 2 seconds
         setTimeout(() => {
-          window.location.href = 'index.html';
+          window.location.href = redirectTo;
         }, 2000);
 
       } catch (error) {
