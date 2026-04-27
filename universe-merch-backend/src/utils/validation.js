@@ -7,7 +7,7 @@ export const signupSchema = z.object({
   first_name: z.string().min(2, 'First name required'),
   last_name: z.string().min(2, 'Last name required'),
   phone: z.string().optional(),
-  school_id: z.string().uuid().optional(),
+  school_id: z.string().uuid().optional().or(z.literal('')).transform(v => v || undefined),
 });
 
 export const loginSchema = z.object({

@@ -452,44 +452,11 @@
           />
         </div>
 
-        <!-- SCHOOL SELECTION -->
+        <!-- SCHOOL SELECTION — populated from API -->
         <div class="form-group">
           <label class="form-label" for="schoolId">Select Your School</label>
-          <select id="schoolId" class="form-select" required>
-            <option value="">-- Choose your school --</option>
-            <optgroup label="Universities">
-              <option value="university-unilag">University of Lagos (UNILAG)</option>
-              <option value="university-ui">University of Ibadan (UI)</option>
-              <option value="university-oau">Obafemi Awolowo University (OAU)</option>
-              <option value="university-abu">Ahmadu Bello University (ABU)</option>
-              <option value="university-uniben">University of Benin (UNIBEN)</option>
-              <option value="university-unical">University of Calabar (UNICAL)</option>
-              <option value="university-uniport">University of Port Harcourt</option>
-              <option value="university-unn">University of Nigeria (UNN)</option>
-              <option value="university-futa">FUTA - Akure</option>
-              <option value="university-lautech">LAUTECH - Ogbomoso</option>
-              <option value="university-nsu">Nnamdi Azikiwe University (NSU)</option>
-              <option value="university-uniosun">Osun State University (UNIOSUN)</option>
-              <option value="university-delsu">Delta State University (DELSU)</option>
-              <option value="university-atbu">Abubakar Tafawa Balewa University (ATBU)</option>
-              <option value="university-biu">Bayero University Kano (BIU)</option>
-              <option value="university-unimaid">University of Maiduguri</option>
-              <option value="university-funaab">Federal University of Agriculture (FUNAAB)</option>
-              <option value="university-lasu">Lagos State University (LASU)</option>
-              <option value="university-uniabuja">University of Abuja</option>
-            </optgroup>
-            <optgroup label="High Schools">
-              <option value="highschool-queens">Queens College Lagos</option>
-              <option value="highschool-kings">Kings College Lagos</option>
-              <option value="highschool-lasg">Lagos State Model College</option>
-              <option value="highschool-mfs">Mayflower School Ikenne</option>
-              <option value="highschool-loyola">Loyola Jesuit College Abuja</option>
-              <option value="highschool-baptist">Baptist Secondary School Enugu</option>
-              <option value="highschool-girls-jos">Girls College Jos</option>
-              <option value="highschool-boys-jos">Boys College Jos</option>
-              <option value="highschool-fedpoly">Federal College of Education</option>
-              <option value="highschool-aps">APS Secondary School Enugu</option>
-            </optgroup>
+          <select id="schoolId" class="form-select">
+            <option value="">-- Loading schools... --</option>
           </select>
         </div>
 
@@ -565,6 +532,21 @@
 
     // Get redirect destination
     const redirectTo = new URLSearchParams(window.location.search).get('redirect') || 'schools-browse.html';
+
+    // Populate school dropdown from live API
+    (async function loadSchools() {
+      try {
+        const schools = await UMA.schools.list();
+        const unis = schools.filter(s => s.type === 'university');
+        const highs = schools.filter(s => s.type === 'high_school');
+        schoolSelect.innerHTML =
+          '<option value="">-- Choose your school --</option>' +
+          (unis.length ? `<optgroup label="Universities">${unis.map(s => `<option value="${s.id}">${s.name}</option>`).join('')}</optgroup>` : '') +
+          (highs.length ? `<optgroup label="High Schools">${highs.map(s => `<option value="${s.id}">${s.name}</option>`).join('')}</optgroup>` : '');
+      } catch {
+        schoolSelect.innerHTML = '<option value="">-- Could not load schools --</option>';
+      }
+    })();
 
     // DOM Elements
     const signupForm = document.getElementById('signupForm');
@@ -681,7 +663,7 @@
       }
 
       if (!schoolId) {
-        showError('Please select your school');
+        showError('Please select your school to continue');
         schoolSelect.focus();
         return;
       }
@@ -719,7 +701,7 @@
           first_name: firstName,
           last_name: lastName,
           phone: phone || undefined,
-          school_id: schoolId // Note: backend will need to handle school_id mapping
+          school_id: schoolId || undefined
         });
 
         showSuccess('Account created successfully! You are now logged in. Redirecting...');

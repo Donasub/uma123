@@ -61,7 +61,11 @@ window.UMA = (function() {
     }
 
     if (!response.ok) {
-      throw new Error(data.error || 'Request failed');
+      // Include validation details if present
+      const details = data.details && data.details.length
+        ? ' — ' + data.details.join(', ')
+        : '';
+      throw new Error((data.error || 'Request failed') + details);
     }
 
     return data;
