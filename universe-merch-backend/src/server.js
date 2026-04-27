@@ -43,10 +43,6 @@ app.use(cors({
   credentials: true,
 }));
 
-// Serve the frontend (all HTML/CSS/JS) from the project root
-// API routes registered below take priority over static files
-app.use(express.static(PROJECT_ROOT, { index: 'index.html' }));
-
 // Rate limiting
 const generalLimiter = rateLimit({
   windowMs: 1 * 60 * 1000, // 1 minute
@@ -91,9 +87,15 @@ app.use('/api/cart', cartRouter);
 app.use('/api/orders', ordersRouter);
 app.use('/api/addresses', addressesRouter);
 
-// 404 handler
-app.use((req, res) => {
-  res.status(404).json({ error: 'Endpoint not found' });
+// Serve frontend static files AFTER API routes so /api/* is never intercepted
+app.use(express.static(PROJECT_ROOT, { index: 'index.html' }));
+
+// SPA fallback — serve index.html for unknown non-API routes
+app.use((req, res, next) => {
+  if (req.path.startsWith('/api/')) {
+    return res.status(404).json({ error: 'Endpoint not found' });
+  }
+  res.sendFile(path.join(PROJECT_ROOT, 'index.html'));
 });
 
 // Error handler

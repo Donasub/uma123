@@ -47,7 +47,18 @@ window.UMA = (function() {
     }
 
     const response = await fetch(`${apiUrl}${endpoint}`, options);
-    const data = await response.json();
+    const text = await response.text();
+
+    let data;
+    try {
+      data = JSON.parse(text);
+    } catch (_) {
+      // Server returned non-JSON (e.g. Render spin-up splash page)
+      if (response.status === 0 || !response.ok) {
+        throw new Error('Server is starting up — please refresh in a few seconds.');
+      }
+      throw new Error('Unexpected server response. Please try again.');
+    }
 
     if (!response.ok) {
       throw new Error(data.error || 'Request failed');

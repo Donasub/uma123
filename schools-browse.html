@@ -594,7 +594,8 @@
         updateCartCount();
         updateUserDisplay();
       } catch (error) {
-        schoolsGrid.innerHTML = `<div class="empty-state"><div class="empty-state-icon">⚠️</div><p>Error loading schools. Please try again.</p></div>`;
+        const isWakingUp = error.message && error.message.toLowerCase().includes('starting up');
+        schoolsGrid.innerHTML = `<div class="empty-state"><div class="empty-state-icon">${isWakingUp ? '⏳' : '⚠️'}</div><p>${isWakingUp ? 'Server is starting up — please wait a moment and <a href="" style="color:var(--oxblood)">refresh</a>.' : 'Error loading schools. Please try again.'}</p></div>`;
         console.error('Error fetching schools:', error);
       }
     }
