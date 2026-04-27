@@ -292,9 +292,9 @@
       </a>
       <ul class="nav-links">
         <li><a href="how-it-works_1.html">How It Works</a></li>
-        <li><a href="students_redesigned.html">For Students</a></li>
         <li><a href="partner.html">Partner</a></li>
-        <li><a href="students_redesigned.html" class="nav-cta">Shop Now</a></li>
+        <li><a href="schools-browse.html" class="nav-cta">Shop Now</a></li>
+        <li><div id="userMenu" style="display:inline-flex;align-items:center;"></div></li>
       </ul>
       <button class="hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
     </div>
@@ -303,9 +303,9 @@
   <div class="mobile-menu" id="mobileMenu">
     <button class="mobile-close" id="mobileClose" aria-label="Close menu">✕</button>
     <a href="how-it-works_1.html" class="mobile-nav-link">How It <em>Works</em></a>
-    <a href="students_redesigned.html" class="mobile-nav-link">For <em>Students</em></a>
     <a href="partner.html" class="mobile-nav-link"><em>Partner</em></a>
-    <a href="students_redesigned.html" class="mobile-nav-link">Shop <em>Now</em></a>
+    <a href="schools-browse.html" class="mobile-nav-link">Shop <em>Now</em></a>
+    <a href="login.html" class="mobile-nav-link" id="mobileAuthLink">Sign <em>In</em></a>
   </div>
 
   <!-- HERO -->
@@ -503,7 +503,25 @@
     </div>
   </footer>
 
+  <script src="universe-merch-backend/public/uma-nav.js"></script>
   <script>
+    // Init navbar auth on landing page
+    UMANav.init({ userId: 'userMenu' });
+
+    // Update mobile auth link
+    (function() {
+      const token = localStorage.getItem('UMA_TOKEN');
+      const mobileLink = document.getElementById('mobileAuthLink');
+      if (mobileLink) {
+        if (token) {
+          mobileLink.href = 'account.html';
+          mobileLink.innerHTML = 'My <em>Account</em>';
+        } else {
+          mobileLink.href = 'login.html';
+        }
+      }
+    })();
+
     const nav=document.getElementById('siteNav');
     window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>40)});
     const hamburger=document.getElementById('hamburger'),mobileMenu=document.getElementById('mobileMenu'),mobileClose=document.getElementById('mobileClose');

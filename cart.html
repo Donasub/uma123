@@ -456,7 +456,7 @@
       <div class="cart-header-content">
         <a class="cart-back" onclick="goBack()">← Back</a>
         <h1 class="cart-title">Shopping Cart</h1>
-        <div class="cart-placeholder"></div>
+        <div id="userMenu"></div>
       </div>
     </div>
 
@@ -510,6 +510,7 @@
 
   <!-- INCLUDE UMA CLIENT -->
   <script src="universe-merch-backend/public/uma-client.js"></script>
+  <script src="universe-merch-backend/public/uma-nav.js"></script>
   <script>
     UMA.init({ apiUrl: '/api' });
 
@@ -520,6 +521,8 @@
         window.location.href = 'signup.html?redirect=' + encodeURIComponent(window.location.pathname + window.location.search);
       }
     })();
+
+    UMANav.init({ userId: 'userMenu' });
 
     const cartItemsContainer = document.getElementById('cartItems');
     const itemsCount = document.getElementById('itemsCount');

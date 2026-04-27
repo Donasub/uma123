@@ -473,6 +473,7 @@
             🛒
             <span class="storefront-cart-count" id="cartCountHeader" style="display: none;"></span>
           </div>
+          <div id="userMenu" style="margin-left:12px;"></div>
         </div>
       </div>
     </header>
@@ -526,6 +527,7 @@
 
   <!-- INCLUDE UMA CLIENT -->
   <script src="universe-merch-backend/public/uma-client.js"></script>
+  <script src="universe-merch-backend/public/uma-nav.js"></script>
   <script>
     UMA.init({ apiUrl: '/api' });
 
@@ -536,6 +538,8 @@
         window.location.href = 'signup.html?redirect=' + encodeURIComponent(window.location.pathname + window.location.search);
       }
     })();
+
+    UMANav.init({ cartId: 'cartCountHeader', userId: 'userMenu' });
 
     const urlParams = new URLSearchParams(window.location.search);
     const schoolId = urlParams.get('school_id');

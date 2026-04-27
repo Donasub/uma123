@@ -467,6 +467,7 @@
             🛒
             <span class="detail-cart-count" id="cartCount" style="display: none;"></span>
           </div>
+          <div id="userMenu" style="margin-left:12px;"></div>
         </div>
       </div>
     </div>
@@ -485,6 +486,7 @@
 
   <!-- INCLUDE UMA CLIENT -->
   <script src="universe-merch-backend/public/uma-client.js"></script>
+  <script src="universe-merch-backend/public/uma-nav.js"></script>
   <script>
     UMA.init({ apiUrl: '/api' });
 
@@ -495,6 +497,8 @@
         window.location.href = 'signup.html?redirect=' + encodeURIComponent(window.location.pathname + window.location.search);
       }
     })();
+
+    UMANav.init({ cartId: 'cartCount', userId: 'userMenu' });
 
     const urlParams = new URLSearchParams(window.location.search);
     const productId = urlParams.get('product_id');

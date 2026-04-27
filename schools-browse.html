@@ -555,13 +555,11 @@
 
   </div>
 
-  <!-- INCLUDE UMA CLIENT LIBRARY -->
   <script src="universe-merch-backend/public/uma-client.js"></script>
+  <script src="universe-merch-backend/public/uma-nav.js"></script>
   <script>
     // Initialize UMA client
-    UMA.init({
-      apiUrl: '/api'
-    });
+    UMA.init({ apiUrl: '/api' });
 
     // Auth guard — must be logged in to browse
     (function() {
@@ -571,13 +569,16 @@
       }
     })();
 
+    // Init navbar auth
+    UMANav.init({ cartId: 'cartCount', userId: 'userMenu' });
+
     // DOM Elements
     const searchInput = document.getElementById('searchInput');
     const typeFilter = document.getElementById('typeFilter');
     const schoolsGrid = document.getElementById('schoolsGrid');
     const schoolsCount = document.getElementById('schoolsCount');
     const cartCount = document.getElementById('cartCount');
-    const userDisplay = document.getElementById('userDisplay');
+    const userDisplay = document.getElementById('userMenu');
 
     let allSchools = [];
 
@@ -658,14 +659,9 @@
       }
     }
 
-    // Update user display
+    // Update user display handled by UMANav
     function updateUserDisplay() {
-      const token = localStorage.getItem('UMA_TOKEN');
-      if (token) {
-        userDisplay.textContent = 'Account';
-      } else {
-        userDisplay.textContent = 'Sign In';
-      }
+      UMANav.update();
     }
 
     // Navigation
